@@ -29,6 +29,10 @@
 \usepackage{times} % assumes new font selection scheme installed
 \usepackage{amsmath} % assumes amsmath package installed
 \usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{mathtools}
+\usepackage{relsize}
+\usepackage{tikz}
+\graphicspath{{./Drawings/}} 
 
 \title{\LARGE \bf
 Robustly constrained data-driven control
@@ -69,23 +73,41 @@ Consider a \textit{single-input single-output} system $\mathbb{G}_P$ generating 
 \\
 A feedback controller is designed to control the system, using the VRFT methodology. For this, a reference model $\mathbb{M}_P$ is selected. The VRFT methodology designs a feedback controller  $\mathbb{K}_P$, with the goal of making the closed-loop system $\mathbb{K}_P$-$\mathbb{G}_P$ behave similar to the reference model $\mathbb{M}_P$. To this end, the VRFT methodology utilizes the dataset $\mathbb{D}_N$. The desired closed-loop behavior is described by the LTI state-space model $\mathbb{M}_P$ 
 
-	\begin{equation}
+	\begin{equation*}
 	\begin{matrix}
 	x_M(t+1) = A_Mx_M(t) + B_Mg(t)\\
 	y_d(t) = C_Mx_M(t)
 	\end{matrix}
-	\end{equation}\\    
+	\end{equation*}\\    
 The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ is now explained:
 \begin{enumerate}
 	\item
 	A virtual reference input $g(t)$ is calculated by setting $y_d(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by the inverting the model $\mathbb{M}_P$. Let this mapping be defined by $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
 	\item
 	A feedback controller $\mathbb{K}_P$ described by $A_K(q^{-1})u(t) = B_K(q^{-1})(g(t)-y(t)$ is chosen, where 
-	\begin{equation}
+	\begin{equation*}
 	\begin{matrix}
-	A_K(q^{-1}) = 1+\bigg{\sum_{i=1}^{n_a_K}}
+	A_K(q^{-1}) = 1+\mathlarger{\sum\limits_{i=1}^{n_{a_K}}}a_i^Kq^{-i}\\
+	B_K(q^{-1}) = \mathlarger{\sum\limits_{i=1}^{n_{b_K}}}b_i^Kq^{-i}
 	\end{matrix}  
-	\end{equation}
+	\end{equation*}
+	The parameters of the controller $a_i^K$ and $b_i^K$ are calculated by the VRFT methodology, such that the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$ matches open loop performance of  the reference model $\mathbb{M}_P$.
+	\item
+	This is done by solving the convex optimization problem
+	\begin{equation*}
+	\begin{aligned}
+	& \underset{a_i^K,b_i^K}{\text{min}}
+	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{|}}A_K(q^{-1})u(t)-B_K(q^{-1})(\mathbb{M}_P^{\dagger}y(t)-y(t))\mathlarger{\mathlarger{|}}^2 \\
+	\end{aligned}
+	\end{equation*}
+	which minimizes the deviation between the control input calculated by the controller and $u(t)$ that is used to excite the system and obtain $y(t)$.
+	\item
+	The synthesized controller $\mathbb{K}_P$ is placed before the plant, and the loop is closed. A reference step input is given to evaluate the controller performance.
+	\begin{figure}[h]
+	\includegraphics{KpGp.pdf}
+	\end{figure}
+	
+	
 	  
 \end{enumerate} 
 
