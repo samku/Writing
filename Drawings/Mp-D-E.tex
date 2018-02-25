@@ -1,0 +1,56 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{mathtools}
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+
+\begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-1.000000, xscale=1.000000, inner sep=0pt, outer sep=0pt]  
+    \draw[line width=1pt] (120,60) rectangle (200,100);
+    \node at (160,80) {\small $\mathbb{M}_P$};
+    \draw[line width=1pt] (120,0) rectangle (200,40);
+    \node at (160,20) {\small $\mathbb{D}_d$};
+    \draw[->,line width=1pt] (40,80) -- (120,80);
+    \node at (60,70) {\small $g(t)$};
+    \draw[-,line width=1pt] (80,80) -- (80,20);
+    \draw[->,line width=1pt] (80,20) -- (120,20);
+    \draw[line width=1pt] (240,80) circle (6pt);
+    \draw[->,line width=1pt] (200,80) -- (232,80);
+    \draw[-,line width=1pt] (200,20) -- (240,20);
+    \draw[->,line width=1pt] (240,20) -- (240,72);
+    \draw[line width=1pt] (280,80) circle (6pt);
+    \draw[->,line width=1pt] (247,80) -- (272,80);
+    \draw[line width=1pt] (270,20) rectangle (290,40);
+    \draw[->,line width=1pt] (280,40) -- (280,72);
+	\draw[->,line width=1pt] (280,-25) -- (280,20);
+	\node at (280,30) {\small $\mathbb{D}_s$};
+	\node at (295,-20) {\small $w(t)$};
+	\draw[->,line width=1pt] (300,80) -- (300,110);
+	\draw[->,line width=1pt] (288,80) -- (350,80);
+	\draw[line width=1pt] (300,118) circle (6pt);
+	\draw[-,line width=1pt] (80,80) -- (80,118);'
+	\draw[->,line width=1pt] (80,118) -- (292,118);
+	\draw[->,line width=1pt] (300,126) -- (300,146);
+	\draw[line width=1pt] (290,146) rectangle (310,166);
+	\node at (300,156) {\small $\mathbb{K}_P$};
+	\draw[->,line width=1pt] (310,156) -- (350,156);
+	\draw[line width=1pt,dashed] (100,-10) rectangle (310,50);
+	\node at (236,80) {\tiny +};
+	\node at (240,76) {\tiny +};
+	\node at (276,80) {\tiny +};
+	\node at (280,76) {\tiny +};
+	\node at (296,118) {\tiny +};
+	\node at (300,114) {\tiny -};
+\end{tikzpicture}
+\end{document}
+

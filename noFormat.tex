@@ -106,7 +106,42 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\begin{figure}[h]
 	\includegraphics{KpGp.pdf}
 	\end{figure}
+	\\
+	The performance of this setup is improved by providing the reference signal $g(t)$ using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. This augmented state-space model is called $\mathbb{M}'_P$.
+	\begin{equation*}
+	\begin{matrix}
+	\zeta(t+1) = A_\zeta\zeta(t) + B_\zeta g(t)\\
+	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\zeta\zeta(t) + \begin{bmatrix}0\\D_\zeta\end{bmatrix}g(t)
+	\end{matrix}
+	\end{equation*}
+	\\
+	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown below. The lower and upper bounds on $y(t)$ and $u(t)$ are $[y_{min},y_{max}]$ and $[u_{min},u_{max}]$ respectively.
+	\begin{equation*}
+	\begin{aligned}
+	& \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
+	& & Q_y\mathlarger{\sum\limits_{k=1}^{N_P}}(y(t+k|t)-r(t+k))^2 + Q_{\epsilon}\epsilon^2 \\
+	& \text{subject to}
+	& & 
+	\begin{matrix}
+	\zeta(t+k+1) = A_\zeta\zeta(t+k) + B_\zeta g(t+k)\\
+	\begin{bmatrix}y(t+k)\\u(t+k)\end{bmatrix} = C_\zeta\zeta(t+k) + \begin{bmatrix}0\\D_\zeta\end{bmatrix}g(t+k)\\
+	y_{min}-V_y\epsilon \leq y(t+k) \leq y_{max}+V_y\epsilon \\
+	u_{min}-V_u\epsilon \leq u(t+k) \leq u_{max}+V_u\epsilon \\
+	\zeta(t|t) = \zeta(t)
+	\end{matrix}
+	\end{aligned}
+	\end{equation*}
+	\\
+	The quantities $V_y$ and $V_u$ in the MPC formulation are used to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the unknown plant $\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
+	\section{Disturbance sensor}
+	In order to improve prediction of closed loop performance, a disturbance sensor is designed. The disturbance sensor is a dynamical system whose output is the discrepancy between output of the actual closed loop system  $\mathbb{K}_P$-$\mathbb{G}_P$ and reference closed loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in.
+	\begin{figure}[h]
+		\includegraphics{Mp-D-E.pdf}
+	\end{figure}
+	\\
 	
+	
+	\section{Contribution}
 	
 	  
 \end{enumerate} 
