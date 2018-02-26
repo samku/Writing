@@ -69,7 +69,7 @@ This is a very skeletal overview.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Setup}
-Consider a \textit{single-input single-output} system $\mathbb{G}_P$ generating an output signal $y(t) \in \mathbb{R}$ corresponding to the input signal $u(t) \in \mathbb{R}$ for the time $t \in \mathbb{Z}$. Consider the data $\mathbb{D}_{N}=\{u(t),y(t);t\in{1,...,N}\}$ obtained by exciting the system. 
+Consider a \textit{single-input single-output} system $\mathbb{G}_P$ generating an output signal $y(t) \in \mathbb{R}$ corresponding to the input signal $u(t) \in \mathbb{R}$ for the time $t \in \mathbb{Z}$. Consider the data $D_{N}=\{u(t),y(t);t\in{1,...,N}\}$ obtained by exciting the system. 
 \\
 A feedback controller is designed to control the system, using the VRFT methodology. For this, a reference model $\mathbb{M}_P$ is selected. The VRFT methodology designs a feedback controller  $\mathbb{K}_P$, with the goal of making the closed-loop system $\mathbb{K}_P$-$\mathbb{G}_P$ behave similar to the reference model $\mathbb{M}_P$. To this end, the VRFT methodology utilizes the dataset $\mathbb{D}_N$. The desired closed-loop behavior is described by the LTI state-space model $\mathbb{M}_P$ 
 
@@ -133,15 +133,45 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\end{equation*}
 	\\
 	The quantities $V_y$ and $V_u$ in the MPC formulation are used to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the unknown plant $\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
+	
 	\section{Disturbance sensor}
-	In order to improve prediction of closed loop performance, a disturbance sensor is designed. The disturbance sensor is a dynamical system whose output is the discrepancy between output of the actual closed loop system  $\mathbb{K}_P$-$\mathbb{G}_P$ and reference closed loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in.
+	In order to improve prediction of closed loop performance, a disturbance sensor $\mathbb{D}$ is designed. The disturbance sensor is a dynamical system whose output is the discrepancy between output of the actual closed loop system  $\mathbb{K}_P$-$\mathbb{G}_P$ and reference closed loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in Fig. \ref{Appended}.
 	\begin{figure}[h]
 		\includegraphics{Mp-D-E.pdf}
+		\caption{Reference model appended with disturbance sensor}
+		\label{Appended}
 	\end{figure}
 	\\
-	
-	
-	\section{Contribution}
+	This can be seen as a 2-input 2-output system, whose transfer function is described as
+	\begin{equation}
+	\begin{bmatrix}
+		Y(z) \\ U(z)
+	 \end{bmatrix} = 
+	 \begin{bmatrix} 
+	 \mathbb{M}_P+\mathbb{D}_D & \mathbb{D}_S \\
+	 \mathbb{K}_P(I-(\mathbb{M}_P+\mathbb{D}_D)) &  -\mathbb{K}_P\mathbb{D}_S
+	 \end{bmatrix}
+	 \begin{bmatrix}
+	 G(z) \\ W(z)
+	 \end{bmatrix}
+	\end{equation}
+	Note that the dependence of transfer functions on time shift operator $z$ (or $q^{-1}$) is not denoted for ease of notation. The signal $w(t)$ is interpreted as an external noise signal. 
+	Since this model represents the closed loop behavior of the system, new closed loop measurements are required to estimate the parameters of the disturbance sensor. These are obtained by performing experiments with excitaion signals $\hat{g}(t)$ on the closed loop model and plant, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The output is captured as the data sequence $\hat{D}_{N}=\{\hat{g}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
+	The disturbance sensor $\mathbb{D}$ is parameterized as $A_D(q^{-1})y_D(t) = B_D(q^{-1})g(t)+w(t)$, where 
+	\begin{equation*}
+	\begin{matrix}
+	y_D(t) = y(t) - y_M(t) = d_D(t)+d_S(t) \\ 
+	A_D(q^{-1}) = 1+\mathlarger{\sum\limits_{i=1}^{n_{a_D}}}a_i^Dq^{-i}\\
+	B_D(q^{-1}) = \mathlarger{\sum\limits_{i=1}^{n_{b_D}}}b_i^Dq^{-i}
+	\end{matrix}  
+	\end{equation*}
+	Using standard ARX identification, the coefficients $a_i^D$ and $b_i^D$ are estimated by solving the optimization problem
+	\begin{equation*}
+	\begin{aligned}
+	& \underset{a_i^D,b_i^D}{\text{min}}
+	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{|}}A_D(q^{-1})(\hat{y}(t)-\hat{y}_M(t))-B_K(q^{-1})(\hat{g}(t))\mathlarger{\mathlarger{|}}^2 \\
+	\end{aligned}
+	\end{equation*}
 	
 	  
 \end{enumerate} 
