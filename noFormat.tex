@@ -33,6 +33,8 @@
 \usepackage{relsize}
 \usepackage{tikz}
 \graphicspath{{./Drawings/}} 
+\newcommand{\notimplies}{%
+	\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
 
 \title{\LARGE \bf
 Robustly constrained data-driven control
@@ -116,7 +118,7 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\end{equation*}
 	\\
 	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown below. The lower and upper bounds on $y(t)$ and $u(t)$ are $[y_{min},y_{max}]$ and $[u_{min},u_{max}]$ respectively.
-	\begin{equation*}
+	\begin{equation}
 	\begin{aligned}
 	& \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
 	& & Q_y\mathlarger{\sum\limits_{k=1}^{N_P}}(y(t+k|t)-r(t+k))^2 + Q_{\epsilon}\epsilon^2 \\
@@ -130,7 +132,8 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\zeta(t|t) = \zeta(t)
 	\end{matrix}
 	\end{aligned}
-	\end{equation*}
+	\label{MPC}
+	\end{equation}
 	\\
 	The quantities $V_y$ and $V_u$ in the MPC formulation are used to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the unknown plant $\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
 	
@@ -154,6 +157,7 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	 \begin{bmatrix}
 	 G(z) \\ W(z)
 	 \end{bmatrix}
+	 \label{TF}
 	\end{equation}
 	Note that the dependence of transfer functions on time shift operator $z$ (or $q^{-1}$) is not denoted for ease of notation. The signal $w(t)$ is interpreted as an external noise signal. 
 	Since this model represents the closed loop behavior of the system, new closed loop measurements are required to estimate the parameters of the disturbance sensor. These are obtained by performing experiments with excitaion signals $\hat{g}(t)$ on the closed loop model and plant, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The output is captured as the data sequence $\hat{D}_{N}=\{\hat{g}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
@@ -172,8 +176,36 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{|}}A_D(q^{-1})(\hat{y}(t)-\hat{y}_M(t))-B_K(q^{-1})(\hat{g}(t))\mathlarger{\mathlarger{|}}^2 \\
 	\end{aligned}
 	\end{equation*}
+	The disturbance sensor is then split into two parts, deterministic and stochastic. The deterministic part $\mathbb{D}_D$ takes in the reference signal $g(t)$ as an input, and the stochastic part $\mathbb{D}_S$ takes in the noise $w(t)$. The I/O behavior of these parts are separately written as 
+	\begin{equation*}
+	\begin{matrix}
+	d_D(t) = \cfrac{B_D(q^{-1})}{A_D(q^{-1})}g(t) = \mathbb{D}_D g(t) \vspace{4pt} \\  
+	d_S(t) = \cfrac{1}{A_D(q^{-1})}w(t) = \mathbb{D}_S w(t)
+	\end{matrix}
+	\end{equation*}
+	Once all the parameters of the disturbance sensor are calculated, the model \eqref{TF} can be used in a formulation similar to \eqref{MPC} to generate optimal input signal $g(t)$. However, the model has an additional noisy input $w(t)$, which will be transformed to process and measurement noises on the state space model corresponding to \eqref{TF}. Hence, it is desirable to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the noise signal $w(t)$, and explicitly provide them to the optimization problem in order to obtain as robust formulation.\\
+	\section{Noise input bounds calculation}
+	A realization of the discrepancy $d_S(t)$ between desired output $y(t)$ and deterministic output $y_M(t)+d_D(t)$ can be calculated from the data set $\hat{D}_{N}$ as 
+	\begin{equation*}
+	\hat{d}_S(t) = \hat{y}(t)-\hat{y}_M(t)-\cfrac{B_D(q^{-1})}{A_D(q^{-1})} \hat{g}(t) 
+	\end{equation*}
+	The maximum and minimum values of this discrepancy are labeled $\hat{d}_{D,max}$ and $\hat{d}_{D,min}$ respectively. If the ARX estimation results in a stable deterministic disturbance sensor $\mathbb{D}_D$, the values $\hat{d}_{D,max}$ and $\hat{d}_{D,min}$ are finite. Further, if infinite closed loop data $\hat{D}_{\infty}$ is collected for ARX estimation, the bounds on discrepancy are equal to the actual bounds $d_{D,max}$ and $d_{D,min}$. The set of sequences $d_S(t)$ satisfying these bounds are indicated as lying in a set $D_{\infty}$, defined as 
+	\begin{equation*}
+	D_{\infty} = \{d(t): d_{D,min} \leq d(t) \leq d_{D,max} \hspace{5pt} \forall t \in (-\infty,\infty) \}
+	\end{equation*}
+	 From these bounds, we attempt to calculate the set $W_{\infty}$ defined as
+	\begin{equation*}
+	W_{\infty} = \begin{Bmatrix} w(t): \forall t \in (-\infty,\infty), \begin{matrix}
+	w_{min}\leq w(t)\leq w_{max} \\ 
+	\mathbb{D}_S w(t) \in D_{\infty} \\
+	\end{matrix} 
+	\end{Bmatrix}
+	\end{equation*}  
+	This is the set of all $w(t)$ sequences such that the output signal of $\mathbb{D}_S$ corresponding to any $w(t)\in W_{\infty}$  lies within the bounds $[d_{D,max},d_{D,min}]$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $W_{\infty}$ but producing a corresponding output sequence belonging to $D_{\infty}$.
+	\begin{equation*}
+	\forall w(t) \in W_{\infty} , \mathbb{D}_S w(t) \in D_{\infty} \notimplies \nexists  w(t) \notin W_{\infty} , \mathbb{D}_S w(t) \in D_{\infty}
+	\end{equation*}
 	
-	  
 \end{enumerate} 
 
 	
