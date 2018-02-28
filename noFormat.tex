@@ -35,6 +35,7 @@
 \graphicspath{{./Drawings/}} 
 \newcommand{\notimplies}{%
 	\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+\usepackage{caption}
 
 \title{\LARGE \bf
 Robustly constrained data-driven control
@@ -189,9 +190,9 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\begin{equation*}
 	\hat{d}_S(t) = \hat{y}(t)-\hat{y}_M(t)-\cfrac{B_D(q^{-1})}{A_D(q^{-1})} \hat{g}(t) 
 	\end{equation*}
-	The maximum and minimum values of this discrepancy are labeled $\hat{d}_{D,max}$ and $\hat{d}_{D,min}$ respectively. If the ARX estimation results in a stable deterministic disturbance sensor $\mathbb{D}_D$, the values $\hat{d}_{D,max}$ and $\hat{d}_{D,min}$ are finite. Further, if infinite closed loop data $\hat{D}_{\infty}$ is collected for ARX estimation, the bounds on discrepancy are equal to the actual bounds $d_{D,max}$ and $d_{D,min}$. The set of sequences $d_S(t)$ satisfying these bounds are indicated as lying in a set $D_{\infty}$, defined as 
+	The maximum and minimum values of this discrepancy are labeled $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ respectively. If the ARX estimation results in a stable deterministic disturbance sensor $\mathbb{D}_D$, the values $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ are finite. Further, if infinite closed loop data $\hat{D}_{\infty}$ is collected for ARX estimation, the bounds on discrepancy are equal to the actual bounds $d_{D,max}$ and $d_{D,min}$. The set of sequences $d_S(t)$ satisfying these bounds are indicated as lying in a set $D_{\infty}$, defined as 
 	\begin{equation*}
-	D_{\infty} = \{d(t): d_{D,min} \leq d(t) \leq d_{D,max} \hspace{5pt} \forall t \in (-\infty,\infty) \}
+	D_{\infty} = \{d_S(t): d_{S,min} \leq d_S(t) \leq d_{S,max} \hspace{5pt} \forall t \in (-\infty,\infty) \}
 	\end{equation*}
 	 From these bounds, we attempt to calculate the set $W_{\infty}$ defined as
 	\begin{equation*}
@@ -201,10 +202,69 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\end{matrix} 
 	\end{Bmatrix}
 	\end{equation*}  
-	This is the set of all $w(t)$ sequences such that the output signal of $\mathbb{D}_S$ corresponding to any $w(t)\in W_{\infty}$  lies within the bounds $[d_{D,max},d_{D,min}]$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $W_{\infty}$ but producing a corresponding output sequence belonging to $D_{\infty}$.
+	This is the set of all $w(t)$ sequences such that the output signal of $\mathbb{D}_S$ corresponding to any $w(t)\in W_{\infty}$  lies within the bounds $[d_{S,min},d_{S,max}]$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $W_{\infty}$ but producing a corresponding output sequence belonging to $D_{\infty}$.
 	\begin{equation*}
-	\forall w(t) \in W_{\infty} , \mathbb{D}_S w(t) \in D_{\infty} \notimplies \nexists  w(t) \notin W_{\infty} , \mathbb{D}_S w(t) \in D_{\infty}
+	\forall w(t) \in W_{\infty}  : \mathbb{D}_S w(t) \in D_{\infty} \notimplies \nexists  w(t) \notin W_{\infty} : \mathbb{D}_S w(t) \in D_{\infty}
 	\end{equation*}
+	To calculate the bounds $w_{min}$ and $w_{max}$, the optimization problems shown in \ref{bound} are solved for increasing lengths of time horizon $N$.
+	\begin{figure*}[h]
+	\begin{center}
+	\begin{tabular}[h]{c|c}
+		\centering
+		\setlength{\tabcolsep}{0.1em}
+		$
+		\begin{matrix}
+		\underset{X_{min}}{\text{max}}
+		& w^N_{min} \\
+		\text{subject to}
+		& 
+		d_S(k) = -\mathlarger{\sum\limits_{i=1}^{n_{a_D}}}a_i^Dd_S(k-i) + w(k), k={1:N}\\
+		& d_{S,min} \leq d_S(k) \leq d_{S,min}, k={1:N-1} \vspace{4pt}\\
+		& w^N_{min} \leq w(k), k={1:N} \vspace{3pt}\\
+		& d_S(N) \leq d_{S,min} 
+		\end{matrix} 
+		$
+		&
+		$
+		\begin{matrix}
+			\underset{X_{max}}{\text{min}}
+			& w^N_{max} \\
+			\text{subject to}
+			&
+			d_S(k) = -\mathlarger{\sum\limits_{i=1}^{n_{a_D}}}a_i^Dd_S(k-i) + w(k), k={1:N}\\
+			& d_{S,min} \leq d_S(k) \leq d_{S,min}, k={1:N-1} \vspace{4pt}\\
+			& w(k) \leq w^N_{max}, k={1:N} \vspace{3pt}\\
+			& d_S(N) \geq d_{S,max} \\
+		\end{matrix}
+		$
+		\vspace{10pt}\\
+		$
+		\text{where } X_{min} = 
+		\begin{Bmatrix}
+		\{d_S(-n_{a_D}+1),...,d_S(N)\},\\
+		\{w(1),...,w(N)\},\vspace{0.001cm}\\
+		w^N_{min}
+		\end{Bmatrix}
+		$
+		&
+		$
+			\text{where } X_{max} = 
+			\begin{Bmatrix}
+			\{d_S(-n_{a_D}+1),...,d_S(N)\},\\
+			\{w(1),...,w(N)\},\vspace{0.001cm}\\
+			w^N_{max}
+			\end{Bmatrix}
+			$
+	\end{tabular}
+	\end{center}\mbox{} 
+	\label{bound}
+	\caption{Linear programs solved to calculate the set $W_{\infty}$}
+	\end{figure*}
+	These equations solve for a sequence of inputs $\{w(k), k={1:N}\}$ such that the sequence of corresponding outputs at all instances except at time $N$ lie within $D_{\infty}$. This means that the chosen input sequence $w(k)$ can drive the system output out of bounds in $N$ time steps. The initial conditions on $d_S(k)$ are left free to be chosen by the problem. This makes sure that the assumption of infinite data $\hat{D}_{\infty}$ holds.
+	\\
+	\noindent
+	Any sequence $\{w(k)>w^N_{min},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,min}$. Similarly, $\{w(k)<w^N_{max},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,max}$. Hence, in order to explain the whole set $D_{\infty}$, we need to find the lowest possible value of $w^N_{min}$ and the highest possible value of $w^N_{max}$ such that $d_S(k)$ is driven to its bounds in finite time $k$. This is achieved by increasing the value of $N$, which would require lower and higher values of $w(k)$ to make $d_S(N)$ reach $d_{S,min}$ and $d_{S,max}$ respectively. This leads to $w^N_{min}$ and $w^N_{max}$ asymptotically reaching their true values $w_{min}$ and $w_{max}$ as $N$ increases, thus making the set $W_{\infty}$ completely explain the set $D_{\infty}$.   
+	
 	
 \end{enumerate} 
 

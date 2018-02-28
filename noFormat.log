@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  28 FEB 2018 01:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  28 FEB 2018 15:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -556,34 +556,65 @@ File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
-))) (./noFormat.aux)
+)))
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen181
+\captionmargin@=\dimen182
+\captionwidth=\dimen183
+\caption@tempdima=\dimen184
+\caption@indent=\dimen185
+\caption@parindent=\dimen186
+\caption@hangindent=\dimen187
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+)
+
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2->\ifx \@captype \@IEEEta
+blestring \begin {center}{\footnotesize #1}\\{\footnotesize \scshape #2}\end {c
+enter}\@IEEEtablecaptionsepspace \else \@IEEEfigurecaptionsepspace \setbox \@te
+mpboxa \hbox {\footnotesize #1.~~ #2}\ifdim \wd \@tempboxa >\hsize \setbox \@te
+mpboxa \hbox {\footnotesize #1.~~ }\parbox [t]{\hsize }{\footnotesize \noindent
+ \unhbox \@tempboxa #2}\else \ifcenterfigcaptions \hbox to\hsize {\footnotesize
+ \hfil \box \@tempboxa \hfil }\else \hbox to\hsize {\footnotesize \box \@tempbo
+xa \hfil }\fi \fi \fi .
+\c@ContinuedFloat=\count127
+) (./noFormat.aux)
 \openout1 = `noFormat.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
+LaTeX Font Info:    ... okay on input line 56.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count127
-\scratchdimen=\dimen181
+\scratchcounter=\count128
+\scratchdimen=\dimen188
 \scratchbox=\box40
-\nofMPsegments=\count128
-\nofMParguments=\count129
+\nofMPsegments=\count129
+\nofMParguments=\count130
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count130
-\MPscratchDim=\dimen182
-\MPnumerator=\count131
-\makeMPintoPDFobject=\count132
+\MPscratchCnt=\count131
+\MPscratchDim=\dimen189
+\MPnumerator=\count132
+\makeMPintoPDFobject=\count133
 \everyMPtoPDFconversion=\toks34
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -634,64 +665,66 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EveryShipout initializing macros
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 59.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 59
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 60.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 60
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 59
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 60
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 59
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 60
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 59
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 60
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 59.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 59.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 59.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 59.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 60.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 [][][]$[]$\OT1/ptm/m/n/8 Bernard D. Re-searcheris with the De-part-ment of Elec
 -tri-cal
  []
 
 
-Underfull \hbox (badness 8075) in paragraph at lines 59--59
+Underfull \hbox (badness 8075) in paragraph at lines 60--60
 \OT1/ptm/m/n/8 En-gi-neer-ing, Wright State Uni-ver-sity, Day-ton, OH 45435, US
 A
  []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 74.
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 102.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 75.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 103.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 102.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.36008> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 102.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.40009> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 102.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 
-Overfull \hbox (5.0774pt too wide) detected at line 104
+Overfull \hbox (5.0774pt too wide) detected at line 105
 [] []
  []
 
@@ -699,17 +732,17 @@ Overfull \hbox (5.0774pt too wide) detected at line 104
 File: ./Drawings/KpGp.pdf Graphic file (type pdf)
 
 <use ./Drawings/KpGp.pdf>
-Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 109.
+Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 110.
 (pdftex.def)             Requested size: 244.69055pt x 66.00342pt.
 
 <./Drawings/Mp-D-E.pdf, id=5, 250.00502pt x 154.80435pt>
 File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
 
 <use ./Drawings/Mp-D-E.pdf>
-Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 143.
+Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 144.
 (pdftex.def)             Requested size: 250.0044pt x 154.80396pt.
 
-Overfull \hbox (4.28629pt too wide) in paragraph at lines 143--144
+Overfull \hbox (4.28629pt too wide) in paragraph at lines 144--145
 [][] 
  []
 
@@ -717,36 +750,47 @@ Overfull \hbox (4.28629pt too wide) in paragraph at lines 143--144
 
 
  <./Drawings/KpGp.pdf>]
-Overfull \hbox (5.33159pt too wide) detected at line 178
+Overfull \hbox (5.33159pt too wide) detected at line 179
 [] []
  []
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 185--187
+Underfull \hbox (badness 2096) in paragraph at lines 186--188
 \OT1/ptm/m/n/10 noisy in-put $\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm
 /m/it/10 t\OT1/ztmcm/m/n/10 )$\OT1/ptm/m/n/10 , which will be trans-formed to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--187
+Underfull \hbox (badness 10000) in paragraph at lines 186--188
 
  []
 
 
-Overfull \hbox (7.05774pt too wide) detected at line 207
+Overfull \hbox (11.52206pt too wide) detected at line 208
 \OMS/ztmcm/m/n/10 8\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\
-OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 W[]; \U/msb/m/n/10 D[
-]\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 )
- \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 D[] [] \U/msb/m/n/10 @\OML/ztmcm/m/it/1
-0 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 ) [] \OML/ztmcm/m/i
-t/10 W[]; \U/msb/m/n/10 D[]\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/
-it/10 t\OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 D[]
+OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 W[] \OT1/ztmcm/m/n/10
+ : \U/msb/m/n/10 D[]\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t
+\OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 D[] [] \U/msb/m/n/10
+ @\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 
+) [] \OML/ztmcm/m/it/10 W[] \OT1/ztmcm/m/n/10 : \U/msb/m/n/10 D[]\OML/ztmcm/m/i
+t/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n
+/10 2 \OML/ztmcm/m/it/10 D[]
  []
 
+
+Package caption Warning: \label without proper reference on input line 260.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `bound' on page 2 undefined on input line 209.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 <./Drawings/Mp-D-E.pdf>]
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
 Missing character: There is no Ð in font ptmr7t!
-[2 <./Drawings/Mp-D-E.pdf>]
 Missing character: There is no Ð in font ptmr7t!
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
@@ -801,30 +845,32 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[3
+[3] (./noFormat.aux)
 
-] (./noFormat.aux) ) 
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 13655 strings out of 493029
- 266172 string characters out of 6136234
- 314688 words of memory out of 5000000
- 16882 multiletter control sequences out of 15000+600000
- 90537 words of font info for 205 fonts, out of 8000000 for 9000
+ 14719 strings out of 493029
+ 285424 string characters out of 6136234
+ 340635 words of memory out of 5000000
+ 17939 multiletter control sequences out of 15000+600000
+ 91644 words of font info for 206 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,19n,54p,592b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/u
-syr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/times/utmri8a.pfb>
-Output written on noFormat.pdf (3 pages, 117933 bytes).
+ 55i,21n,54p,799b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usy
+r.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
+tmri8a.pfb>
+Output written on noFormat.pdf (3 pages, 123366 bytes).
 PDF statistics:
  98 PDF objects out of 1000 (max. 8388607)
  78 compressed objects within 1 object stream
