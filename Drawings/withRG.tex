@@ -1,0 +1,67 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{mathtools}
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\begin{document}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+
+\begin{tikzpicture}[y=0.80pt, x=0.80pt, yscale=-1.000000, xscale=1.000000, inner sep=0pt, outer sep=0pt]  
+    \draw[line width=1pt] (55,65) rectangle (75,85);
+    \node at (65,75) {\small $\mathbb{G}_P$};
+    \draw[line width=1pt] (25,65) rectangle (45,85);
+    \node at (35,75) {\small $\mathbb{K}_P$};
+    \draw[->,line width=1pt] (45,75) -- (55,75);
+    \draw[->,line width=1pt] (15,75) -- (25,75);
+    \draw[->,line width=1pt] (75,75) -- (85,75);
+    \draw[line width=1pt] (65,85) -- (65,95.5);
+    \draw[line width=1pt] (64.5,95) -- (34.5,95);
+    \draw[->,line width=1pt] (35,95.5) -- (35,85);
+    \draw[->,line width=1pt] (-20,80) -- (10,80);
+    \node at (-5,70) {\small $v(t)$};
+	\draw[->,line width=1pt] (90,80) -- (120,80);
+	\node at (105,70) {\small $y(t)$};
+    \draw[line width=1pt,dashed] (10,40) rectangle (90,120);
+	\draw[line width=1pt] (105,80) -- (105,135.5);
+	\draw[line width=1pt] (105.5,135) -- (-199.5,135);
+	\draw[->,line width=1pt] (-200,135.5) -- (-200,120);
+	%RG
+	\draw[line width=1pt] (-120,40) rectangle (-20,120);
+	\draw[line width=1pt] (-90,60) rectangle (-50,100);
+	\draw[->,line width=1pt] (-110,80) -- (-90,80);
+	\node at (-100,70) {\small $v(t)$};
+	\draw[->,line width=1pt] (-70,45) -- (-70,60);
+	\node at (-58,50) {\small $w(t)$};
+	\draw[->,line width=1pt] (-50,70) -- (-30,70);
+	\node at (-35,62) {\small $y(t)$};
+	\draw[->,line width=1pt] (-50,90) -- (-30,90);
+	\node at (-35,98) {\small $u(t)$};
+	\node at (-105,110) {\small $RG$};
+	\node at (-70,80) {\small $\mathbb{M}_{PD}^{'}$};
+	%MPC
+	\draw[line width=1pt] (-250,40) rectangle (-150,120);
+	\draw[line width=1pt] (-220,60) rectangle (-180,100);
+	\draw[->,line width=1pt] (-240,80) -- (-220,80);
+	\node at (-230,70) {\small $g(t)$};
+	\draw[->,line width=1pt] (-180,70) -- (-160,70);
+	\node at (-165,62) {\small $y(t)$};
+	\draw[->,line width=1pt] (-180,90) -- (-160,90);
+	\node at (-165,98) {\small $u(t)$};
+	\node at (-235,110) {\small $MPC$};
+	\node at (-200,80) {\small $\mathbb{M}_{P}^{'}$};
+	\draw[->,line width=1pt] (-270,80) -- (-250,80);
+	\node at (-260,70) {\small $r(t)$};
+	\draw[->,line width=1pt] (-150,80) -- (-120,80);
+	\node at (-135,70) {\small $g(t)$};
+\end{tikzpicture}
+\end{document}
+

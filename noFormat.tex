@@ -114,7 +114,7 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\begin{equation*}
 	\begin{matrix}
 	\zeta(t+1) = A_\zeta\zeta(t) + B_\zeta g(t)\\
-	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\zeta\zeta(t) + \begin{bmatrix}0\\D_\zeta\end{bmatrix}g(t)
+	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\zeta\zeta(t) + D_\zeta g(t)
 	\end{matrix}
 	\end{equation*}
 	\\
@@ -206,7 +206,7 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\begin{equation*}
 	\forall w(t) \in W_{\infty}  : \mathbb{D}_S w(t) \in D_{\infty} \notimplies \nexists  w(t) \notin W_{\infty} : \mathbb{D}_S w(t) \in D_{\infty}
 	\end{equation*}
-	To calculate the bounds $w_{min}$ and $w_{max}$, the optimization problems shown in \ref{bound} are solved for increasing lengths of time horizon $N$.
+	To calculate the bounds $w_{min}$ and $w_{max}$, the optimization problems shown in \ref{bounds} are solved for increasing lengths of time horizon $N$.
 	\begin{figure*}[h]
 	\begin{center}
 	\begin{tabular}[h]{c|c}
@@ -257,13 +257,30 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 			$
 	\end{tabular}
 	\end{center}\mbox{} 
-	\label{bound}
+	\label{bounds}
 	\caption{Linear programs solved to calculate the set $W_{\infty}$}
 	\end{figure*}
 	These equations solve for a sequence of inputs $\{w(k), k={1:N}\}$ such that the sequence of corresponding outputs at all instances except at time $N$ lie within $D_{\infty}$. This means that the chosen input sequence $w(k)$ can drive the system output out of bounds in $N$ time steps. The initial conditions on $d_S(k)$ are left free to be chosen by the problem. This makes sure that the assumption of infinite data $\hat{D}_{\infty}$ holds.
 	\\
 	\noindent
-	Any sequence $\{w(k)>w^N_{min},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,min}$. Similarly, $\{w(k)<w^N_{max},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,max}$. Hence, in order to explain the whole set $D_{\infty}$, we need to find the lowest possible value of $w^N_{min}$ and the highest possible value of $w^N_{max}$ such that $d_S(k)$ is driven to its bounds in finite time $k$. This is achieved by increasing the value of $N$, which would require lower and higher values of $w(k)$ to make $d_S(N)$ reach $d_{S,min}$ and $d_{S,max}$ respectively. This leads to $w^N_{min}$ and $w^N_{max}$ asymptotically reaching their true values $w_{min}$ and $w_{max}$ as $N$ increases, thus making the set $W_{\infty}$ completely explain the set $D_{\infty}$.   
+	Any sequence $\{w(k)>w^N_{min},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,min}$. Similarly, $\{w(k)<w^N_{max},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,max}$. Hence, in order to explain the whole set $D_{\infty}$, we need to find the lowest possible value of $w^N_{min}$ and the highest possible value of $w^N_{max}$ such that $d_S(k)$ is driven to its bounds in finite time $k$. This is achieved by increasing the value of $N$, which would require lower and higher values of $w(k)$ to make $d_S(N)$ reach $d_{S,min}$ and $d_{S,max}$ respectively. This leads to $w^N_{min}$ and $w^N_{max}$ asymptotically reaching their true values $w_{min}$ and $w_{max}$ as $N$ increases, thus making the set $W_{\infty}$ completely explain the set $D_{\infty}$. It is noted that the presented method provides a methodology to quantify uncertainty in any general ARX identified model.
+	\\
+	After finding bounds on the noise, the appended model with disturbance sensor can be used in a robust control framework. In the current work, a robust reference governer is developed. The reference governer alters the reference input $g(t)$ from the MPC algorithm in \eqref{MPC} to generate a new reference signal $v(t)$, for which the closed loop plant satisfies output constraints.
+	\section{Robust reference governer}
+	The robust reference governer is a signal regulator which alters the command input such that the system robustly satisfies constraints. It does so by utilizing knowledge of disturbances acting on the system. A schematic of the control system is shown in Fig. \ref{fullloop}. The $MPC$ controller utilizes the model $\mathbb{M}'_{P}$, and the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$, which is the state space representation of \eqref{TF}. This is written as :
+	\begin{equation*}
+	\begin{matrix}
+	\gamma(t+1) = A_\gamma\gamma(t) + B_\gamma \begin{bmatrix}v(t) \\ w(t) \end{bmatrix} \vspace{2pt}\\
+	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\gamma\gamma(t) + D_\gamma\begin{bmatrix}v(t) \\ w(t) \end{bmatrix}
+	\end{matrix}
+	\end{equation*}
+	\\
+	\begin{figure}[h]
+		\includegraphics[scale = 0.8]{withRG.pdf}
+		\caption{Schematic of the control system}
+		\label{fullloop}
+	\end{figure} \\
+	The reference governer $RG$ solves, at each time instant, the optimization problem:
 	
 	
 \end{enumerate} 
