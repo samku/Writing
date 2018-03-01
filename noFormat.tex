@@ -36,6 +36,7 @@
 \newcommand{\notimplies}{%
 	\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
 \usepackage{caption}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 \title{\LARGE \bf
 Robustly constrained data-driven control
@@ -267,22 +268,78 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\\
 	After finding bounds on the noise, the appended model with disturbance sensor can be used in a robust control framework. In the current work, a robust reference governer is developed. The reference governer alters the reference input $g(t)$ from the MPC algorithm in \eqref{MPC} to generate a new reference signal $v(t)$, for which the closed loop plant satisfies output constraints.
 	\section{Robust reference governer}
-	The robust reference governer is a signal regulator which alters the command input such that the system robustly satisfies constraints. It does so by utilizing knowledge of disturbances acting on the system. A schematic of the control system is shown in Fig. \ref{fullloop}. The $MPC$ controller utilizes the model $\mathbb{M}'_{P}$, and the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$, which is the state space representation of \eqref{TF}. This is written as :
-	\begin{equation*}
-	\begin{matrix}
-	\gamma(t+1) = A_\gamma\gamma(t) + B_\gamma \begin{bmatrix}v(t) \\ w(t) \end{bmatrix} \vspace{2pt}\\
-	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\gamma\gamma(t) + D_\gamma\begin{bmatrix}v(t) \\ w(t) \end{bmatrix}
-	\end{matrix}
-	\end{equation*}
-	\\
+	The robust reference governer is a signal regulator which alters the command input such that the system robustly satisfies constraints. It does so by utilizing knowledge of disturbances acting on the system. A schematic of the control system is shown in Fig. \ref{fullloop}. 
 	\begin{figure}[h]
 		\includegraphics[scale = 0.8]{withRG.pdf}
 		\caption{Schematic of the control system}
 		\label{fullloop}
 	\end{figure} \\
-	The reference governer $RG$ solves, at each time instant, the optimization problem:
-	
-	
+	The $MPC$ controller utilizes the model $\mathbb{M}'_{P}$, and the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$, which is the state space representation of \eqref{TF}. This is written as:
+	\begin{equation*}
+	\begin{matrix}
+	\gamma(t+1) = A_\gamma\gamma(t) + B^v_\gamma v(t) + B^w_\gamma w(t) \vspace{2pt}\\
+	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\gamma\gamma(t) + D^v_\gamma v(t) + D^w_\gamma w(t)
+	\end{matrix}
+	\end{equation*}
+	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The outputs of the system are called $y_{\gamma}(t)=[y(t) u(t)]^T$. The constraints on these outputs are written as: 
+	\begin{equation*}
+	\begin{matrix}
+	\begin{matrix}
+	y_{min} \leq y(t) \leq y_{max} \\
+	u_{min} \leq u(t) \leq u_{max}
+	\end{matrix} & \bigg{\}} & Hy_{\gamma}(t) \leq h
+	\end{matrix}
+	\end{equation*}
+	At each time instant $t$, the reference governer solves the quadratic program:
+	\begin{equation}
+	\begin{aligned}
+	& \underset{v}{\text{min}}
+	& & \cfrac{1}{2}\norm{v-g(t)}_2^2 \\
+	& \text{subject to}
+	& & 
+	(x(t),v) \in \mathbb{O}_{\infty}
+	\end{aligned}
+	\label{RGprob}
+	\end{equation}
+	where the set $\mathbb{O}_{\infty}$ is defined as:
+	\begin{equation*}
+	\mathbb{O}_{\infty} = \{(x(t),v): x(t) = \gamma(t), \hspace{2pt} Hy_{\gamma}(\tau) \leq h \hspace{5pt} \forall \tau \geq t \} \\ 
+	\end{equation*}
+	This is called an output-invariant set.
+	It is set of feasible values for $v$ for the current observed state $x(t)=\gamma(t)$ such that if a constant input signal $v(\tau \geq t)=v$ is applied, the system output constraints $Hy_{\gamma}(\tau \geq t) \leq h$ remain satisfied for all $\tau$.
+	At a time instant $\tau \geq t$, the system output $y_{\gamma}(\tau)$ for input signal $v(\tau \geq t)=v$ can be written as:
+	\begin{equation*}
+	\hspace{-30pt}
+	\begin{aligned}
+	\begin{matrix}
+	y_{\gamma}(\tau) = C_{\gamma}A_{\gamma}^{\tau - t}\gamma(t) + \bigg( C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^v_{\gamma} + D_{\gamma}^v \bigg)v + \vspace{5pt}\\  \hspace{110pt} C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^w_{\gamma}w(\tau-k) + D_{\gamma}^w w(\tau)
+	\end{matrix}
+	\end{aligned}
+	\end{equation*} \vspace{24pt}\\
+	For a particular future time instant $\tau$, the set $\mathbb{O}_{\infty}(\tau)$ is given by:
+	\begin{equation*}
+	\begin{matrix}
+	\mathbb{O}_{\infty}(\tau) = \{(x(t),v): x(t) = \gamma(t), \hspace{5pt} \tilde{H}(\tau)v \leq \tilde{h}(\tau)\} \vspace{5pt}\\
+	\text{where } \hspace{5pt} \tilde{H}(\tau) = H\bigg( C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^v_{\gamma} + D_{\gamma}^v \bigg) \vspace{5pt} \\ \hspace{10pt}
+	\tilde{h}(\tau) = h - HC_{\gamma}A_{\gamma}^{\tau - t}\gamma(t) - f^w(\tau) \vspace{5pt}
+	\end{matrix} 
+	\end{equation*}
+	Each element $f^w_i(\tau)$ of the column vector $f^w(\tau)$ is calculated by solving the linear program:
+	\begin{equation*}
+	f_i^w(\tau) = \underset{\{w(k)\}_{t}^{\tau}\in W_{\infty}}{\text{max}} H\bigg(C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^w_{\gamma}w(\tau-k) + D_{\gamma}^w w(\tau)\bigg)_i
+	\end{equation*}
+	Subscript $i$ in the above problem indicates that row $i$ of the matrix is used in the linear program to calculate the corresponding $w(k)$ sequence. According to the theory of output invariant sets for linear systems with polyhedral constraints on noise and outputs, the set $\mathbb{O}_{\infty} = \mathbb{O}_{\infty}(\tau \to \infty)$ is reached when the elements of $f^w(\tau)$ converge to a constant value. Since the linear problem to be solved for $f_i^w(\tau)$ does not depend on values at current time instant $t$, it can be solved offline for increasing values of $\tau$. When convergence is observed at time $\tau_c$, the value $f^w(\tau_c)$ is stored. This results in  problem \eqref{RGprob} being simplified to
+	\begin{equation}
+	\begin{aligned}
+	& \underset{v}{\text{min}}
+	& & \cfrac{1}{2}\norm{v-g(t)}_2^2 \\
+	& \text{subject to}
+	& & 
+	\tilde{H}(\tau_c)v \leq \tilde{h}(\tau_c)
+	\end{aligned}
+	\label{RGprob_simple}
+	\end{equation}
+	It must be noted that the value $\tilde{h}(\tau_c)$ depends on the current observed state $\gamma(t)$.
 \end{enumerate} 
 
 	

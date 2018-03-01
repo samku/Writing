@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  1 MAR 2018 20:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  1 MAR 2018 23:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -590,18 +590,18 @@ xa \hfil }\fi \fi \fi .
 ) (./noFormat.aux)
 \openout1 = `noFormat.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -667,64 +667,64 @@ e
 ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 60.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 60
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 61.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 61
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 60
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 61
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 60
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 61
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 60
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 61
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 61.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 61.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 60.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 61.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 61.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 60--60
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
 [][][]$[]$\OT1/ptm/m/n/8 Bernard D. Re-searcheris with the De-part-ment of Elec
 -tri-cal
  []
 
 
-Underfull \hbox (badness 8075) in paragraph at lines 60--60
+Underfull \hbox (badness 8075) in paragraph at lines 61--61
 \OT1/ptm/m/n/8 En-gi-neer-ing, Wright State Uni-ver-sity, Day-ton, OH 45435, US
 A
  []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 75.
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 103.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 104.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 104.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.36008> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 104.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.40009> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 104.
 
-Overfull \hbox (5.0774pt too wide) detected at line 105
+Overfull \hbox (5.0774pt too wide) detected at line 106
 [] []
  []
 
@@ -732,17 +732,17 @@ Overfull \hbox (5.0774pt too wide) detected at line 105
 File: ./Drawings/KpGp.pdf Graphic file (type pdf)
 
 <use ./Drawings/KpGp.pdf>
-Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 110.
+Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 111.
 (pdftex.def)             Requested size: 244.69055pt x 66.00342pt.
 
 <./Drawings/Mp-D-E.pdf, id=5, 250.00502pt x 154.80435pt>
 File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
 
 <use ./Drawings/Mp-D-E.pdf>
-Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 144.
+Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 145.
 (pdftex.def)             Requested size: 250.0044pt x 154.80396pt.
 
-Overfull \hbox (4.28629pt too wide) in paragraph at lines 144--145
+Overfull \hbox (4.28629pt too wide) in paragraph at lines 145--146
 [][] 
  []
 
@@ -750,23 +750,23 @@ Overfull \hbox (4.28629pt too wide) in paragraph at lines 144--145
 
 
  <./Drawings/KpGp.pdf>]
-Overfull \hbox (5.33159pt too wide) detected at line 179
+Overfull \hbox (5.33159pt too wide) detected at line 180
 [] []
  []
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 186--188
+Underfull \hbox (badness 2096) in paragraph at lines 187--189
 \OT1/ptm/m/n/10 noisy in-put $\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm
 /m/it/10 t\OT1/ztmcm/m/n/10 )$\OT1/ptm/m/n/10 , which will be trans-formed to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--188
+Underfull \hbox (badness 10000) in paragraph at lines 187--189
 
  []
 
 
-Overfull \hbox (11.52206pt too wide) detected at line 208
+Overfull \hbox (11.52206pt too wide) detected at line 209
 \OMS/ztmcm/m/n/10 8\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\
 OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 W[] \OT1/ztmcm/m/n/10
  : \U/msb/m/n/10 D[]\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t
@@ -778,28 +778,40 @@ t/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n
  []
 
 
-Package caption Warning: \label without proper reference on input line 260.
+Package caption Warning: \label without proper reference on input line 261.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `bounds' on page 2 undefined on input line 209.
+LaTeX Warning: Reference `bounds' on page 2 undefined on input line 210.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [2 <./Drawings/Mp-D-E.pdf>]
-Underfull \vbox (badness 2057) has occurred while \output is active []
-
-
 <./Drawings/withRG.pdf, id=60, 314.00513pt x 78.40392pt>
 File: ./Drawings/withRG.pdf Graphic file (type pdf)
 
 <use ./Drawings/withRG.pdf>
-Package pdftex.def Info: ./Drawings/withRG.pdf used on input line 279.
+Package pdftex.def Info: ./Drawings/withRG.pdf used on input line 273.
 (pdftex.def)             Requested size: 251.20444pt x 62.7232pt.
 
-Overfull \hbox (5.48633pt too wide) in paragraph at lines 279--280
+Overfull \hbox (5.48633pt too wide) in paragraph at lines 273--274
 [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 2057) has occurred while \output is active []
+
+ [3 <./Drawings/withRG.pdf>]
+Overfull \hbox (10.93167pt too wide) detected at line 330
+\OML/ztmcm/m/it/10 f[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^\\OT1/ztmcm/m/n/1
+0 ) = []\OML/ztmcm/m/it/10 H[]C[] [] A[]B[]w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/
+10 ^^\ \OMS/ztmcm/m/n/10 ^^@ \OML/ztmcm/m/it/10 k\OT1/ztmcm/m/n/10 ) + \OML/ztm
+cm/m/it/10 D[]w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^\\OT1/ztmcm/m/n/10 )[][]
+
  []
 
 Missing character: There is no Ò in font ptmr7t!
@@ -827,7 +839,6 @@ Missing character: There is no Ð in font ptmr7t!
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
 Missing character: There is no Ð in font ptmr7t!
-[3 <./Drawings/withRG.pdf>]
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
 Missing character: There is no Ð in font ptmr7t!
@@ -848,7 +859,6 @@ Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
-
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -860,19 +870,17 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[4
-
-] (./noFormat.aux)
+[4] (./noFormat.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 14725 strings out of 493029
- 285548 string characters out of 6136234
- 341644 words of memory out of 5000000
- 17944 multiletter control sequences out of 15000+600000
- 91644 words of font info for 206 fonts, out of 8000000 for 9000
+ 14730 strings out of 493029
+ 285587 string characters out of 6136234
+ 341668 words of memory out of 5000000
+ 17947 multiletter control sequences out of 15000+600000
+ 92066 words of font info for 208 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,21n,54p,918b,487s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -887,7 +895,7 @@ e/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
 tmri8a.pfb>
-Output written on noFormat.pdf (4 pages, 127694 bytes).
+Output written on noFormat.pdf (4 pages, 133960 bytes).
 PDF statistics:
  116 PDF objects out of 1000 (max. 8388607)
  94 compressed objects within 1 object stream
