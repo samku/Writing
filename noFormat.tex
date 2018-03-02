@@ -37,6 +37,11 @@
 	\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
 \usepackage{caption}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+\newlength\figureheight
+\newlength\figurewidth 
 
 \title{\LARGE \bf
 Robustly constrained data-driven control
@@ -353,7 +358,18 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\end{equation*}
 	The input $u(t)$ is deterministic and $w(t)$ is noisy. An approximate ARX model of the system is calculated as $A(q^{-1})\tilde{x}(t) = B(q^{-1})u(t)+w(t)$ after performing experiments on the system and collecting data. It is identified with $A(q^{-1})$ and $B(q^{-1})$ having 2 and 1 free parameters respectively. Following this, the methodology discussed in Sec.\ref{Noise} is used to calculate bounds on $w(t)$.
 	\\
-	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $D_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \ref{bounds}. The bounds $w^N_{min}$ and $W^N_{max}$ on the input sequences are shown in 
+	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $D_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \ref{bounds}. The bounds $w^N_{min}$ and $W^N_{max}$ on the input sequences are shown in Fig.\ref{bounds}.
+	\begin{figure}[h]
+		\includegraphics[scale = 0.55]{bounds.eps}
+		\caption{Convergence of bounds to $w_{min}$ and $w_{max}$}
+		\label{bounds}
+	\end{figure} 
+	The largest region where $w^N_{min} \leq w(k) \leq w^N_{max}$ is satisfied is $W_{\infty}$. To verify the obtained bounds, the system identified through ARX identification is simulated with deterministic inputs $u(t)$, and a range of noise inputs $w(t)$ sampled from $W_{\infty}$ and held constant throughout the simulation horizon. The simulation results are seen in Fig.\ref{simulation}.
+	\begin{figure}[h]
+		\includegraphics[scale = 0.65]{simulation.eps}
+		\caption{Comparison of ARX model performance with constant $w(t)=0$(nominal) and $w(t)\in W_{\infty}$. The noise model gives bounded output $x(t)$ without being conservative.}
+		\label{simulation}
+	\end{figure} \\
 \end{enumerate} 
 
 	
