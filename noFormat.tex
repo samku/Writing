@@ -187,6 +187,7 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\end{equation*}
 	Once all the parameters of the disturbance sensor are calculated, the model \eqref{TF} can be used in a formulation similar to \eqref{MPC} to generate optimal input signal $g(t)$. However, the model has an additional noisy input $w(t)$, which will be transformed to process and measurement noises on the state space model corresponding to \eqref{TF}. Hence, it is desirable to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the noise signal $w(t)$, and explicitly provide them to the optimization problem in order to obtain as robust formulation.\\
 	\section{Noise input bounds calculation}
+	\label{Noise}
 	A realization of the discrepancy $d_S(t)$ between desired output $y(t)$ and deterministic output $y_M(t)+d_D(t)$ can be calculated from the data set $\hat{D}_{N}$ as 
 	\begin{equation*}
 	\hat{d}_S(t) = \hat{y}(t)-\hat{y}_M(t)-\cfrac{B_D(q^{-1})}{A_D(q^{-1})} \hat{g}(t) 
@@ -261,7 +262,7 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\label{bounds}
 	\caption{Linear programs solved to calculate the set $W_{\infty}$}
 	\end{figure*}
-	These equations solve for a sequence of inputs $\{w(k), k={1:N}\}$ such that the sequence of corresponding outputs at all instances except at time $N$ lie within $D_{\infty}$. This means that the chosen input sequence $w(k)$ can drive the system output out of bounds in $N$ time steps. The initial conditions on $d_S(k)$ are left free to be chosen by the problem. This makes sure that the assumption of infinite data $\hat{D}_{\infty}$ holds.
+	These equations solve for a sequence of inputs $\{w(k), k={1:N}\}$ such that the sequence of corresponding outputs at all instances except at time $N$ lie within $D_{\infty}$. This means that the chosen input sequence $w(k)$ can drive the system output out of bounds in $N$ time steps. The initial conditions on $d_S(k)$ are left free to be chosen by the problem, but are constrained to lie within $D_{\infty}$. Thus, for a time horizon $N$, the input $\{w(k), k={1:N}\}$ is chosen such that, wherever the system starts inside the set $D_{\infty}$, it will stay inside the set $D_{\infty}$. This freedom to choose an initial condition also permits the assumption that $D_{\infty}$ is obtained from the infinite data set $\hat{D}_{\infty}$.
 	\\
 	\noindent
 	Any sequence $\{w(k)>w^N_{min},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,min}$. Similarly, $\{w(k)<w^N_{max},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,max}$. Hence, in order to explain the whole set $D_{\infty}$, we need to find the lowest possible value of $w^N_{min}$ and the highest possible value of $w^N_{max}$ such that $d_S(k)$ is driven to its bounds in finite time $k$. This is achieved by increasing the value of $N$, which would require lower and higher values of $w(k)$ to make $d_S(N)$ reach $d_{S,min}$ and $d_{S,max}$ respectively. This leads to $w^N_{min}$ and $w^N_{max}$ asymptotically reaching their true values $w_{min}$ and $w_{max}$ as $N$ increases, thus making the set $W_{\infty}$ completely explain the set $D_{\infty}$. It is noted that the presented method provides a methodology to quantify uncertainty in any general ARX identified model.
@@ -339,7 +340,20 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\end{aligned}
 	\label{RGprob_simple}
 	\end{equation}
-	It must be noted that the value $\tilde{h}(\tau_c)$ depends on the current observed state $\gamma(t)$.
+	It must be noted that the value $\tilde{h}(\tau_c)$ depends on the current observed state $\gamma(t)$. Thus, at each time instant, the reference governer reads the current state $\gamma(t)$, reference input $g(t)$, and calculates a new reference $v(t)$ which satisfies output constraints on the system robustly.
+	\section{Simulation results}
+	\subsection{Noise input bound}
+	Consider a MISO system with inputs $\{u(t),w(t)\}$ and output $x(t)$, described by:
+	\begin{equation*}
+	\begin{matrix}
+	u(t+1) = 0.9u(t)+1 \\
+	x(t+1) = 0.1x(t)+u(t)+w(t) \\
+	u(1) = 0, \hspace{5pt} x(1) = 0
+	\end{matrix}
+	\end{equation*}
+	The input $u(t)$ is deterministic and $w(t)$ is noisy. An approximate ARX model of the system is calculated as $A(q^{-1})\tilde{x}(t) = B(q^{-1})u(t)+w(t)$ after performing experiments on the system and collecting data. It is identified with $A(q^{-1})$ and $B(q^{-1})$ having 2 and 1 free parameters respectively. Following this, the methodology discussed in Sec.\ref{Noise} is used to calculate bounds on $w(t)$.
+	\\
+	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $D_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \ref{bounds}. The bounds $w^N_{min}$ and $W^N_{max}$ on the input sequences are shown in 
 \end{enumerate} 
 
 	
