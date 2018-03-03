@@ -44,7 +44,7 @@
 \newlength\figurewidth 
 
 \title{\LARGE \bf
-Robustly constrained data-driven control
+Robust data-driven predictive control
 }
 
 
@@ -346,19 +346,19 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\label{RGprob_simple}
 	\end{equation}
 	It must be noted that the value $\tilde{h}(\tau_c)$ depends on the current observed state $\gamma(t)$. Thus, at each time instant, the reference governer reads the current state $\gamma(t)$, reference input $g(t)$, and calculates a new reference $v(t)$ which satisfies output constraints on the system robustly.
-	\section{Simulation results}
+	\section{Case studies}
 	\subsection{Noise input bound}
 	Consider a MISO system with inputs $\{u(t),w(t)\}$ and output $x(t)$, described by:
 	\begin{equation*}
 	\begin{matrix}
-	u(t+1) = 0.9u(t)+1 \\
-	x(t+1) = 0.1x(t)+u(t)+w(t) \\
+	u(t+1) = 0.995u(t)+1 \\
+	x(t+1) = 0.05x(t)+u(t)+w(t) \\
 	u(1) = 0, \hspace{5pt} x(1) = 0
 	\end{matrix}
 	\end{equation*}
 	The input $u(t)$ is deterministic and $w(t)$ is noisy. An approximate ARX model of the system is calculated as $A(q^{-1})\tilde{x}(t) = B(q^{-1})u(t)+w(t)$ after performing experiments on the system and collecting data. It is identified with $A(q^{-1})$ and $B(q^{-1})$ having 2 and 1 free parameters respectively. Following this, the methodology discussed in Sec.\ref{Noise} is used to calculate bounds on $w(t)$.
 	\\
-	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $D_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \ref{bounds}. The bounds $w^N_{min}$ and $W^N_{max}$ on the input sequences are shown in Fig.\ref{bounds}.
+	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $D_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \ref{bounds}. The bounds $w^N_{min}$ and $w^N_{max}$ on the input sequences are shown in Fig.\ref{bounds}.
 	\begin{figure}[h]
 		\includegraphics[scale = 0.55]{bounds.eps}
 		\caption{Convergence of bounds to $w_{min}$ and $w_{max}$}
@@ -370,6 +370,50 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 		\caption{Comparison of ARX model performance with constant $w(t)=0$(nominal) and $w(t)\in W_{\infty}$. The noise model gives bounded output $x(t)$ without being conservative.}
 		\label{simulation}
 	\end{figure} \\
+	The simulation of ARX model with noise requires an initial condition on the noise model. However, the problem calculates $W_{\infty}$ for all $D_{\infty}$ without incorporating the knowledge of an initial condition (This is the main feature of the problem). In the current example, the ARX model with noise is simulated with a initial condition = $0$. Since the actual initial condtion of the noise model might not be $0$, one might face problems with the model not covering the whole range of $D_{\infty}$ during the transient period. To correct this, a state estimator could be used which rectifies the effect of initial state discrepancy, thus covering the noise effects even during transients.
+	\subsection{Data driven MPC with robust reference governer}
+	Simulations are performed on a model of a servo positioning system, controlled using the loop presented in Fig.\ref{fullloop}. The plant dynamics are modeled with the following non-linear state space equations:
+	\begin{equation*}
+	\begin{matrix}
+	\begin{bmatrix}
+	\dot{\theta}(t) \vspace{12pt} \\
+	\dot{\omega}(t) \vspace{12pt} \\
+	\dot{i}(t)
+	\end{bmatrix} = 
+	\begin{bmatrix}
+	\omega(t) \vspace{3pt}\\
+	\cfrac{-mgl}{J}\hspace{1pt}sin\theta(t)-\cfrac{b}{J}\hspace{1pt}\omega(t) + \cfrac{K_m}{J}\hspace{1pt}i(t) \\  
+	\cfrac{-K_m}{L}\hspace{1pt}\omega(t)-\cfrac{R}{L}\hspace{1pt}i(t) + \cfrac{1}{L}\hspace{1pt}u(t)
+	\end{bmatrix} \vspace{10pt}\\
+	y(t) = \begin{bmatrix} 1 & 0 & 0 \end{bmatrix} 
+	\begin{bmatrix} \theta(t) \\ \omega(t) \\ i(t) \end{bmatrix} 
+	\end{matrix}
+	\end{equation*}
+	
+	\begin{center}
+		\begin{tabular}{||c|c|c||} 
+			\hline
+			Symbol & Parameter & Value\\ [0.5ex] 
+			\hline\hline
+			$R$ & Motor resistance & $5$\Omega\\ 
+			\hline
+			$L$ & Motor inductance & $5.10^{-3}$H \\
+			\hline
+			$K_m$ & Motor torque constant & $0.0847$Nm/A \\
+			\hline
+			$J$ & Complete disk inertia & $5.10^{-5}$Nm^2 \\
+			\hline
+			$b$ & Friction coefficient & $3.10^{-3}Nms/rad$ \\ [1ex] 
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	
+	
+	
+	
+	
+	
 \end{enumerate} 
 
 	
