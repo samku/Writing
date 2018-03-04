@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  3 MAR 2018 16:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  3 MAR 2018 19:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -710,6 +710,9 @@ File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
 
 LaTeX Warning: Label `bounds' multiply defined.
 
+
+LaTeX Warning: Label `VRFT' multiply defined.
+
 )
 \openout1 = `noFormat.aux'.
 
@@ -849,25 +852,25 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.36008> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.40009> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 109.
 
-Overfull \hbox (5.0774pt too wide) detected at line 111
-[] []
+Overfull \hbox (5.0774pt too wide) detected at line 112
+[] [][]
  []
 
 <./Drawings/KpGp.pdf, id=4, 244.69116pt x 66.00359pt>
 File: ./Drawings/KpGp.pdf Graphic file (type pdf)
 
 <use ./Drawings/KpGp.pdf>
-Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 116.
+Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 117.
 (pdftex.def)             Requested size: 244.69055pt x 66.00342pt.
 
 <./Drawings/Mp-D-E.pdf, id=5, 250.00502pt x 154.80435pt>
 File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
 
 <use ./Drawings/Mp-D-E.pdf>
-Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 150.
+Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 151.
 (pdftex.def)             Requested size: 250.0044pt x 154.80396pt.
 
-Overfull \hbox (4.28629pt too wide) in paragraph at lines 150--151
+Overfull \hbox (4.28629pt too wide) in paragraph at lines 151--152
 [][] 
  []
 
@@ -875,23 +878,23 @@ Overfull \hbox (4.28629pt too wide) in paragraph at lines 150--151
 
 
  <./Drawings/KpGp.pdf>]
-Overfull \hbox (5.33159pt too wide) detected at line 185
+Overfull \hbox (5.33159pt too wide) detected at line 186
 [] []
  []
 
 
-Underfull \hbox (badness 2096) in paragraph at lines 192--194
+Underfull \hbox (badness 2096) in paragraph at lines 193--195
 \OT1/ptm/m/n/10 noisy in-put $\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm
 /m/it/10 t\OT1/ztmcm/m/n/10 )$\OT1/ptm/m/n/10 , which will be trans-formed to
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 192--194
+Underfull \hbox (badness 10000) in paragraph at lines 193--195
 
  []
 
 
-Overfull \hbox (11.52206pt too wide) detected at line 215
+Overfull \hbox (11.52206pt too wide) detected at line 216
 \OMS/ztmcm/m/n/10 8\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\
 OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 W[] \OT1/ztmcm/m/n/10
  : \U/msb/m/n/10 D[]\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t
@@ -910,15 +913,15 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: ./Drawings/withRG.pdf Graphic file (type pdf)
 
 <use ./Drawings/withRG.pdf>
-Package pdftex.def Info: ./Drawings/withRG.pdf used on input line 279.
+Package pdftex.def Info: ./Drawings/withRG.pdf used on input line 280.
 (pdftex.def)             Requested size: 251.20444pt x 62.7232pt.
 
-Overfull \hbox (5.48633pt too wide) in paragraph at lines 279--280
+Overfull \hbox (5.48633pt too wide) in paragraph at lines 280--281
 [][] 
  []
 
 [3 <./Drawings/withRG.pdf>]
-Overfull \hbox (10.93167pt too wide) detected at line 336
+Overfull \hbox (10.93167pt too wide) detected at line 337
 \OML/ztmcm/m/it/10 f[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^\\OT1/ztmcm/m/n/1
 0 ) = []\OML/ztmcm/m/it/10 H[]C[] [] A[]B[]w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/
 10 ^^\ \OMS/ztmcm/m/n/10 ^^@ \OML/ztmcm/m/it/10 k\OT1/ztmcm/m/n/10 ) + \OML/ztm
@@ -934,14 +937,14 @@ Package epstopdf Info: Source file: <./Drawings/bounds.eps>
 (epstopdf)                    size: 17963 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/bounds-eps-conv
 erted-to.pdf ./Drawings/bounds.eps>
-(epstopdf)             \includegraphics on input line 363.
+(epstopdf)             \includegraphics on input line 364.
 Package epstopdf Info: Output file is already uptodate.
 <./Drawings/bounds-eps-converted-to.pdf, id=79, 421.575pt x 316.18124pt>
 File: ./Drawings/bounds-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/bounds-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/bounds-eps-converted-to.pdf used on input l
-ine 363.
+ine 364.
 (pdftex.def)             Requested size: 231.86696pt x 173.9002pt.
 Package epstopdf Info: Source file: <./Drawings/simulation.eps>
 (epstopdf)                    date: 2018-03-03 14:48:46
@@ -952,7 +955,7 @@ Package epstopdf Info: Source file: <./Drawings/simulation.eps>
 (epstopdf)                    size: 59045 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/simulation-eps-
 converted-to.pdf ./Drawings/simulation.eps>
-(epstopdf)             \includegraphics on input line 369.
+(epstopdf)             \includegraphics on input line 370.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/simulation-eps-converted-to.pdf, id=80, 421.575pt x 316.18124pt>
@@ -960,17 +963,36 @@ File: ./Drawings/simulation-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/simulation-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/simulation-eps-converted-to.pdf used on inp
-ut line 369.
+ut line 370.
 (pdftex.def)             Requested size: 274.0205pt x 205.51537pt.
 
-Overfull \hbox (28.30238pt too wide) in paragraph at lines 369--370
+Overfull \hbox (28.30238pt too wide) in paragraph at lines 370--371
 [][] 
  []
 
 [4 <./Drawings/bounds-eps-converted-to.pdf> <./Drawings/simulation-eps-converte
 d-to.pdf>]
-Overfull \hbox (6.20004pt too wide) in paragraph at lines 394--409
- [] 
+Package epstopdf Info: Source file: <./Drawings/VRFT.eps>
+(epstopdf)                    date: 2018-03-03 19:31:00
+(epstopdf)                    size: 379796 bytes
+(epstopdf)             Output file: <./Drawings/VRFT-eps-converted-to.pdf>
+(epstopdf)                    date: 2018-03-03 19:31:22
+(epstopdf)                    size: 100352 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT-eps-conver
+ted-to.pdf ./Drawings/VRFT.eps>
+(epstopdf)             \includegraphics on input line 434.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Drawings/VRFT-eps-converted-to.pdf, id=95, 382.42876pt x 312.16624pt>
+File: ./Drawings/VRFT-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Drawings/VRFT-eps-converted-to.pdf>
+Package pdftex.def Info: ./Drawings/VRFT-eps-converted-to.pdf used on input lin
+e 434.
+(pdftex.def)             Requested size: 248.57573pt x 202.90565pt.
+
+Overfull \hbox (2.85762pt too wide) in paragraph at lines 434--435
+[][] 
  []
 
 Missing character: There is no Ò in font ptmr7t!
@@ -1001,6 +1023,7 @@ Missing character: There is no Ð in font ptmr7t!
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
 Missing character: There is no Ð in font ptmr7t!
+[5 <./Drawings/VRFT-eps-converted-to.pdf>]
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
 Missing character: There is no Ð in font ptmr7t!
@@ -1018,6 +1041,7 @@ Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
 Missing character: There is no Ò in font ptmr7t!
 Missing character: There is no Ó in font ptmr7t!
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1029,17 +1053,19 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[5] (./noFormat.aux)
+[6
+
+] (./noFormat.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 24032 strings out of 493029
- 598462 string characters out of 6136234
+ 24046 strings out of 493029
+ 598699 string characters out of 6136234
  797846 words of memory out of 5000000
- 27111 multiletter control sequences out of 15000+600000
- 90959 words of font info for 207 fonts, out of 8000000 for 9000
+ 27119 multiletter control sequences out of 15000+600000
+ 93453 words of font info for 212 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,21n,84p,918b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1054,10 +1080,10 @@ e/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
 tmri8a.pfb>
-Output written on noFormat.pdf (5 pages, 211978 bytes).
+Output written on noFormat.pdf (6 pages, 311786 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 102 compressed objects within 2 object streams
+ 142 PDF objects out of 1000 (max. 8388607)
+ 108 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -85,15 +85,15 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\begin{equation*}
 	\begin{matrix}
 	x_M(t+1) = A_Mx_M(t) + B_Mg(t)\\
-	y_d(t) = C_Mx_M(t)
+	y_M(t) = C_Mx_M(t)
 	\end{matrix}
 	\end{equation*}\\    
 The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ is now explained:
 \begin{enumerate}
 	\item
-	A virtual reference input $g(t)$ is calculated by setting $y_d(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by the inverting the model $\mathbb{M}_P$. Let this mapping be defined by $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
+	A virtual reference input $g(t)$ is calculated by setting $y_M(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by the inverting the model $\mathbb{M}_P$. Let this mapping be defined by $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
 	\item
-	A feedback controller $\mathbb{K}_P$ described by $A_K(q^{-1})u(t) = B_K(q^{-1})(g(t)-y(t)$ is chosen, where 
+	A feedback controller $\mathbb{K}_P$ described by $A_K(q^{-1})u(t) = B_K(q^{-1})(g(t)-y(t))$ is chosen, where 
 	\begin{equation*}
 	\begin{matrix}
 	A_K(q^{-1}) = 1+\mathlarger{\sum\limits_{i=1}^{n_{a_K}}}a_i^Kq^{-i}\\
@@ -108,6 +108,7 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	& \underset{a_i^K,b_i^K}{\text{min}}
 	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{|}}A_K(q^{-1})u(t)-B_K(q^{-1})(\mathbb{M}_P^{\dagger}y(t)-y(t))\mathlarger{\mathlarger{|}}^2 \\
 	\end{aligned}
+	\label{VRFT}
 	\end{equation*}
 	which minimizes the deviation between the control input calculated by the controller and $u(t)$ that is used to excite the system and obtain $y(t)$.
 	\item
@@ -390,26 +391,51 @@ The VRFT methodology utilized to design the feedback controller $\mathbb{K}_P$ i
 	\end{matrix}
 	\end{equation*}
 	
-	\begin{center}
+	\begin{table}[h!]
+		\hspace{30pt}
 		\begin{tabular}{||c|c|c||} 
 			\hline
 			Symbol & Parameter & Value\\ [0.5ex] 
 			\hline\hline
-			$R$ & Motor resistance & $5$\Omega\\ 
-			\hline
+			$R$ & Motor resistance & $5\Omega$ \\ 
+			%\hline
 			$L$ & Motor inductance & $5.10^{-3}$H \\
-			\hline
+			%\hline
 			$K_m$ & Motor torque constant & $0.0847$Nm/A \\
-			\hline
-			$J$ & Complete disk inertia & $5.10^{-5}$Nm^2 \\
-			\hline
-			$b$ & Friction coefficient & $3.10^{-3}Nms/rad$ \\ [1ex] 
+			%\hline
+			$J$ & Complete disk inertia & $5.10^{-5}$Nm$^2$ \\
+			%\hline
+			$b$ & Friction coefficient & $3.10^{-3}$Nms/rad \\
+			%\hline
+			$m$ & Additional mass & $3$Kg \\
+			%\hline
+			$l$ & Mass offset & $2$m \\
 			\hline
 		\end{tabular}
-	\end{center}
-	
-	
-	
+		\caption{Physical parameters of servo motor system}
+		\label{Simparam}
+	\end{table}
+	The states of the system $\theta(t)$,$\omega(t)$ and $i(t)$ are angle $[rad]$ and rotational velocity $[rad/s]$ of the servo motor, and armature current $[A]$ respectively. The input $u(t)$ is the voltage $[V]$ applied across the motor, and output $y(t)$ is the rotational angle. 
+	A VRFT methodology is used to design a stabilizing PD controller, which provides a voltage input $u(t)$ to make the rotational angle $y(t)$ track a reference signal $g(t)$. To this end, experiments are conducted with a low-pass filtered white noise signal $u(t)$ with a standard deviation of $20V$. The output angle $y(t)$ is recorded, and with an assumption of no measurement noise, the dataset $\mathbb{D}_N$ is obtained. A slow reference closed loop model $\mathbb{M}_P$ is chosen, given by:
+	\begin{equation*}
+	\begin{matrix}
+	x_M(t+1) = 0.99x_M(t) + 0.01g(t)\\
+	y_M(t) = x_M(t)
+	\end{matrix}
+	\end{equation*}\\ 
+	The PD inner-loop controller $\mathbb{K}_P$ is parameterized as:
+	\begin{equation*}
+	u(t) = K_pe(t) + K_d\cfrac{e(t)-e(t-1)}{Ts}
+	\end{equation*} 
+	Solving the optimization problem Eq.\eqref{VRFT}, the parameters 
+	$K_p$ and $K_d$ are calculated using the dataset $D_N$. The closed loop performance of the system with gains obtained using VRFT methodology is plotted in Fig.\ref{VRFT}.
+	\vspace{-13pt}
+	\begin{figure}[h]
+		\includegraphics[scale = 0.65]{VRFT.eps}
+		\caption{The closed loop plant gives performance similar to $\mathbb{M}_P$, but with a high control signal.}
+		\label{VRFT}
+	\end{figure} \\
+	An outer MPC is designed using the formulation in \eqref{MPC}, to provide a reference signal $g(t)$. However, 
 	
 	
 	
