@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  4 MAR 2018 15:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  5 MAR 2018 19:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -706,41 +706,84 @@ File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
 )))
 \figureheight=\skip54
 \figurewidth=\skip55
- (./root.aux
+ (/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
 
-LaTeX Warning: Label `bounds' multiply defined.
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
-
-LaTeX Warning: Label `VRFT' multiply defined.
-
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks37
+\XKV@tempa@toks=\toks38
 )
+\XKV@depth=\count136
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box41
+)
+\tc@llx=\dimen258
+\tc@lly=\dimen259
+\tc@urx=\dimen260
+\tc@ury=\dimen261
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen262
+\adjbox@Height=\dimen263
+\adjbox@Depth=\dimen264
+\adjbox@Totalheight=\dimen265
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
+\c@checkoddpage=\count137
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box42
+\sift@deathcycles=\count138
+\@vwid@loff=\dimen266
+\@vwid@roff=\dimen267
+)) (./root.aux)
 \openout1 = `root.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
- (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
+LaTeX Font Info:    ... okay on input line 63.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count136
-\scratchdimen=\dimen258
-\scratchbox=\box41
-\nofMPsegments=\count137
-\nofMParguments=\count138
-\everyMPshowfont=\toks37
-\MPscratchCnt=\count139
-\MPscratchDim=\dimen259
-\MPnumerator=\count140
-\makeMPintoPDFobject=\count141
-\everyMPtoPDFconversion=\toks38
+\scratchcounter=\count139
+\scratchdimen=\dimen268
+\scratchbox=\box43
+\nofMPsegments=\count140
+\nofMParguments=\count141
+\everyMPshowfont=\toks39
+\MPscratchCnt=\count142
+\MPscratchDim=\dimen269
+\MPnumerator=\count143
+\makeMPintoPDFobject=\count144
+\everyMPtoPDFconversion=\toks40
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -796,144 +839,90 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.13}).
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 66.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 66
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 67.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 67
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 66
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 67
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 66
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 67
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 66
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 67
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 66.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 67.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 66.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 67.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 66.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 66.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 67.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 67.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 66--66
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
 [][][]$[]$\OT1/ptm/m/n/8 Bernard D. Re-searcheris with the De-part-ment of Elec
 -tri-cal
  []
 
 
-Underfull \hbox (badness 8075) in paragraph at lines 66--66
+Underfull \hbox (badness 8075) in paragraph at lines 67--67
 \OT1/ptm/m/n/8 En-gi-neer-ing, Wright State Uni-ver-sity, Day-ton, OH 45435, US
 A
  []
 
-
-LaTeX Warning: Reference `Background' on page 1 undefined on input line 90.
-
-
-LaTeX Warning: Reference `Contribution' on page 1 undefined on input line 90.
-
-
-LaTeX Warning: Reference `Case studies' on page 1 undefined on input line 90.
-
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 95.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 122.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 132.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.36008> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.40009> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
 
-Overfull \hbox (5.0774pt too wide) detected at line 125
-[] [][]
+Overfull \hbox (5.0774pt too wide) detected at line 135
+[] []
  []
 
 <./Drawings/KpGp.pdf, id=18, 244.69116pt x 66.00359pt>
 File: ./Drawings/KpGp.pdf Graphic file (type pdf)
 
 <use ./Drawings/KpGp.pdf>
-Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 130.
-(pdftex.def)             Requested size: 244.69055pt x 66.00342pt.
+Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 141.
+(pdftex.def)             Requested size: 195.75317pt x 52.80293pt.
 
-Underfull \vbox (badness 4954) has occurred while \output is active []
-
-
-<./Drawings/Mp-D-E.pdf, id=19, 250.00502pt x 154.80435pt>
-File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
-
-<use ./Drawings/Mp-D-E.pdf>
-Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 164.
-(pdftex.def)             Requested size: 250.0044pt x 154.80396pt.
-
-Overfull \hbox (4.28629pt too wide) in paragraph at lines 164--165
-[][] 
- []
-
-[2 <./Drawings/KpGp.pdf> <./Drawings/Mp-D-E.pdf>]
-Overfull \hbox (5.33159pt too wide) detected at line 199
-[] []
- []
-
-
-Underfull \hbox (badness 2096) in paragraph at lines 206--208
-\OT1/ptm/m/n/10 noisy in-put $\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm
-/m/it/10 t\OT1/ztmcm/m/n/10 )$\OT1/ptm/m/n/10 , which will be trans-formed to
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 206--208
-
- []
-
-
-Overfull \hbox (11.52206pt too wide) detected at line 229
-\OMS/ztmcm/m/n/10 8\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\
-OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 W[] \OT1/ztmcm/m/n/10
- : \U/msb/m/n/10 D[]\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t
-\OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n/10 2 \OML/ztmcm/m/it/10 D[] [] \U/msb/m/n/10
- @\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 
-) [] \OML/ztmcm/m/it/10 W[] \OT1/ztmcm/m/n/10 : \U/msb/m/n/10 D[]\OML/ztmcm/m/i
-t/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 ) \OMS/ztmcm/m/n
-/10 2 \OML/ztmcm/m/it/10 D[]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<./Drawings/withRG.pdf, id=60, 314.00513pt x 78.40392pt>
+<./Drawings/withRG.pdf, id=19, 314.00513pt x 78.40392pt>
 File: ./Drawings/withRG.pdf Graphic file (type pdf)
 
 <use ./Drawings/withRG.pdf>
-Package pdftex.def Info: ./Drawings/withRG.pdf used on input line 293.
+Package pdftex.def Info: ./Drawings/withRG.pdf used on input line 175.
 (pdftex.def)             Requested size: 251.20444pt x 62.7232pt.
 
-Overfull \hbox (5.48633pt too wide) in paragraph at lines 293--294
+Overfull \hbox (5.48633pt too wide) in paragraph at lines 175--176
 [][] 
  []
 
-[3]
-Overfull \hbox (10.93167pt too wide) detected at line 350
+[2 <./Drawings/KpGp.pdf> <./Drawings/withRG.pdf>]
+Overfull \hbox (11.46445pt too wide) detected at line 234
 \OML/ztmcm/m/it/10 f[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^\\OT1/ztmcm/m/n/1
 0 ) = []\OML/ztmcm/m/it/10 H[]C[] [] A[]B[]w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/
 10 ^^\ \OMS/ztmcm/m/n/10 ^^@ \OML/ztmcm/m/it/10 k\OT1/ztmcm/m/n/10 ) + \OML/ztm
@@ -941,46 +930,77 @@ cm/m/it/10 D[]w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^\\OT1/ztmcm/m/n/10 )[][]
 
  []
 
-[4 <./Drawings/withRG.pdf>]
+<./Drawings/Mp-D-E.pdf, id=62, 250.00502pt x 154.80435pt>
+File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
+
+<use ./Drawings/Mp-D-E.pdf>
+Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 255.
+(pdftex.def)             Requested size: 175.0023pt x 108.36229pt.
+
+Overfull \hbox (4.77153pt too wide) detected at line 346
+[] []
+ []
+
+[3 <./Drawings/Mp-D-E.pdf>]
+
+Package caption Warning: \label without proper reference on input line 336.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `w_calculation' on page 4 undefined on input line 380.
+
+
+[4]
+
+Package caption Warning: \label without proper reference on input line 336.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `w_calculation' on page 5 undefined on input line 387.
+
+
 Package epstopdf Info: Source file: <./Drawings/bounds.eps>
-(epstopdf)                    date: 2018-03-03 14:47:43
-(epstopdf)                    size: 42447 bytes
+(epstopdf)                    date: 2018-03-05 15:22:14
+(epstopdf)                    size: 41133 bytes
 (epstopdf)             Output file: <./Drawings/bounds-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-03-03 14:48:51
-(epstopdf)                    size: 17963 bytes
+(epstopdf)                    date: 2018-03-05 15:22:17
+(epstopdf)                    size: 18300 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/bounds-eps-conv
 erted-to.pdf ./Drawings/bounds.eps>
-(epstopdf)             \includegraphics on input line 377.
+(epstopdf)             \includegraphics on input line 402.
 Package epstopdf Info: Output file is already uptodate.
-
-<./Drawings/bounds-eps-converted-to.pdf, id=82, 421.575pt x 316.18124pt>
+<./Drawings/bounds-eps-converted-to.pdf, id=83, 399.4925pt x 150.5625pt>
 File: ./Drawings/bounds-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/bounds-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/bounds-eps-converted-to.pdf used on input l
-ine 377.
-(pdftex.def)             Requested size: 231.86696pt x 173.9002pt.
+ine 402.
+(pdftex.def)             Requested size: 259.66704pt x 97.86446pt.
+
+Overfull \hbox (13.94893pt too wide) in paragraph at lines 402--403
+[][] 
+ []
+
 Package epstopdf Info: Source file: <./Drawings/simulation.eps>
-(epstopdf)                    date: 2018-03-03 14:48:46
-(epstopdf)                    size: 63936 bytes
+(epstopdf)                    date: 2018-03-05 15:23:52
+(epstopdf)                    size: 33177 bytes
 (epstopdf)             Output file: <./Drawings/simulation-eps-converted-to.pdf
 >
-(epstopdf)                    date: 2018-03-03 14:48:52
-(epstopdf)                    size: 59045 bytes
+(epstopdf)                    date: 2018-03-05 15:23:56
+(epstopdf)                    size: 30219 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/simulation-eps-
 converted-to.pdf ./Drawings/simulation.eps>
-(epstopdf)             \includegraphics on input line 383.
+(epstopdf)             \includegraphics on input line 408.
 Package epstopdf Info: Output file is already uptodate.
-
-<./Drawings/simulation-eps-converted-to.pdf, id=83, 421.575pt x 316.18124pt>
+<./Drawings/simulation-eps-converted-to.pdf, id=84, 399.4925pt x 150.5625pt>
 File: ./Drawings/simulation-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/simulation-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/simulation-eps-converted-to.pdf used on inp
-ut line 383.
-(pdftex.def)             Requested size: 274.0205pt x 205.51537pt.
+ut line 408.
+(pdftex.def)             Requested size: 259.66704pt x 97.86446pt.
 
-Overfull \hbox (28.30238pt too wide) in paragraph at lines 383--384
+Overfull \hbox (13.94893pt too wide) in paragraph at lines 408--409
 [][] 
  []
 
@@ -989,30 +1009,88 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [5 <./Drawings/bounds-eps-converted-to.pdf> <./Drawings/simulation-eps-converte
 d-to.pdf>]
-Package epstopdf Info: Source file: <./Drawings/VRFT.eps>
-(epstopdf)                    date: 2018-03-03 19:31:00
-(epstopdf)                    size: 379796 bytes
-(epstopdf)             Output file: <./Drawings/VRFT-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-03-03 19:31:22
-(epstopdf)                    size: 100352 bytes
-(epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT-eps-conver
-ted-to.pdf ./Drawings/VRFT.eps>
-(epstopdf)             \includegraphics on input line 447.
+
+Package caption Warning: \label without proper reference on input line 336.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `w_calculation' on page 6 undefined on input line 471.
+
+
+Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
+(epstopdf)                    date: 2018-03-05 17:42:55
+(epstopdf)                    size: 50809 bytes
+(epstopdf)             Output file: <./Drawings/bounds_RG-eps-converted-to.pdf>
+
+(epstopdf)                    date: 2018-03-05 17:42:58
+(epstopdf)                    size: 19432 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Drawings/bounds_RG-eps-c
+onverted-to.pdf ./Drawings/bounds_RG.eps>
+(epstopdf)             \includegraphics on input line 473.
 Package epstopdf Info: Output file is already uptodate.
+<./Drawings/bounds_RG-eps-converted-to.pdf, id=99, 399.4925pt x 150.5625pt>
+File: ./Drawings/bounds_RG-eps-converted-to.pdf Graphic file (type pdf)
 
-<./Drawings/VRFT-eps-converted-to.pdf, id=98, 382.42876pt x 312.16624pt>
-File: ./Drawings/VRFT-eps-converted-to.pdf Graphic file (type pdf)
+<use ./Drawings/bounds_RG-eps-converted-to.pdf>
+Package pdftex.def Info: ./Drawings/bounds_RG-eps-converted-to.pdf used on inpu
+t line 473.
+(pdftex.def)             Requested size: 259.66704pt x 97.86446pt.
 
-<use ./Drawings/VRFT-eps-converted-to.pdf>
-Package pdftex.def Info: ./Drawings/VRFT-eps-converted-to.pdf used on input lin
-e 447.
-(pdftex.def)             Requested size: 248.57573pt x 202.90565pt.
-
-Overfull \hbox (2.85762pt too wide) in paragraph at lines 447--448
+Overfull \hbox (13.94893pt too wide) in paragraph at lines 473--474
 [][] 
  []
 
-(./root.bbl)
+Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC.eps>
+(epstopdf)                    date: 2018-03-05 19:46:10
+(epstopdf)                    size: 265074 bytes
+(epstopdf)             Output file: <./Drawings/VRFT_vs_MPC-eps-converted-to.pd
+f>
+(epstopdf)                    date: 2018-03-05 19:46:41
+(epstopdf)                    size: 92085 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC-eps
+-converted-to.pdf ./Drawings/VRFT_vs_MPC.eps>
+(epstopdf)             \includegraphics on input line 484.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Drawings/VRFT_vs_MPC-eps-converted-to.pdf, id=100, 324.21124pt x 225.84375pt
+>
+File: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf>
+Package pdftex.def Info: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf used on in
+put line 484.
+(pdftex.def)             Requested size: 210.7348pt x 146.79669pt.
+Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC_u.eps>
+(epstopdf)                    date: 2018-03-05 19:46:36
+(epstopdf)                    size: 185070 bytes
+(epstopdf)             Output file: <./Drawings/VRFT_vs_MPC_u-eps-converted-to.
+pdf>
+(epstopdf)                    date: 2018-03-05 19:46:41
+(epstopdf)                    size: 80267 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC_u-e
+ps-converted-to.pdf ./Drawings/VRFT_vs_MPC_u.eps>
+(epstopdf)             \includegraphics on input line 489.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf, id=101, 399.4925pt x 150.5625pt
+>
+File: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf>
+Package pdftex.def Info: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf used on 
+input line 489.
+(pdftex.def)             Requested size: 259.66704pt x 97.86446pt.
+
+Overfull \hbox (13.94893pt too wide) in paragraph at lines 489--490
+[][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+(./root.bbl [6 <./Drawings/bounds_RG-eps-converted-to.pdf> <./Drawings/VRFT_vs_
+MPC-eps-converted-to.pdf> <./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf>])
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1024,38 +1102,37 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
-[6 <./Drawings/VRFT-eps-converted-to.pdf>] (./root.aux)
+[7
+
+] (./root.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 24040 strings out of 493029
- 598737 string characters out of 6136234
- 794846 words of memory out of 5000000
- 27110 multiletter control sequences out of 15000+600000
- 94560 words of font info for 213 fonts, out of 8000000 for 9000
+ 24787 strings out of 493029
+ 611017 string characters out of 6136234
+ 801846 words of memory out of 5000000
+ 27812 multiletter control sequences out of 15000+600000
+ 97624 words of font info for 221 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,21n,84p,914b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,21n,84p,950b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usy
-r.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmri8a.pfb>
-Output written on root.pdf (6 pages, 315737 bytes).
+public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/rsfs/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/uc
+rr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times
+/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on root.pdf (7 pages, 381265 bytes).
 PDF statistics:
- 142 PDF objects out of 1000 (max. 8388607)
- 108 compressed objects within 2 object streams
+ 163 PDF objects out of 1000 (max. 8388607)
+ 123 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

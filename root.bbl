@@ -32,4 +32,9 @@ A.~Mohammadi, M.~Diehl, and M.~Zanon, ``Estimation of uncertain arx models with
   ellipsoidal parameter variability,'' in {\em 2015 European Control Conference
   (ECC)}, pp.~1766--1771, July 2015.
 
+\bibitem{Lofberg2004}
+J.~L{\"{o}}fberg, ``Yalmip : A toolbox for modeling and optimization in
+  matlab,'' in {\em In Proceedings of the CACSD Conference}, (Taipei, Taiwan),
+  2004.
+
 \end{thebibliography}
