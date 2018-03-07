@@ -533,19 +533,17 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\caption{Convergence of bounds on the noise $w(t)$ acting on the disturbance sensor $D_S$.}
 		\label{bounds_RG}
 	\end{figure}
+		\begin{figure}[t]
+			\hspace{30pt}
+			\includegraphics[scale = 0.55]{VRFT_vs_MPC.eps}
+			\caption{The performance inner closed loop does not exactly match the reference model $M_P$. MPC improves the performance but results in small constraint violation. Constraint violation is robustly avoided by using a reference governor.}
+			\label{VRFT_y}
+		\end{figure} 
 	The converged values $w_{min}$ and $w_{max}$ are passed into \eqref{RG_offline} and bounds on input $v(t)$ are calculated. The quadratic program \eqref{RGprob_simple} is constructed, which is solved at each time step by the robust reference governor. The reference governor modifies the input $g(t)$ to a constraint respecting $v(t)$. Steady-state Kalman filters are used to calculate the states $\zeta(t)$ and $\gamma(t)$ of the models $\mathbb{M}'_P$ and $\mathbb{M}'_{PD}$, which are used by the MPC controller and robust reference governor respectively.
 	\\
 	Instead of using $w(t)$ as process noise, one can treat $d_S(t)$ as measurement noise after suitable transformations. The noise can be assumed to lie in the set $\mathcal{D}_{\infty}$. In this case, the calculation of $\mathbb{O}_{\infty}$ for the robust reference governor becomes very simple, since there is no dependence of output on past input disturbances. This was implemented for the sake of comparison with the process noise case. \\
 	Performance of the control system for all these cases is plotted in Fig.\ref{VRFT_y} and Fig.\ref{VRFT_u}.
-	\vspace{-10pt}
-	\begin{figure}[h]
-		\hspace{30pt}
-		\includegraphics[scale = 0.55]{VRFT_vs_MPC.eps}
-		\caption{The performance inner closed loop does not exactly match the reference model $M_P$. MPC improves the performance but results in small constraint violation. Constraint violation is robustly avoided by using a reference governor.}
-		\label{VRFT_y}
-	\end{figure} 
-	\vspace{-20pt}
-	\begin{figure}[h]
+	\begin{figure}[t]
 		\hspace{20pt}
 		\includegraphics[scale = 0.55]{VRFT_vs_MPC_u.eps}
 		\caption{Comparison of voltage input $u(t)$. Constraints are violated by the MPC controller. This is avoided by using a reference governor. The performance with the reference governer using either process noise model or measurement noise models is similar.}
