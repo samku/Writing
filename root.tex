@@ -72,7 +72,7 @@ Robust data-driven predictive control
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-This is a very skeletal overview.
+This paper presents a robust data-driven control approach for SISO systems, by building on a previously presented hierarchical control architecture for constrained systems. To this end, a robust reference governor is designed. The reference governor alters the input from the outer model predictive controller (MPC) of the architecture, in a way that the system constraints are robustly satisfied. The reference governor utilizes a model of the inner loop. Uncertainty in the model is modeled as process noise. A novel method to calculate the bounds on this noise from ARX identification is discussed. Numerical validations of this method, and of the robust control architecture are performed, and the results are presented.
 
 \end{abstract}
 
@@ -84,8 +84,8 @@ Design of control systems can broadly be classified into two categories: model-b
 Data-driven controller design methods avoid explicitly identifying the plant model. They synthesize a controller directly from I/O data obtained from the plant. A review of several such methods can be found in \cite{HOU20133}. One such method, virtual reference feedback tuning (VRFT) introduced in \cite{CAMPI20021337}, has been used to design a stabilizing feedback controller within a hierarchical controller framework in \cite{7932940} for LTI/LPV systems. It employs an outer MPC controller, which utilizes the reference model selected for VRFT to generate a tracking signal. Performance bounds on the plant are translated into constraints on the optimization problem solved by the MPC controller. Since the reference model might not reasonably reflect the performance of the closed-loop plant, there is a possibility of constraint violation.
 To avoid this, one can use the techniques developed under the umbrella of robust MPC theory to guarantee constraint satisfaction in an MPC framework. A review of the techniques can be found in \cite{10.1007/BFb0109870}. An alternative is to use a robust reference governor, which modifies the reference signal supplied to the plant in a way that constraints are satisfied. These are reviewed in \cite{GARONE2017306}. Both the methodologies require an explicit model of the uncertainties present in the plant being controlled. 
 \\ \indent
-In this work, we propose a systematic methodology to develop a robust control framework, building on the hierarchical control design presented in \cite{7932940}. A model of closed loop behavior of the plant is used for  controller design, which is different from the reference model used for VRFT. The parameters of this model are estimated using standard ARX estimation. 
- The model incorporates uncertainties as exogenous noise signals, assumed to lie within a bounded polyhedral set. Robust control methods explicitly incorporate the knowledge of these noise signals in their formulation. Hence, identification of the polyhedral sets is necessary. In this work, a method to do so is presented. Identification for robust control includes a large volume of literature on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral sets of exogenous noise signals.
+In this work, we propose a systematic methodology to develop a robust data-driven control framework, building on the hierarchical control architecture presented in \cite{7932940}. A model of closed loop behavior of the plant is used for  controller design, which is different from the reference model used for VRFT. The parameters of this model are estimated using standard ARX estimation. 
+ The model incorporates uncertainties as exogenous noise signals, assumed to lie within a bounded polyhedral set. Since robust control methods explicitly incorporate the knowledge of these noise signals in their formulation, identification of the polyhedral sets is necessary. In this work, a method to do so is presented. Identification for robust control includes a large volume of literature on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral sets of exogenous noise signals.
  \\
   Following the identification of a model and corresponding noise sets, a robust reference governor is designed and appended to the control architecture presented in \cite{7932940}.
  The option of robust reference governor is chosen for illustration, but the techniques presented can be easily extended to a robust MPC.
@@ -137,14 +137,14 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{equation}
 	which minimizes the deviation between the control input calculated by the controller and $u(t)$ that is used to excite the system and obtain $y(t)$.
 	\item
-	The synthesized controller $\mathbb{K}_P$ is placed before the plant, and the loop is closed. A reference step input is given to evaluate the controller performance.
+	The synthesized controller $\mathbb{K}_P$ is placed before the plant, and the loop is closed.
 	\begin{figure}[h]
 		\hspace{30pt}
 	\includegraphics[scale=0.8]{KpGp.pdf}
 	\caption{Feedback controller designed using VRFT}
 	\end{figure}
 	\\
-	The satisfy plant constraints, the reference signal $g(t)$ using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. This augmented state-space model is called $\mathbb{M}'_P$.
+	To satisfy plant constraints, the reference signal $g(t)$ is generated using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. This augmented state-space model is called $\mathbb{M}'_P$.
 	\begin{equation*}
 	\begin{matrix}
 	\zeta(t+1) = A_\zeta\zeta(t) + B_\zeta g(t)\\
@@ -169,7 +169,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{aligned}
 	\label{MPC}
 	\end{equation}
-	The quantities $V_y$ and $V_u$ in the MPC formulation are used to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the unknown plant $\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
+	The quantities $V_y$ and $V_u$ in the MPC formulation are used to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the closed loop $\mathbb{K}_P-\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
 	
 	\subsection{Robust reference governor}
 	The robust reference governer is a signal regulator which alters the command input such that the system robustly satisfies constraints. It does so by utilizing knowledge of disturbances acting on the system. A schematic of the control system is shown in Fig.\ref{fullloop}. 
@@ -187,7 +187,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\gamma\gamma(t) + D^v_\gamma v(t) + D^w_\gamma w(t)
 	\end{matrix}
 	\end{equation*}
-	The model has a deterministic input $v(t)$ and a noise input $w(t)$, which captures the effect of measurement noise and un-modeled dynamics on the system output. 
+	The model has a deterministic input $v(t)$ and a noise input $w(t)$, which captures the effect of model uncertainties on system output. 
 	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The outputs of the system are called $y_{\gamma}(t)=[y(t) \hspace{2pt} u(t)]^T$. The constraints on these outputs are written as: 
 	\begin{equation*}
 	\begin{matrix}
@@ -236,7 +236,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	f_i^w(\tau) = \underset{\{w(k)\}_{t}^{\tau}\in \mathcal{W}_{\infty}}{\text{max}} H\bigg(C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^w_{\gamma}w(\tau-k) + D_{\gamma}^w w(\tau)\bigg)_i
 	\label{RG_offline}
 	\end{equation}
-	Subscript $i$ in the above problem indicates that row $i$ of the matrix is used in the linear program to calculate the corresponding $w(k)$ sequence. According to the theory of maximal output admissible sets for linear systems as discussed in \cite{83532}, the set $\mathbb{O}_{\infty} = \mathbb{O}_{\infty}(\tau \to \infty)$ is reached at a finite value $\tau_c$. In the current setting, this happens when elements of $f^w(\tau)$ converge to a constant value. Since the linear problem to be solved for $f_i^w(\tau)$ does not depend on the state at current time instant $t$, it can be solved offline for increasing values of $\tau$. When convergence is observed at time $\tau_c$, the value $f^w(\tau_c)$ is stored. This results in  problem \eqref{RGprob} being simplified to
+	Subscript $i$ in the above problem indicates that row $i$ of the matrix is used in the linear program to calculate the corresponding $w(k)$ sequence. According to the theory of maximal output admissible sets for linear systems as discussed in \cite{83532}, the set $\mathbb{O}_{\infty} = \mathbb{O}_{\infty}(\tau \to \infty)$ is reached at a finite value $\tau_c$. In the current setting, this happens when elements of $f^w(\tau)$ converge to a constant value. Since the linear problem to be solved for $f_i^w(\tau)$ does not depend on the state at current time instant $t$, it can be solved offline for increasing values of $\tau$ after setting $t=1$. When convergence is observed at time $\tau_c$, the value $f^w(\tau_c)$ is stored. This results in  problem \eqref{RGprob} being simplified to
 	\begin{equation}
 	\begin{aligned}
 	& \underset{v}{\text{min}}
@@ -551,9 +551,9 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\caption{Comparison of voltage input $u(t)$. Constraints are violated by the MPC controller. This is avoided by using a reference governor. The performance with the reference governer using either process noise model or measurement noise models is similar.}
 		\label{VRFT_u}
 	\end{figure}
-	It can clearly be seen that with a loss of performance from MPC, the reference governor ensures robust constraint satisfaction. Since computational efficiency was not the focus of this work, the solving times are not noted here.
+	It can clearly be seen that with a loss of performance from MPC, the reference governor ensures robust constraint satisfaction. This loss in performance can be reduced bu using a robust MPC controller instead of a reference governer. Since computational efficiency was not the focus of this work, the solving times are not noted here.
 	\section{Conclusion}
-	This paper builds on the hierarchical data-driven control of constrained systems, by introducing robustness. This is done by adding a robust reference governor. The major contribution of this work is the formulation of a novel technique to compute process noise bounds from ARX identification. This formulation can prove to be useful, and is not limited to a control perspective. Possible extensions to the formulation are: a) Dealing with MIMO systems, b) Establishing the class of systems for which the formulation can be used, c) Efficient ways to deal with initial condition of the disturbance generating model $\mathbb{D}_S$. The performance of the control system in the case of using only measurement noise model instead of process noise $w(t)$ should be studied.
+	This paper builds on the hierarchical data-driven control of constrained systems, by introducing robustness. This is done by adding a robust reference governor. The major contribution of this work is the formulation of a novel technique to compute process noise bounds from ARX identification. Since the calculation of process noise bounds and maximal output admissible sets is performed offline, the control scheme can be experimentally validated online  in an efficient manner. Possible extensions to the work includes formulation of equivalent schemes for LPV and MIMO systems.
 \end{enumerate} 
 
 	
