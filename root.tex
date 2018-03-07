@@ -35,7 +35,7 @@
 \graphicspath{{./Drawings/}} 
 \newcommand{\notimplies}{%
 	\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
-\usepackage{caption}
+\usepackage[margin=0.8cm]{caption}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \usepackage{pgfplots}
 \pgfplotsset{compat=newest}
@@ -49,7 +49,7 @@ Robust data-driven predictive control
 }
 
 
-\author{Sampath Kumar Mulagaleti$^{1}$ and Alberto Bemporad$^{2}$% <-this % stops a space
+\author{A$^{1}$ and B$^{2}$% <-this % stops a space
 \thanks{*This work was not supported by any organization}% <-this % stops a space
 \thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
         University of Twente, 7500 AE Enschede, The Netherlands
@@ -79,13 +79,13 @@ This is a very skeletal overview.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-Design of control systems can broadly be classified into two categories: model-based and data-driven. Model-based control design techniques utilize an explicit model of the plant being controlled. This necessitates choosing a dynamical system parameterization that  expresses the performance of the plant, and performing identification experiments to find the parameters. A good parameterization is one that sufficiently captures the dynamics, without being too complex for control design. Obtaining such a good model poses several challenges. To avoid this, one can resort to a data-driven controller design methodology. \\
+Design of control systems can broadly be classified into two categories: model-based and data-driven. Model-based control design techniques utilize an explicit model of the plant being controlled. This involves selecting a model that trades-off between complexity and accuracy. Then, identification of the model parameters is performed. These steps introduce several challenges. To avoid this, one can resort to a data-driven controller design methodology. \\
 \indent
 Data-driven controller design methods avoid explicitly identifying the plant model. They synthesize a controller directly from I/O data obtained from the plant. A review of several such methods can be found in \cite{HOU20133}. One such method, virtual reference feedback tuning (VRFT) introduced in \cite{CAMPI20021337}, has been used to design a stabilizing feedback controller within a hierarchical controller framework in \cite{7932940} for LTI/LPV systems. It employs an outer MPC controller, which utilizes the reference model selected for VRFT to generate a tracking signal. Performance bounds on the plant are translated into constraints on the optimization problem solved by the MPC controller. Since the reference model might not reasonably reflect the performance of the closed-loop plant, there is a possibility of constraint violation.
 To avoid this, one can use the techniques developed under the umbrella of robust MPC theory to guarantee constraint satisfaction in an MPC framework. A review of the techniques can be found in \cite{10.1007/BFb0109870}. An alternative is to use a robust reference governor, which modifies the reference signal supplied to the plant in a way that constraints are satisfied. These are reviewed in \cite{GARONE2017306}. Both the methodologies require an explicit model of the uncertainties present in the plant being controlled. 
 \\ \indent
-In this work, we propose a systematic methodology to develop a robust control framework, building on the hierarchical control design presented in \cite{7932940}. A model of closed loop behavior of the plant is used for robust controller design. A parameterization of the closed loop behavior is chosen, and the parameters are identified using standard ARX estimation. Since the VRFT methodology shapes the closed loop performance similar to a user-selected reference model, identification of the closed loop model does not pose the same level of challenge as during model-based controller design.
- The model incorporates uncertainties as exogenous noise signals. The noises are assumed to lie within a bounded polyhedral set. The major contribution of this work is the formulation of an optimization problem which solves for these sets. Similar work was done for the estimation of parameter variability within ellipsoidal sets in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral noise sets. Following the identification of a model and corresponding noise sets, a robust reference governer is designed and appended to the control architecture presented in \cite{7330793}.
+In this work, we propose a systematic methodology to develop a robust control framework, building on the hierarchical control design presented in \cite{7932940}. A model of closed loop behavior of the plant is used for  controller design, which is different from the reference model used for VRFT. A parameterization of the closed loop behavior is chosen, and the parameters are identified using standard ARX estimation. 
+ The model incorporates uncertainties as exogenous noise signals, assumed to lie within a bounded polyhedral set. In this work, a method to calculate these sets is presented. With respect to identification for robust control, a large volume of literature is present on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral noise sets. Following the identification of a model and corresponding noise sets, a robust reference governor is designed and appended to the control architecture presented in \cite{7932940}.
  The option of robust reference governor is chosen for illustration, but the techniques presented can be easily extended to a robust MPC.
  \\ \indent
  The paper is organized as follows. In Sec.\ref{Problem statement}, the problem statement is formally presented. Background regarding the hierarchical data-driven control architecture and robust reference governor is presented in Sec.\ref{Background}. Sec.\ref{Contribution} presents the techniques used to identify the closed-loop system model with bounds, which is the main contribution of this paper. The final Sec.\ref{Case studies} presents two simulation results, one verifying the techniques presented for bound identification, and one presenting the robust hierarchical control design framework. 
@@ -281,6 +281,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	B_D(q^{-1}) = \mathlarger{\sum\limits_{i=1}^{n_{b_D}}}b_i^Dq^{-i}
 	\end{matrix}  
 	\end{equation*}
+	\iffalse
 	\begin{table*}[ht]
 		\begin{center} 
 			\begin{adjustbox}{width=0.9\textwidth,center=\textwidth}
@@ -336,6 +337,8 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\label{w_calculation}
 		\caption{Linear programs solved to calculate the set $\mathcal{W}_{\infty}$}
 	\end{table*}
+	\fi
+	
 	Using standard ARX identification, the coefficients $a_i^D$ and $b_i^D$ are estimated by solving the optimization problem
 	\begin{equation}
 	\begin{aligned}
@@ -377,14 +380,62 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\hspace{40pt}\notimplies \nexists  w(t) \notin \mathcal{W}_{\infty} : \mathbb{D}_S w(t) \in \mathcal{D}_{\infty}
 	\end{matrix}
 	\end{equation*}
-	To calculate the bounds $w_{min}$ and $w_{max}$, the optimization problems shown in \ref{w_calculation} are solved for increasing lengths of time horizon $N$.
-	These equations solve for a sequence of inputs $\{w(k), k={1:N}\}$ such that the sequence of corresponding outputs at all instances except at time $N$ lie within $\mathcal{D}_{\infty}$. This means that the chosen input sequence $w(k)$ can drive the system output out of bounds in $N$ time steps. The initial conditions on $d_S(k)$ are left free to be chosen by the problem, but are constrained to lie within $\mathcal{D}_{\infty}$. Thus, for a time horizon $N$, the input $\{w(k), k={1:N}\}$ is chosen such that, wherever the system starts inside the set $\mathcal{D}_{\infty}$, it will stay inside the set $\mathcal{D}_{\infty}$. This freedom to choose an initial condition requires the assumption that $\mathcal{D}_{\infty}$ is obtained from the infinite data set $\hat{D}_{\infty}$.
-	\\
-	Any sequence $\{w(k)>w^N_{min},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,min}$. Similarly, $\{w(k)<w^N_{max},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,max}$. Hence, in order to explain the whole set $\mathcal{D}_{\infty}$, we need to find the lowest possible value of $w^N_{min}$ and the highest possible value of $w^N_{max}$ such that $d_S(k)$ is driven to its bounds in finite time $k$. This is achieved by increasing the value of $N$, which would require lower and higher values of $w(k)$ to make $d_S(N)$ reach $d_{S,min}$ and $d_{S,max}$ respectively. This leads to $w^N_{min}$ and $w^N_{max}$ asymptotically reaching their true values $w_{min}$ and $w_{max}$ as $N$ increases, thus making the set $\mathcal{W}_{\infty}$ completely explain the set $\mathcal{D}_{\infty}$. It is noted that the presented method provides a methodology to quantify uncertainty in any general ARX identified model.
-	\\
+	This implies that the bounds on residuals of the ARX identification \eqref{DSensor} are not necessarily $w_{min}$ and $w_{max}$, since the realization of the residuals need not necessarily belong to $\mathcal{W}_{\infty}$. 
+		
+	To calculate the bounds $w_{min}$ and $w_{max}$, first, the optimization problems shown in \eqref{bound_problem} are solved for increasing lengths of time horizon $N$.
+	\begin{equation}
+	\begin{matrix}
+	\begin{matrix}
+	\underset{X_{j}}{\text{min}}
+	& \bar{w}_j(N) \\
+	\text{subject to}
+	& 
+	d_S(k) = -\mathlarger{\sum\limits_{i=1}^{n_{a_D}}}a_i^Dd_S(k-i) + w(k), k={1:N}\\
+	& d_{S,min} \leq d_S(k) \leq d_{S,min}, k={1:N-1} \vspace{4pt}\\
+	& -\bar{w}_j(N) \leq w(k) \leq \bar{w}_j(N), k={1:N} \vspace{3pt}\\
+	& d_S(N) \in D_j 
+	\end{matrix}
+	\vspace{10pt} \\
+	\text{where } X_j = 
+	\begin{Bmatrix}
+	\{d_S(-n_{a_D}+1),...,d_S(N)\},\\
+	\{w(1),...,w(N)\},\vspace{0.001cm}\\
+	\bar{w}_j(N)
+	\end{Bmatrix}, j=\{1,2\}
+	\vspace{5pt}\\
+	\begin{matrix}
+	D_1 = \{d:d \leq d_{S,min}\}\\
+	D_2 = \{d:d \geq d_{S,max}\}
+	\end{matrix}
+	\end{matrix}
+	\label{bound_problem}
+	\end{equation}
+	
+	These equations solve for a sequence of inputs $\{w(k), k={1:N}\}$ such that the sequence of corresponding outputs at all instances except at time $N$ lie within $\mathcal{D}_{\infty}$. This means that the chosen input sequence $w(k)$ should drive $d_S(N)$ out of $\mathcal{D}_{\infty}$ into $D_j$. The initial conditions on $d_S(k)$ are left free to be chosen by the problem, but are constrained to lie within $\mathcal{D}_{\infty}$.
+	The solutions $\bar{w}_j(N)$ are collected, and the set $\mathcal{W}_{\infty}$ is calculated using \eqref{maxmin}. It is noted that the noise is assumed to be zero-mean. This can be rectified easily by letting the lower and upper bounds on $w(k)$ in \eqref{bound_problem} be composed of different optimization variables.
+	\begin{equation}
+		\begin{matrix}
+		w_{max} = {\text{max }}\{\underset{N}{\text{max }} \bar{w}_1(N),\underset{N}{\text{max }}\bar{w}_2(N)\} \\
+		w_{min} = {\text{min }}\{\underset{N}{\text{min }}-\bar{w}_1(N),\underset{N}{\text{min }}-\bar{w}_2(N)\} \\
+		\end{matrix}
+		\label{maxmin}
+	\end{equation}
+	At lower values of $N$, there can exist an initial sequence $\{d_S(-n_{a_D}+1),..,d_S(1)\}$ that drives $d_S(N)$ into $D_j$ with very low control effort. At higher values of $N$, the effect of initial condition wears off, and a higher value of control effort is required to violate $\mathcal{D}_{\infty}$. Hence, solving \eqref{maxmin} gives the values of $w_{min}$ and $w_{max}$, that are the minimum and maximum values of the noise signal $w(t)$ such that the steady state values of $d_S(t)$ lie within $\mathcal{D}_{\infty}$.  
+	%\begin{figure}[h!]
+		%\begin{center}
+			%\hspace{20pt}
+			%\includegraphics[scale = 0.85]{explain.eps}
+			%\hspace{20pt}
+			%\caption{An illustration of the bounds for the case of %$w_{max}$ calculation. Any sequence %$||w(t)||_{\infty}=\bar{w}$ can drive $d_S(t)\geq %d_{S,max}$ only after $k \geq N_{\bar{w}}$ of %application. We want to find the value of %$w^N_{max}=\bar{w}$ such that $N=N_{\bar{w}} \to \infty$. %This is $w_{max}$. The analogous opposite applies to the %calculation of $w_{min}$.   }
+	%		\label{explanation}
+	%	\end{center}
+	%\end{figure} 
+	%Any sequence $\{w(k)>w^N_{min},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,min}$. Similarly, $\{w(k)<w^N_{max},k=1:N\}$ will not drive $d_S(k \geq N)$ to the bound $d_{S,max}$. Hence, in order to explain the whole set $\mathcal{D}_{\infty}$, we need to find the lowest possible value of $w^N_{min}$ and the highest possible value of $w^N_{max}$ such that $d_S(k)$ is driven to its bounds in finite time $k$. This is achieved by increasing the value of $N$, which would require lower and higher values of $w(k)$ to make $d_S(N)$ reach $d_{S,min}$ and $d_{S,max}$ respectively. This leads to $w^N_{min}$ and $w^N_{max}$ asymptotically reaching their true values $w_{min}$ and $w_{max}$ as $N$ increases, thus making the set $\mathcal{W}_{\infty}$ completely explain the set $\mathcal{D}_{\infty}$.
+	 %It is noted that the presented method provides a methodology to quantify uncertainty in any general ARX identified model.%
+	 \\
 	We now have a closed-loop model with knowledge of noise bounds, and hence are ready to put it in a robust reference governor.
 	\section{Case studies}
-	Two case studies are presented. The first one is to verify the formulation presented in \eqref{w_calculation}. Then, numerical simulations are performed on a servo motor control problem, implementing the complete control scheme presented in Fig.\ref{fullloop}. Both the case studies are implemented using MATLAB R2017b, with optimization problems occasionally implemented with YALMIP \cite{Lofberg2004}.
+	Two case studies are presented. The first one is to verify the formulation presented in \eqref{bound_problem} and \eqref{maxmin}. Then, numerical simulations are performed on a servo motor control problem, implementing the complete control scheme presented in Fig.\ref{fullloop}. Both the case studies are implemented using MATLAB R2017b, with optimization problems occasionally implemented with YALMIP \cite{Lofberg2004}.
 	\label{Case studies}
 	\subsection{Noise input bound}
 	Consider a MISO system with inputs $\{u(t),w(t)\}$ and output $x(t)$, described by:
@@ -395,17 +446,19 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	u(1) = 0, \hspace{5pt} x(1) = 0
 	\end{matrix}
 	\end{equation*}
-	The input $u(t)$ is deterministic and $w(t)$ is noisy. An approximate ARX model of the system is calculated as $A(q^{-1})\tilde{x}(t) = B(q^{-1})u(t)+w(t)$ after performing experiments on the system and collecting data. It is identified with $A(q^{-1})$ and $B(q^{-1})$ having 2 and 1 free parameters respectively. Following this, the methodology discussed in Sec.\ref{Noise} is used to calculate bounds on $w(t)$.
+	The input $u(t)$ is deterministic and $w(t)$ is noisy. An approximate ARX model of the system is calculated as $A(q^{-1})\tilde{x}(t) = B(q^{-1})u(t)+w(t)$ after performing experiments on the system and collecting data. It is identified with $A(q^{-1})$ and $B(q^{-1})$ having one free parameter each. Following this, the methodology discussed in Sec.\ref{Noise} is used to calculate bounds on $w(t)$.
 	\\
-	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $\mathcal{D}_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \ref{bounds}. The bounds $w^N_{min}$ and $w^N_{max}$ on the input sequences are shown in Fig.\ref{bounds}.
-	\begin{figure}[h]
-		\includegraphics[scale = 0.65]{bounds.eps}
-		\caption{Convergence of bounds to $w_{min}$ and $w_{max}$}
+	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $\mathcal{D}_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \ref{bounds}. The bounds $-\bar{w}_j(N)$ and $\bar{w}_j(N)$ on the input sequences are shown in Fig.\ref{bounds}.
+	\begin{figure}[h!]
+		\hspace{22pt}
+		\includegraphics[scale = 0.70]{bounds.eps}
+		\caption{Convergence of bounds to $w_{min}$ and $w_{max}$, with zero mean noise assumption.}
 		\label{bounds}
 	\end{figure} 
-	The largest region where $w^N_{min} \leq w(k) \leq w^N_{max}$ is satisfied is $\mathcal{W}_{\infty}$. To verify the obtained bounds, the system identified through ARX identification is simulated with deterministic inputs $u(t)$, and a range of noise inputs $w(t)$ sampled from $\mathcal{W}_{\infty}$ and held constant throughout the simulation horizon. The simulation results are seen in Fig.\ref{simulation}.
+	The largest region where $-\bar{w}_j(N) \leq w(k) \leq -\bar{w}_j(N)$ is satisfied is $\mathcal{W}_{\infty}$. To verify the obtained bounds, the system identified through ARX identification is simulated with deterministic inputs $u(t)$, and a range of noise inputs $w(t)$ sampled from $\mathcal{W}_{\infty}$ and held constant throughout the simulation horizon. The simulation results are seen in Fig.\ref{simulation}.
 	\begin{figure}[h]
-		\includegraphics[scale = 0.65]{simulation.eps}
+		\hspace{22pt}
+		\includegraphics[scale = 0.70]{simulation.eps}
 		\caption{Comparison of ARX model performance with constant $w(t)=0$(nominal) and $w(t)\in \mathcal{W}_{\infty}$. The noise model gives bounded output $x(t)$ without being conservative.}
 		\label{simulation}
 	\end{figure} \\
@@ -468,10 +521,11 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	Solving the optimization problem \eqref{VRFT_problem}, the parameters 
 	$K_p$ and $K_d$ are calculated using the dataset $D_N$. The controller is placed in the inner loop within the hierarchical control scheme.
 	Following VRFT synthesis, an outer MPC is designed using the formulation in \eqref{MPC}, to provide a reference signal $g(t)$. The output $y(t)$ is constrained to lie between $0$ rad and $4$ rad, and the voltage input $u(t)$ between $-3.5$ V and $3.5$ V. An MPC horizon of $N_P=20$ timesteps is chosen, and weights are $Q_y=1$ and $Q_{\epsilon}=1$. 
-	To improve prediction, a disturbance sensor discussed in Sec.\ref{Contribution} is developed. First, the dataset $\hat{D}_N$ is built by performing closed loop experiments with input signal $\hat{v}(t)$ of standard deviation $10$V. Then, a linear model for $\mathbb{D}$ parameterized by $n_{a_D} = 4$ and $n_{b_D} = 3$ is identified by solving \eqref{DSensor}. This disturbance sensor is split into two parts, $\mathbb{D}_D$ and $\mathbb{D}_S$, with inputs $v(t)$ and noise $w(t)$ respectively. Bounds on the noise $w(t)$ are calculated by solving the linear problems \eqref{w_calculation}. The evolution of these bounds with increasing values of horizon $N$ is plotted in Fig.\ref{bounds_RG}.
+	To improve prediction, a disturbance sensor discussed in Sec.\ref{Contribution} is developed. First, the dataset $\hat{D}_N$ is built by performing closed loop experiments with input signal $\hat{v}(t)$ of standard deviation $10$V. Then, a linear model for $\mathbb{D}$ parameterized by $n_{a_D} = 4$ and $n_{b_D} = 3$ is identified by solving \eqref{DSensor}. This disturbance sensor is split into two parts, $\mathbb{D}_D$ and $\mathbb{D}_S$, with inputs $v(t)$ and noise $w(t)$ respectively. Bounds on the noise $w(t)$ are calculated by solving the linear problems \eqref{bound_problem} and \eqref{maxmin}. The evolution of these bounds with increasing values of horizon $N$ is plotted in Fig.\ref{bounds_RG}.
 	\begin{figure}[h]
-		\includegraphics[scale = 0.65]{bounds_RG.eps}
-		\caption{Comparison of voltage input $u(t)$. Constraints are violated by the MPC controller.}
+		\hspace{22pt}
+		\includegraphics[scale = 0.7]{bounds_RG.eps}
+		\caption{Convergence of bounds on the noise $w(t)$ acting on the disturbance sensor $D_S$.}
 		\label{bounds_RG}
 	\end{figure}
 	The converged values $w_{min}$ and $w_{max}$ are passed into \eqref{RG_offline} and bounds on input $v(t)$ are calculated. A quadratic program \eqref{RGprob_simple} is constructed as the robust reference governor. The reference governor modifies the input $g(t)$ to a constraint respecting $v(t)$. 
@@ -489,8 +543,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\includegraphics[scale = 0.65]{VRFT_vs_MPC_u.eps}
 		\caption{Comparison of voltage input $u(t)$. Constraints are violated by the MPC controller. This is avoided by using a reference governor. The performance with the reference governer using either process noise model or measurement noise models is similar.}
 		\label{VRFT_u}
-	\end{figure} \\
-	\indent
+	\end{figure}
 	It can clearly be seen that with a slight loss of performance from MPC, the reference governor ensures constraint satisfaction. Since computational efficiency was not the focus of this work, the solving times are not noted here.
 	\section{Conclusion}
 	This paper builds on the hierarchical data-driven control of constrained systems, by introducing robustness. This is done by adding a robust reference governor. The major contribution of this work is the formulation of a novel technique to compute process noise bounds from ARX identification. This formulation can prove to be useful, and is not limited to a control perspective. Possible extensions to the formulation are: a) Dealing with MIMO systems, b) Establishing the class of systems for which the formulation can be used, c) Efficient ways to deal with initial condition of the disturbance generating model $\mathbb{D}_S$. The performance of the control system in the case of using only measurement noise model instead of process noise $w(t)$ should be studied.
