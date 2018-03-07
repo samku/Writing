@@ -84,15 +84,17 @@ Design of control systems can broadly be classified into two categories: model-b
 Data-driven controller design methods avoid explicitly identifying the plant model. They synthesize a controller directly from I/O data obtained from the plant. A review of several such methods can be found in \cite{HOU20133}. One such method, virtual reference feedback tuning (VRFT) introduced in \cite{CAMPI20021337}, has been used to design a stabilizing feedback controller within a hierarchical controller framework in \cite{7932940} for LTI/LPV systems. It employs an outer MPC controller, which utilizes the reference model selected for VRFT to generate a tracking signal. Performance bounds on the plant are translated into constraints on the optimization problem solved by the MPC controller. Since the reference model might not reasonably reflect the performance of the closed-loop plant, there is a possibility of constraint violation.
 To avoid this, one can use the techniques developed under the umbrella of robust MPC theory to guarantee constraint satisfaction in an MPC framework. A review of the techniques can be found in \cite{10.1007/BFb0109870}. An alternative is to use a robust reference governor, which modifies the reference signal supplied to the plant in a way that constraints are satisfied. These are reviewed in \cite{GARONE2017306}. Both the methodologies require an explicit model of the uncertainties present in the plant being controlled. 
 \\ \indent
-In this work, we propose a systematic methodology to develop a robust control framework, building on the hierarchical control design presented in \cite{7932940}. A model of closed loop behavior of the plant is used for  controller design, which is different from the reference model used for VRFT. A parameterization of the closed loop behavior is chosen, and the parameters are identified using standard ARX estimation. 
- The model incorporates uncertainties as exogenous noise signals, assumed to lie within a bounded polyhedral set. In this work, a method to calculate these sets is presented. With respect to identification for robust control, a large volume of literature is present on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral noise sets. Following the identification of a model and corresponding noise sets, a robust reference governor is designed and appended to the control architecture presented in \cite{7932940}.
+In this work, we propose a systematic methodology to develop a robust control framework, building on the hierarchical control design presented in \cite{7932940}. A model of closed loop behavior of the plant is used for  controller design, which is different from the reference model used for VRFT. The parameters of this model are estimated using standard ARX estimation. 
+ The model incorporates uncertainties as exogenous noise signals, assumed to lie within a bounded polyhedral set. Robust control methods explicitly incorporate the knowledge of these noise signals in their formulation. Hence, identification of the polyhedral sets is necessary. In this work, a method to do so is presented. Identification for robust control includes a large volume of literature on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral sets of exogenous noise signals.
+ \\
+  Following the identification of a model and corresponding noise sets, a robust reference governor is designed and appended to the control architecture presented in \cite{7932940}.
  The option of robust reference governor is chosen for illustration, but the techniques presented can be easily extended to a robust MPC.
  \\ \indent
  The paper is organized as follows. In Sec.\ref{Problem statement}, the problem statement is formally presented. Background regarding the hierarchical data-driven control architecture and robust reference governor is presented in Sec.\ref{Background}. Sec.\ref{Contribution} presents the techniques used to identify the closed-loop system model with bounds, which is the main contribution of this paper. The final Sec.\ref{Case studies} presents two simulation results, one verifying the techniques presented for bound identification, and one presenting the robust hierarchical control design framework. 
 
 \section{Problem statement}
 \label{Problem statement}
-Consider a \textit{single-input single-output} system $\mathbb{G}_P$ generating an output signal $y(t) \in \mathbb{R}$ corresponding to the input signal $u(t) \in \mathbb{R}$ for the time $t \in \mathbb{Z}^+$. We aim to synthesize a controller that can make $y(t)$ accurately track any user defined reference signal, while robustly respecting the constraints
+Consider a \textit{single-input single-output} system $\mathbb{G}_P$ generating an output signal $y(t) \in \mathbb{R}$ corresponding to the input signal $u(t) \in \mathbb{R}$ for the time $t \in \mathbb{Z}^+$. We aim to synthesize a controller that can make $y(t)$ accurately track any user defined reference signal, while robustly respecting the constraints:
 \begin{equation*} 
 \begin{matrix}
 y_{min}\leq y(t) \leq y_{max}\\
@@ -114,7 +116,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
  The VRFT methodology designs a feedback controller  $\mathbb{K}_P$, with the goal of making the closed-loop system $\mathbb{K}_P$-$\mathbb{G}_P$ behave similar to the reference model $\mathbb{M}_P$. To this end, the VRFT methodology utilizes the dataset $\mathbb{D}_N$. The steps followed are as follows:
 \begin{enumerate}
 	\item
-	A virtual reference input $g(t)$ is calculated by setting $y_M(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by the inverting the model $\mathbb{M}_P$. Let this mapping be defined by $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
+	A virtual reference input $g(t)$ is calculated by setting $y_M(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by inverting the model $\mathbb{M}_P$. Let this mapping be defined by $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
 	\item
 	A feedback controller $\mathbb{K}_P$ described by $A_K(q^{-1})u(t) = B_K(q^{-1})(g(t)-y(t))$ is chosen, where 
 	\begin{equation*}
@@ -123,8 +125,8 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	B_K(q^{-1}) = \mathlarger{\sum\limits_{i=1}^{n_{b_K}}}b_i^Kq^{-i}
 	\end{matrix}  
 	\end{equation*}
-	The parameters of the controller $a_i^K$ and $b_i^K$ are calculated by the VRFT methodology, such that the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$ matches open loop performance of  the reference model $\mathbb{M}_P$.
 	\item
+		The parameters $a_i^K$ and $b_i^K$  of the controller are calculated such that the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$ matches open loop performance of  the reference model $\mathbb{M}_P$.
 	This is done by solving the convex optimization problem
 	\begin{equation}
 	\begin{aligned}
@@ -137,12 +139,12 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\item
 	The synthesized controller $\mathbb{K}_P$ is placed before the plant, and the loop is closed. A reference step input is given to evaluate the controller performance.
 	\begin{figure}[h]
-		\hspace{25pt}
+		\hspace{30pt}
 	\includegraphics[scale=0.8]{KpGp.pdf}
 	\caption{Feedback controller designed using VRFT}
 	\end{figure}
 	\\
-	The performance of this setup is improved by providing the reference signal $g(t)$ using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. This augmented state-space model is called $\mathbb{M}'_P$.
+	The satisfy plant constraints, the reference signal $g(t)$ using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. This augmented state-space model is called $\mathbb{M}'_P$.
 	\begin{equation*}
 	\begin{matrix}
 	\zeta(t+1) = A_\zeta\zeta(t) + B_\zeta g(t)\\
@@ -150,7 +152,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{matrix}
 	\end{equation*}
 	\\
-	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown below. The lower and upper bounds on $y(t)$ and $u(t)$ are $[y_{min},y_{max}]$ and $[u_{min},u_{max}]$ respectively.
+	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown in \eqref{MPC}. The lower and upper bounds on $y(t)$ and $u(t)$ are $[y_{min},y_{max}]$ and $[u_{min},u_{max}]$ respectively.
 	\begin{equation}
 	\begin{aligned}
 	& \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
@@ -170,13 +172,15 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	The quantities $V_y$ and $V_u$ in the MPC formulation are used to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the unknown plant $\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
 	
 	\subsection{Robust reference governor}
-	The robust reference governer is a signal regulator which alters the command input such that the system robustly satisfies constraints. It does so by utilizing knowledge of disturbances acting on the system. A schematic of the control system is shown in Fig. \ref{fullloop}. 
+	The robust reference governer is a signal regulator which alters the command input such that the system robustly satisfies constraints. It does so by utilizing knowledge of disturbances acting on the system. A schematic of the control system is shown in Fig.\ref{fullloop}. 
 	\begin{figure}[h]
+		\vspace{-3pt}
+		\hspace{10pt}
 		\includegraphics[scale = 0.8]{withRG.pdf}
-		\caption{Schematic of the control system}
+		\caption{Schematic of the robust control system}
 		\label{fullloop}
 	\end{figure} \\
-	The $MPC$ controller utilizes the model $\mathbb{M}'_{P}$, and the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$. Identification of this model and corresponding bounds is discussed in Sec.\ref{Contribution}. The state space form of this model is written as:
+	The $MPC$ controller utilizes the model $\mathbb{M}'_{P}$, and the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$, which explicitly incorporates knowledge of the disturbances acting on $\mathbb{M}'_{P}$. Identification of this model and corresponding bounds is discussed in Sec.\ref{Contribution}. The state space form of this model is written as:
 	\begin{equation*}
 	\begin{matrix}
 	\gamma(t+1) = A_\gamma\gamma(t) + B^v_\gamma v(t) + B^w_\gamma w(t) \vspace{2pt}\\
@@ -184,7 +188,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{matrix}
 	\end{equation*}
 	The model has a deterministic input $v(t)$ and a noise input $w(t)$, which captures the effect of measurement noise and un-modeled dynamics on the system output. 
-	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The outputs of the system are called $y_{\gamma}(t)=[y(t) u(t)]^T$. The constraints on these outputs are written as: 
+	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The outputs of the system are called $y_{\gamma}(t)=[y(t) \hspace{2pt} u(t)]^T$. The constraints on these outputs are written as: 
 	\begin{equation*}
 	\begin{matrix}
 	\begin{matrix}
@@ -200,15 +204,15 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	& & \cfrac{1}{2}\norm{v-g(t)}_2^2 \\
 	& \text{subject to}
 	& & 
-	(x(t),v) \in \mathbb{O}_{\infty}
+	(x,v) \in \mathbb{O}_{\infty}
 	\end{aligned}
 	\label{RGprob}
 	\end{equation}
 	where the set $\mathbb{O}_{\infty}$ is defined as:
 	\begin{equation*}
-	\mathbb{O}_{\infty} = \{(x(t),v): x(t) = \gamma(t), \hspace{2pt} Hy_{\gamma}(\tau) \leq h \hspace{5pt} \forall \tau \geq t \} \\ 
+	\mathbb{O}_{\infty} = \{(x,v): x = \gamma(t), \hspace{2pt} Hy_{\gamma}(\tau) \leq h \hspace{5pt} \forall \tau \geq t \} \\ 
 	\end{equation*}
-	This is called an output-invariant set.
+	This is called a maximal output admissible set.
 	It is set of feasible values for $v$ for the current observed state $x(t)=\gamma(t)$ such that if a constant input signal $v(\tau \geq t)=v$ is applied, the system output constraints $Hy_{\gamma}(\tau \geq t) \leq h$ remain satisfied for all $\tau$.
 	At a time instant $\tau \geq t$, the system output $y_{\gamma}(\tau)$ for input signal $v(\tau \geq t)=v$ can be written as:
 	\begin{equation*}
@@ -222,7 +226,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	For a particular future time instant $\tau$, the set $\mathbb{O}_{\infty}(\tau)$ is given by:
 	\begin{equation*}
 	\begin{matrix}
-	\mathbb{O}_{\infty}(\tau) = \{(x(t),v): x(t) = \gamma(t), \hspace{5pt} \tilde{H}(\tau)v \leq \tilde{h}(\tau)\} \vspace{5pt}\\
+	\mathbb{O}_{\infty}(\tau) = \{(x,v): x = \gamma(t), \hspace{5pt} \tilde{H}(\tau)v \leq \tilde{h}(\tau)\} \vspace{5pt}\\
 	\text{where } \hspace{5pt} \tilde{H}(\tau) = H\bigg( C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^v_{\gamma} + D_{\gamma}^v \bigg) \vspace{5pt} \\ \hspace{10pt}
 	\tilde{h}(\tau) = h - HC_{\gamma}A_{\gamma}^{\tau - t}\gamma(t) - f^w(\tau) \vspace{5pt}
 	\end{matrix} 
@@ -232,7 +236,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	f_i^w(\tau) = \underset{\{w(k)\}_{t}^{\tau}\in \mathcal{W}_{\infty}}{\text{max}} H\bigg(C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^w_{\gamma}w(\tau-k) + D_{\gamma}^w w(\tau)\bigg)_i
 	\label{RG_offline}
 	\end{equation}
-	Subscript $i$ in the above problem indicates that row $i$ of the matrix is used in the linear program to calculate the corresponding $w(k)$ sequence. According to the theory of output invariant sets for linear systems with polyhedral constraints on noise and outputs, the set $\mathbb{O}_{\infty} = \mathbb{O}_{\infty}(\tau \to \infty)$ is reached when the elements of $f^w(\tau)$ converge to a constant value. Since the linear problem to be solved for $f_i^w(\tau)$ does not depend on values at current time instant $t$, it can be solved offline for increasing values of $\tau$. When convergence is observed at time $\tau_c$, the value $f^w(\tau_c)$ is stored. This results in  problem \eqref{RGprob} being simplified to
+	Subscript $i$ in the above problem indicates that row $i$ of the matrix is used in the linear program to calculate the corresponding $w(k)$ sequence. According to the theory of maximal output admissible sets for linear systems as discussed in \cite{83532}, the set $\mathbb{O}_{\infty} = \mathbb{O}_{\infty}(\tau \to \infty)$ is reached at a finite value $\tau_c$. In the current setting, this happens when elements of $f^w(\tau)$ converge to a constant value. Since the linear problem to be solved for $f_i^w(\tau)$ does not depend on the state at current time instant $t$, it can be solved offline for increasing values of $\tau$. When convergence is observed at time $\tau_c$, the value $f^w(\tau_c)$ is stored. This results in  problem \eqref{RGprob} being simplified to
 	\begin{equation}
 	\begin{aligned}
 	& \underset{v}{\text{min}}
@@ -243,36 +247,36 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{aligned}
 	\label{RGprob_simple}
 	\end{equation}
-	It must be noted that the value $\tilde{h}(\tau_c)$ depends on the current observed state $\gamma(t)$. Thus, at each time instant, the reference governer reads the current state $\gamma(t)$, reference input $g(t)$, and calculates a new reference $v(t)$ which satisfies output constraints on the system robustly.
+	It must be noted that the value $\tilde{h}(\tau_c)$ depends on the current observed state $\gamma(t)$. Thus, at each time instant, the reference governer reads the current state $\gamma(t)$, reference input $g(t)$, and calculates a new reference $v$ which robustly satisfies output constraints on the system.
 	
 	\section{Disturbance sensor}
 	\label{Contribution}
-	This section discusses the major contribution of this work, which is the development of a methodology to calculate noise bounds on a system identified ARX techniques.
+	This section discusses the development of the model $\mathbb{M}'_{PD}$, which is used by the robust reference governor to generate the signal $v(t)$. First, the overall model is presented. Then, a novel technique is introduces to quantify uncertainty bounds on the model obtained from ARX estimation.
 	\subsection{Appended closed-loop model}
 	In order to improve prediction of closed loop performance, a disturbance sensor $\mathbb{D}$ is designed. The disturbance sensor is a dynamical system whose output is the discrepancy between output of the actual closed loop system  $\mathbb{K}_P$-$\mathbb{G}_P$ and reference closed loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in Fig. \ref{Appended}.
 	\begin{figure}[h]
 		\hspace{30pt}
 		\includegraphics[scale = 0.7]{Mp-D-E.pdf}
-		\caption{Reference model appended with disturbance sensor}
+		\caption{Reference model appended with disturbance sensor.}
 		\label{Appended}
 	\end{figure}
 	\\
-	This can be seen as a 2-input 2-output system, whose transfer function is described as
+	This can be seen as a 2-input 2-output system $\mathbb{M}'_{PD}$, described as
 	\begin{equation}
 	\begin{bmatrix}
-		Y(z) \\ U(z)
+		y(t) \\ u(t)
 	 \end{bmatrix} = 
 	 \begin{bmatrix} 
 	 \mathbb{M}_P+\mathbb{D}_D & \mathbb{D}_S \\
 	 \mathbb{K}_P(I-(\mathbb{M}_P+\mathbb{D}_D)) &  -\mathbb{K}_P\mathbb{D}_S
 	 \end{bmatrix}
 	 \begin{bmatrix}
-	 V(z) \\ W(z)
+	 v(t) \\ w(t)
 	 \end{bmatrix}
 	 \label{TF}
 	\end{equation}
-	Note that the dependence of transfer functions on time shift operator $z$ (or $q^{-1}$) is not denoted for ease of notation. The signal $w(t)$ is interpreted as an external noise signal. 	The state-space equivalent of this model is used in the robust reference governor that was previously discussed. \\
-	Since this model represents the closed loop behavior of the system, new closed loop measurements are required to estimate the parameters of the disturbance sensor. These are obtained by performing experiments with excitaion signals $\hat{v}(t)$ on the closed loop model and plant, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The output is captured as the data sequence $\hat{D}_{N}=\{\hat{v}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
+	Note that the dependence of the model on time shift operator $q^{-1}$ is not shown for ease of notation. The signal $w(t)$ is interpreted as an external noise signal. 	The state-space equivalent of this model is used in the robust reference governor that was previously discussed. \\
+	Since this model represents the closed loop behavior of the system, new closed loop measurements are required to estimate the parameters of the disturbance sensor. These are obtained by performing experiments with excitaion signals $\hat{v}(t)$ on the reference closed loop model $\mathbb{M}_P$ and plant, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The signals are captured in the data set $\hat{D}_{N}=\{\hat{v}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
 	The disturbance sensor $\mathbb{D}$ is parameterized as $A_D(q^{-1})y_D(t) = B_D(q^{-1})v(t)+w(t)$, where 
 	\begin{equation*}
 	\begin{matrix}
@@ -354,7 +358,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	d_S(t) = \cfrac{1}{A_D(q^{-1})}w(t) = \mathbb{D}_S w(t)
 	\end{matrix}
 	\end{equation*}
-	The model has an additional noisy input $w(t)$, which will be transformed to process and measurement noises on the state space model corresponding to \eqref{TF}. The following subsection discusses a technique to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the noise signal $w(t)$, and which are explicitly provided to the robust reference governor.
+	The model has a noise input $w(t)$, which will be transformed to process and measurement noises on the state space model corresponding to \eqref{TF}. The following subsection discusses a technique to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the noise signal $w(t)$, which are explicitly provided to the robust reference governor for the calculation of $\mathcal{O}_{\infty}$.
 	\subsection{Noise input bounds calculation}
 	\label{Noise}
 	A realization of the discrepancy $d_S(t)$ between desired output $y(t)$ and deterministic output $y_M(t)+d_D(t)$ can be calculated from the data set $\hat{D}_{N}$ as 
@@ -380,7 +384,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\hspace{40pt}\notimplies \nexists  w(t) \notin \mathcal{W}_{\infty} : \mathbb{D}_S w(t) \in \mathcal{D}_{\infty}
 	\end{matrix}
 	\end{equation*}
-	This implies that the bounds on residuals of the ARX identification \eqref{DSensor} are not necessarily $w_{min}$ and $w_{max}$, since the realization of the residuals need not necessarily belong to $\mathcal{W}_{\infty}$. 
+	This means that the bounds on residuals of the ARX identification \eqref{DSensor} are not necessarily $w_{min}$ and $w_{max}$, since the realization of the residuals need not necessarily belong to $\mathcal{W}_{\infty}$. 
 		
 	To calculate the bounds $w_{min}$ and $w_{max}$, first, the optimization problems shown in \eqref{bound_problem} are solved for increasing lengths of time horizon $N$.
 	\begin{equation}
