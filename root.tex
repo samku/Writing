@@ -49,7 +49,7 @@ Robust data-driven predictive control
 }
 
 
-\author{SKM$^{1}$ and AB$^{2}$% <-this % stops a space
+\author{Sampath Kumar Mulagaleti$^{1}$ and Alberto Bemporad$^{2}$% <-this % stops a space
 \thanks{*This work was not supported by any organization}% <-this % stops a space
 \thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
         University of Twente, 7500 AE Enschede, The Netherlands
@@ -251,7 +251,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	
 	\section{Disturbance sensor}
 	\label{Contribution}
-	This section discusses the development of the model $\mathbb{M}'_{PD}$, which is used by the robust reference governor to generate the signal $v(t)$. First, the overall model is presented. Then, a novel technique is introduces to quantify uncertainty bounds on the model obtained from ARX estimation.
+	This section discusses the development of the model $\mathbb{M}'_{PD}$, which is used by the robust reference governor to generate the signal $v(t)$. First, the overall model is presented. Then, a novel technique is introduced to quantify uncertainty bounds on the model obtained from ARX estimation.
 	\subsection{Appended closed-loop model}
 	In order to improve prediction of closed loop performance, a disturbance sensor $\mathbb{D}$ is designed. The disturbance sensor is a dynamical system whose output is the discrepancy between output of the actual closed loop system  $\mathbb{K}_P$-$\mathbb{G}_P$ and reference closed loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in Fig. \ref{Appended}.
 	\begin{figure}[h]
@@ -261,22 +261,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\label{Appended}
 	\end{figure}
 	\\
-	This can be seen as a 2-input 2-output system $\mathbb{M}'_{PD}$, described as
-	\begin{equation}
-	\begin{bmatrix}
-		y(t) \\ u(t)
-	 \end{bmatrix} = 
-	 \begin{bmatrix} 
-	 \mathbb{M}_P+\mathbb{D}_D & \mathbb{D}_S \\
-	 \mathbb{K}_P(I-(\mathbb{M}_P+\mathbb{D}_D)) &  -\mathbb{K}_P\mathbb{D}_S
-	 \end{bmatrix}
-	 \begin{bmatrix}
-	 v(t) \\ w(t)
-	 \end{bmatrix}
-	 \label{TF}
-	\end{equation}
-	Note that the dependence of the model on time shift operator $q^{-1}$ is not shown for ease of notation. The signal $w(t)$ is interpreted as an exogenous disturbance signal, which causes the model uncertainty. The state-space equivalent of this model is used in the robust reference governor that was previously discussed. \\
-	Since this model represents the closed loop behavior of the system, new closed loop measurements are required to estimate the parameters of the disturbance sensor. These are obtained by performing experiments with excitation signals $\hat{v}(t)$ on the reference closed loop model $\mathbb{M}_P$ and the closed loop plant $\mathbb{K}_P-\mathbb{G}_{P}$, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The signals are captured in the data set $\hat{D}_{N}=\{\hat{v}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
+	Since this model represents closed loop behavior of the system, new closed loop measurements are required to estimate the parameters of the disturbance sensor. These are obtained by performing experiments with excitation signals $\hat{v}(t)$ on the reference closed loop model $\mathbb{M}_P$ and the closed loop plant $\mathbb{K}_P-\mathbb{G}_{P}$, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The signals are captured in the data set $\hat{D}_{N}=\{\hat{v}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
 	The disturbance sensor $\mathbb{D}$ is parameterized as $A_D(q^{-1})y_D(t) = B_D(q^{-1})v(t)+w(t)$, where 
 	\begin{equation*}
 	\begin{matrix}
@@ -358,7 +343,37 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	d_S(t) = \cfrac{1}{A_D(q^{-1})}w(t) = \mathbb{D}_S w(t)
 	\end{matrix}
 	\end{equation*}
-	The following subsection discusses a technique to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the disturbance signal $w(t)$, which are explicitly provided to the robust reference governor for the calculation of $\mathbb{O}_{\infty}$.
+	The overall appended model shown is Fig.\ref{Appended} can be seen as a 2-input 2-output system $\mathbb{M}'_{PD}$, described as
+	\begin{equation}
+	\begin{bmatrix}
+	y(t) \\ u(t)
+	\end{bmatrix} = 
+	\begin{bmatrix} 
+	\mathbb{M}_P+\mathbb{D}_D & \mathbb{D}_S \\
+	\mathbb{K}_P(I-(\mathbb{M}_P+\mathbb{D}_D)) &  -\mathbb{K}_P\mathbb{D}_S
+	\end{bmatrix}
+	\begin{bmatrix}
+	v(t) \\ w(t)
+	\end{bmatrix}
+	\label{TF_w}
+	\end{equation}
+	Alternatively, it can also be seen a system with $d_S(t)$ acting as measurement noise on the output $y(t)$. The model corresponding to this view-point is:
+	\begin{equation}
+	\begin{bmatrix}
+	y(t) \\ u(t)
+	\end{bmatrix} = 
+	\begin{bmatrix} 
+	\mathbb{M}_P+\mathbb{D}_D & I \\
+	\mathbb{K}_P(I-(\mathbb{M}_P+\mathbb{D}_D)) &  -\mathbb{K}_P
+	\end{bmatrix}
+	\begin{bmatrix}
+	v(t) \\ d_S(t)
+	\end{bmatrix}
+	\label{TF_d}
+	\end{equation} 
+	Note that the dependence of the model on time shift operator $q^{-1}$ is not shown for ease of notation. Both $w(t)$ and $d_S(t)$ can be seen as exogenous disturbance signals, which cause model uncertainty. Hence, the state space equivalents of either of these models can be used in a robust reference governor, along with corresponding bounds on the exogenous disturbance signals. \\
+	If the model described in Eq.\eqref{TF_d} is considered for robust reference governor design, the bounds on $d_S(t)$ can be estimated directly from the prediction errors obtained during ARX identification performed in Eq.\eqref{DSensor}. In case of the model described in Eq.\eqref{TF_w}, the calculation of bounds on $w(t)$ is not as straightforward.
+	The following subsection discusses a technique to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the disturbance signal $w(t)$, which are required for designing a robust reference governor corresponding to Eq.\eqref{TF_w}.
 	\subsection{Calculation of exogenous disturbance set}
 	\label{Noise}
 	A realization of the discrepancy $d_S(t)$ between desired output $y(t)$ and deterministic output $y_M(t)+d_D(t)$ can be calculated from the data set $\hat{D}_{N}$ as 
@@ -377,7 +392,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{matrix} 
 	\end{Bmatrix}
 	\end{equation*}  
-	This is the set of all $w(t)$ sequences such that the output signal of $\mathbb{D}_S$ corresponding to any $w(t)\in \mathcal{W}_{\infty}$  lies within $\mathcal{D}_{\infty}$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $\mathcal{W}_{\infty}$ but producing a corresponding output sequence belonging to $\mathcal{D}_{\infty}$.
+	This is the set of all $w(t)$ sequences such that the steady-state output signal of $\mathbb{D}_S$ corresponding to any $w(t)\in \mathcal{W}_{\infty}$  lies within $\mathcal{D}_{\infty}$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $\mathcal{W}_{\infty}$ but producing a corresponding output sequence belonging to $\mathcal{D}_{\infty}$.
 	\begin{equation*}
 	\begin{matrix}
 	\hspace{-40pt}\forall w(t) \in \mathcal{W}_{\infty}  : \mathbb{D}_S w(t) \in \mathcal{D}_{\infty} \\
@@ -438,9 +453,12 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	 %It is noted that the presented method provides a methodology to quantify uncertainty in any general ARX identified model.%
 	 \\
 	We now have a closed-loop model with disturbance bound information, and hence are ready to use it in a robust reference governor.
-	\section{Case studies}
-	Two case studies are presented. The first one is to verify the formulation presented in \eqref{bound_problem} and \eqref{maxmin}. Then, numerical simulations are performed on a servo motor control problem, implementing the complete control scheme presented in Fig.\ref{fullloop}. Both the case studies are implemented using MATLAB R2017b, with optimization problems occasionally implemented with YALMIP \cite{Lofberg2004}.
+	\section{Case study}
+	Numerical simulations are performed on a servo motor control problem, implementing the complete control scheme presented in Fig.\ref{fullloop}. Reference governors are implemented for closed loop models corresponding to both Eq.\eqref{TF_w} and Eq.\eqref{TF_d}. It is shown that using model \eqref{TF_w} results is superior performance, and hence an additional step to calculate $w_{min}$ and $w_{max}, 
+	Both the case studies are implemented using MATLAB R2017b, with optimization problems occasionally implemented with YALMIP \cite{Lofberg2004}.
 	\label{Case studies}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\iffalse
 	\subsection{Noise input bound}
 	Consider a MISO system with inputs $\{u(t),w(t)\}$ and output $x(t)$, described by:
 	\begin{equation*}
@@ -468,6 +486,8 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\label{simulation}
 	\end{figure} 
 	The simulation of ARX model with disturbance requires an initial condition on the disturbance model $\mathbb{D}_S$. In the current example, it is set to $0$. Since the actual initial condition of $\mathbb{D}_S$ might not be $0$, one might face problems with the model not covering the whole range of $\mathcal{D}_{\infty}$ during the transient period. To correct this, a state estimator could be used which rectifies the effect of initial state discrepancy, thus covering the noise effects even during transients.
+	\fi
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Data driven MPC with robust reference governer}
 	The plant consisting of a servo positioning system is controlled using the scheme shown in Fig.\ref{fullloop}. The plant dynamics are modeled with the following non-linear state space equations:
 	\begin{equation*}
@@ -551,7 +571,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{figure}
 	It can clearly be seen that with a loss of performance from MPC, the reference governor ensures robust constraint satisfaction. This loss in performance can be reduced bu using a robust MPC controller instead of a reference governer. Since computational efficiency was not the focus of this work, the solving times are not noted here.
 	\section{Conclusion}
-	This paper builds on the hierarchical data-driven control of constrained systems, by introducing robustness. This is done by adding a robust reference governor. The major contribution of this work is the formulation of a novel technique to compute process noise bounds from ARX identification. Since the calculation of process noise bounds and maximal output admissible sets is performed offline, the control scheme can be experimentally validated online  in an efficient manner. Possible extensions to the work includes formulation of equivalent schemes for LPV and MIMO systems.
+	This paper builds on the hierarchical data-driven control of constrained systems, by introducing robustness. This is done by adding a robust reference governor. The major contribution of this work is the formulation of a novel technique to compute disturbance bounds from ARX identification, which capture uncertainty in the model. Since the calculation of these bounds and maximal output admissible sets for the reference governor is performed offline, the control scheme can be experimentally validated online  in an efficient manner. Possible extensions to the work includes formulation of equivalent schemes for LPV and MIMO systems.
 \end{enumerate} 
 
 	
