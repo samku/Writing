@@ -77,7 +77,8 @@ Robust data-driven predictive control
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-This paper presents a robust data-driven control approach for SISO systems, by building on a previously presented hierarchical control architecture for constrained systems. To this end, a robust reference governor is designed. The reference governor alters the input from the outer model predictive controller (MPC) of the architecture, in a way that the system constraints are robustly satisfied. The reference governor utilizes a model of the inner loop. Model uncertainty is assumed to be limited to a bounded disturbance set. A novel method to calculate this set from ARX identification is discussed. Numerical validations of this method, and of the robust control architecture are performed, and the results are presented.
+This paper presents a robust data-driven control approach for SISO systems, subject to bound constraints on the outputs.
+ The approach builds on a previously presented hierarchical data-driven control architecture for constrained systems. Robustness is achieved through the addition of a robust reference governor. The reference governor modifies the reference signal from the outer model predictive controller (MPC) of the architecture, in a way that the output constraints are robustly satisfied. To this end, it utilizes a model of the inner loop, the uncertainty of which is assumed to lie within a bounded disturbance set. A major contribution of this work is the development of a method to calculate this set from ARX identification. Numerical validations of the robust control architecture are performed, and the results are presented.
 
 \end{abstract}
 
@@ -575,7 +576,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\begin{figure}[t]
 		\hspace{20pt}
 		\includegraphics[scale = 0.50]{VRFT_vs_MPC_u.eps}
-		\caption{Comparison of voltage input $u(t)$. Constraints are violated by the MPC controller. This is avoided by using a reference governor.}
+		\caption{Comparison of voltage input $u(t)$.}
 		\label{VRFT_u}
 	\end{figure} 
 	It can clearly be seen that utilizing a robust reference governor to modify $g(t)$ from the MPC controller results in robust constraint satisfaction. Also, using the closed loop model corresponding to Eq.\eqref{TF_d} for robust reference governor design results in conservative performance, compared to using Eq.\eqref{TF_w}, for the same admissible set horizon $\tau = 2*N_P*Ts$. Increasing this horizon to $\tau_c$ results in similar conservative performance from both the models. Since the calculation of bounds $w_{min}$ and $w_{max}$ is performed offline, conservativeness of the control scheme can be reduced without any additional online operation.
