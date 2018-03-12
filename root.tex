@@ -46,7 +46,7 @@
 \usepackage{indentfirst}
 
 
-\setlength{\parindent}{1cm} % Default is 15pt.
+\setlength{\parindent}{15pt} % Default is 15pt.
 
 
 \title{\LARGE \bf
@@ -77,7 +77,7 @@ Robust data-driven predictive control
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-This paper presents a robust data-driven control approach for SISO systems, subject to bound constraints on the outputs.
+This paper presents a robust data-driven control approach for SISO systems subject to bound constraints on the outputs.
  The approach builds on a previously presented hierarchical data-driven control architecture for constrained systems. Robustness is achieved through the addition of a robust reference governor. The reference governor modifies the reference signal from the outer model predictive controller (MPC) of the architecture, in a way that the output constraints are robustly satisfied. To this end, it utilizes a model of the inner loop, the uncertainty of which is assumed to lie within a bounded disturbance set. A major contribution of this work is the development of a method to calculate this set from ARX identification. Numerical validations of the robust control architecture are performed, and the results are presented.
 
 \end{abstract}
@@ -90,7 +90,7 @@ Design of control systems can broadly be classified into two categories: model-b
 Data-driven controller design methods avoid explicitly identifying the plant model. They synthesize a controller directly from I/O data obtained from the plant. A review of several such methods can be found in \cite{HOU20133}. One such method, virtual reference feedback tuning (VRFT) introduced in \cite{CAMPI20021337}, has been used to design a stabilizing feedback controller within a hierarchical controller framework in \cite{7932940} for LTI/LPV systems. It employs an outer MPC controller, which utilizes the reference model selected for VRFT to generate a tracking signal. Performance bounds on the plant are translated into constraints on the optimization problem solved by the MPC controller. Since the reference model might not reasonably reflect the performance of the closed-loop plant, there is a possibility of constraint violation.
 To avoid this, one can use the techniques developed under the umbrella of robust MPC theory to guarantee constraint satisfaction in an MPC framework. A review of the techniques can be found in \cite{10.1007/BFb0109870}. An alternative is to use a robust reference governor, which modifies the reference signal supplied to the plant in a way that constraints are satisfied. These are reviewed in \cite{GARONE2017306}. Both the methodologies require an explicit model of the uncertainties present in the plant being controlled. 
 \\ \indent
-In this work, we propose a systematic methodology to develop a robust data-driven control framework, building on the hierarchical control architecture presented in \cite{7932940}. A model of closed loop behavior of the plant is used for  controller design, which is different from the reference model used for VRFT. The parameters of this model are identified using standard ARX estimation. 
+In this work, we propose a systematic methodology to develop a robust data-driven control framework, building on the hierarchical control architecture presented in \cite{7932940}. A model of closed loop behavior of the plant is used for  controller design, which is different from the reference model used for VRFT. For this, an ARX model is considered, and its parameters are identified using the prediction error method.
  The model incorporates uncertainties as exogenous disturbance signals, assumed to lie within a bounded polyhedral set. Since robust control methods explicitly incorporate uncertainty information in their formulation, identification of the polyhedral sets is necessary. In this work, a method to do so is presented. Identification for robust control includes a large volume of literature on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral sets of exogenous disturbance signals.
  \\
   Following the identification of a model and corresponding disturbance sets, a robust reference governor is designed and appended to the control architecture presented in \cite{7932940}.
@@ -158,7 +158,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{matrix}
 	\end{equation*}
 	\\
-	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown in \eqref{MPC}. The lower and upper bounds on $y(t)$ and $u(t)$ are $[y_{min},y_{max}]$ and $[u_{min},u_{max}]$ respectively.
+	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown in \eqref{MPC}.
 	\begin{equation}
 	\begin{aligned}
 	& \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
@@ -175,25 +175,26 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{aligned}
 	\label{MPC}
 	\end{equation}
-	The quantities $V_y$ and $V_u$ in the MPC formulation are used to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the closed loop $\mathbb{K}_P-\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
+	The quantities $V_y$ and $V_u$ in the MPC formulation are used as soft constraints to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the closed loop $\mathbb{K}_P-\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
 	
 	\subsection{Robust reference governor}
-	The robust reference governer is a signal regulator which alters the command input such that the system robustly satisfies constraints. For this, it requires a model of the system with uncertainty information. A schematic of the control system is shown in Fig.\ref{fullloop}. 
+	The robust reference governer is a signal regulator which alters the command input such that the plant constraints are robustly satisfied. A schematic of the heirarchical control system with the additional robust reference governor is shown in Fig.\ref{fullloop}. 
 	\begin{figure}[h]
 		\vspace{-3pt}
 		\hspace{10pt}
 		\includegraphics[scale = 0.8]{withRG.pdf}
 		\caption{Schematic of the robust control system}
 		\label{fullloop}
-	\end{figure} \\
-	The $MPC$ controller utilizes the model $\mathbb{M}'_{P}$, and the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$, which is obtained by appending disturbance information over the model $\mathbb{M}'_{P}$. Identification of this model and corresponding bounds is discussed in Sec.\ref{Contribution}. The state space form of this model is written as:
+	\end{figure} 
+	
+	In order to achieve robustness, the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$, which is obtained by appending disturbance information over the model $\mathbb{M}'_{P}$. Identification of this model and corresponding bounds is discussed in Sec.\ref{Contribution}. The state space form of this model is written as:
 	\begin{equation*}
 	\begin{matrix}
 	\gamma(t+1) = A_\gamma\gamma(t) + B^v_\gamma v(t) + B^w_\gamma w(t) \vspace{2pt}\\
 	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\gamma\gamma(t) + D^v_\gamma v(t) + D^w_\gamma w(t)
 	\end{matrix}
 	\end{equation*}
-	The model has a deterministic input $v(t)$ and a disturbance input $w(t)$, which captures the effect of model uncertainties on system output. 
+	The model has a deterministic input $v(t)$ and a disturbance input $w(t)$, which captures the effect of model uncertainties on system output. It is assumed that the disturbance input lies in a bounded set $\mathcal{W}_{\infty}$.
 	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The outputs of the system are called $y_{\gamma}(t)=[y(t) \hspace{2pt} u(t)]^T$. The constraints on these outputs are written as: 
 	\begin{equation*}
 	\begin{matrix}
