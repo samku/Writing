@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  13 MAR 2018 19:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  13 MAR 2018 20:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -894,15 +894,15 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
 
 
 ]
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 141.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 142.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.36008> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.40009> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
 
-Overfull \hbox (5.0774pt too wide) detected at line 144
+Overfull \hbox (5.0774pt too wide) detected at line 145
 [] []
  []
 
@@ -910,21 +910,24 @@ Overfull \hbox (5.0774pt too wide) detected at line 144
 File: ./Drawings/KpGp.pdf Graphic file (type pdf)
 
 <use ./Drawings/KpGp.pdf>
-Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 150.
+Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 151.
 (pdftex.def)             Requested size: 195.75317pt x 52.80293pt.
 
 <./Drawings/final_robust.pdf, id=19, 230.0043pt x 78.40392pt>
 File: ./Drawings/final_robust.pdf Graphic file (type pdf)
 
 <use ./Drawings/final_robust.pdf>
-Package pdftex.def Info: ./Drawings/final_robust.pdf used on input line 186.
+Package pdftex.def Info: ./Drawings/final_robust.pdf used on input line 185.
 (pdftex.def)             Requested size: 207.00194pt x 70.56287pt.
- [2 <./Drawings/KpGp.pdf> <./Drawings/final_robust.pdf>] <./Drawings/Mp-D-E.pdf
-, id=66, 250.00502pt x 154.80435pt>
+ [2 <./Drawings/KpGp.pdf> <./Drawings/final_robust.pdf>]
+
+LaTeX Warning: Reference `RGprob' on page 3 undefined on input line 250.
+
+<./Drawings/Mp-D-E.pdf, id=66, 250.00502pt x 154.80435pt>
 File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
 
 <use ./Drawings/Mp-D-E.pdf>
-Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 267.
+Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 269.
 (pdftex.def)             Requested size: 175.0023pt x 108.36229pt.
  [3 <./Drawings/Mp-D-E.pdf>] [4]
 Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
@@ -936,7 +939,7 @@ Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
 (epstopdf)                    size: 16934 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/bounds_RG-eps-c
 onverted-to.pdf ./Drawings/bounds_RG.eps>
-(epstopdf)             \includegraphics on input line 562.
+(epstopdf)             \includegraphics on input line 564.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/bounds_RG-eps-converted-to.pdf, id=86, 301.125pt x 150.5625pt>
@@ -944,7 +947,7 @@ File: ./Drawings/bounds_RG-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/bounds_RG-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/bounds_RG-eps-converted-to.pdf used on inpu
-t line 562.
+t line 564.
 (pdftex.def)             Requested size: 180.67638pt x 90.33818pt.
 Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC.eps>
 (epstopdf)                    date: 2018-03-13 14:47:04
@@ -955,7 +958,7 @@ f>
 (epstopdf)                    size: 77788 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC-eps
 -converted-to.pdf ./Drawings/VRFT_vs_MPC.eps>
-(epstopdf)             \includegraphics on input line 574.
+(epstopdf)             \includegraphics on input line 576.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC-eps-converted-to.pdf, id=87, 391.4625pt x 230.8625pt>
@@ -963,7 +966,7 @@ File: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf used on in
-put line 574.
+put line 576.
 (pdftex.def)             Requested size: 234.8793pt x 138.51855pt.
  [5 <./Drawings/bounds_RG-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC_u.eps>
@@ -975,7 +978,7 @@ pdf>
 (epstopdf)                    size: 67699 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC_u-e
 ps-converted-to.pdf ./Drawings/VRFT_vs_MPC_u.eps>
-(epstopdf)             \includegraphics on input line 581.
+(epstopdf)             \includegraphics on input line 583.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf, id=96, 399.4925pt x 225.84375pt
@@ -983,13 +986,9 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf used on 
-input line 581.
+input line 583.
 (pdftex.def)             Requested size: 239.69734pt x 135.50728pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-(./root.bbl)
+ (./root.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1002,29 +1001,32 @@ Before submitting the final camera ready copy, remember to:
  process uses the US letter (8.5in X 11in) paper size.
 
 [6 <./Drawings/VRFT_vs_MPC-eps-converted-to.pdf> <./Drawings/VRFT_vs_MPC_u-eps-
-converted-to.pdf>] (./root.aux) ) 
+converted-to.pdf>] (./root.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 24776 strings out of 493029
- 610816 string characters out of 6136234
- 793872 words of memory out of 5000000
- 27809 multiletter control sequences out of 15000+600000
- 93453 words of font info for 212 fonts, out of 8000000 for 9000
+ 24780 strings out of 493029
+ 610850 string characters out of 6136234
+ 794872 words of memory out of 5000000
+ 27812 multiletter control sequences out of 15000+600000
+ 94560 words of font info for 213 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,19n,84p,888b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips
-/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/u
-syr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/times/utmri8a.pfb>
-Output written on root.pdf (6 pages, 310346 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/rsfs/rsfs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/uc
+rr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times
+/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on root.pdf (6 pages, 311229 bytes).
 PDF statistics:
  148 PDF objects out of 1000 (max. 8388607)
  116 compressed objects within 2 object streams

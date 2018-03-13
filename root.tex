@@ -102,13 +102,14 @@ This field includes a large volume of literature on set-membership techniques fo
 \section{Problem statement}
 \label{Problem statement}
 Consider a \textit{single-input single-output} system $\mathbb{G}_P$ generating an output signal $y(t) \in \mathbb{R}$ corresponding to the input signal $u(t) \in \mathbb{R}$ for the time $t \in \mathbb{Z}^+$. We aim to synthesize a controller that can make $y(t)$ accurately track any user defined reference signal, while robustly respecting the constraints:
-\begin{equation*} 
+\begin{equation} 
 \begin{matrix}
 y_{min}\leq y(t) \leq y_{max}\\
 u_{min}\leq u(t) \leq u_{max} \\
 \forall t \in \mathbb{Z}^+\\
 \end{matrix}
-\end{equation*} 
+\label{constraints}
+\end{equation} 
 Following the data-driven controller synthesis methodology, we use the data $D_{N}=\{u(t),y(t);t\in{1,...,N}\}$ obtained by exciting the system to design the controller.
 \section{Background}
 \label{Background}
@@ -162,24 +163,22 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown in \eqref{MPC}.
 	\begin{equation}
 	\begin{aligned}
-	& \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
-	& & Q_y\mathlarger{\sum\limits_{k=1}^{N_P}}(y(t+k|t)-r(t+k))^2 + Q_{\epsilon}\epsilon^2 \\
-	& \text{subject to}
-	& & 
-	\begin{matrix}
+	 \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
+	& \hspace{20pt} Q_y\mathlarger{\sum\limits_{k=1}^{N_P}}(y(t+k|t)-r(t+k))^2 + Q_{\epsilon}\epsilon^2 \\
+	 \text{subject to}
+	&   \hspace{20pt}
 	\zeta(t+k+1) = A_\zeta\zeta(t+k) + B_\zeta g(t+k)\\
-	\begin{bmatrix}y(t+k)\\u(t+k)\end{bmatrix} = C_\zeta\zeta(t+k) + \begin{bmatrix}0\\D_\zeta\end{bmatrix}g(t+k)\\
-	y_{min}-V_y\epsilon \leq y(t+k) \leq y_{max}+V_y\epsilon \\
-	u_{min}-V_u\epsilon \leq u(t+k) \leq u_{max}+V_u\epsilon \\
-	\zeta(t|t) = \zeta(t)
-	\end{matrix}
+	& \hspace{20pt} \begin{bmatrix}y(t+k)\\u(t+k)\end{bmatrix} = C_\zeta\zeta(t+k) +  \begin{bmatrix}0\\D_\zeta\end{bmatrix}g(t+k)\\
+	& \hspace{20pt}  y_{min}-V_y\epsilon \leq y(t+k) \leq  y_{max}+V_y\epsilon \\
+	& \hspace{20pt}  u_{min}-V_u\epsilon \leq u(t+k) \leq u_{max}+V_u\epsilon \\
+	& \hspace{20pt}  \zeta(t|t) = \zeta(t)
 	\end{aligned}
 	\label{MPC}
 	\end{equation}
 	The quantities $V_y$ and $V_u$ in the MPC formulation are used as soft constraints to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the closed loop $\mathbb{K}_P-\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
 	
-	\subsection{Robust reference governor}
-	The robust reference governer is a signal regulator which alters the command input such that the plant constraints are robustly satisfied. A schematic of the heirarchical control system with the additional robust reference governor is shown in Fig.\ref{fullloop}. 
+	\subsection{Robust model predictive controller}
+	The deterministic MPC controller in the outer loop of the hierarchical control architecture is replaced by a robust MPC controller. A schematic of the control loop is shown in Fig.\ref{fullloop}. 
 	\begin{figure}[h]
 		\vspace{-3pt}
 		\hspace{20pt}
@@ -188,51 +187,54 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\label{fullloop}
 	\end{figure} 
 	
-	In order to achieve robustness, the reference governer $RG$ uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$, which is obtained by appending disturbance information over the model $\mathbb{M}'_{P}$. Identification of this model and corresponding bounds is discussed in Sec.\ref{Contribution}. The state space form of this model is written as:
+	In order to achieve robustness, the robust MPC (RMPC) controller uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$, which is obtained by appending disturbance information over the model $\mathbb{M}'_{P}$. Identification of this model and corresponding bounds is discussed in Sec.\ref{Contribution}. The state-space form of $\mathbb{M}'_{PD}$ is:
 	\begin{equation}
 	\begin{matrix}
-	\gamma(t+1) = A_\gamma\gamma(t) + B^v_\gamma v(t) + B^n_\gamma n(t) \vspace{2pt}\\
-	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\gamma\gamma(t) + D^v_\gamma v(t) + D^n_\gamma n(t)
+	\gamma(t+1) = A_\gamma\gamma(t) + B^g_\gamma g(t) + B^n_\gamma n(t) \vspace{2pt}\\
+	\begin{bmatrix}y(t)\\u(t)\end{bmatrix} = C_\gamma\gamma(t) + D^g_\gamma g(t) + D^n_\gamma n(t)
 	\end{matrix}
 	\label{M_PD}
 	\end{equation}
-	The model has a deterministic input $v(t)$ and a disturbance input $n(t)$, which captures the effect of model uncertainties on system output. It is assumed that the disturbance input lies in a bounded set $\mathcal{N}_{\infty}$.
-	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The outputs of the system are called $y_{\gamma}(t)=[y(t) \hspace{2pt} u(t)]^T$. The constraints on these outputs are written as: 
+	The model has a deterministic input $g(t)$ and a disturbance input $n(t)$, which captures the effect of model uncertainties on system output. It is assumed that the disturbance input lies in a bounded set $\mathcal{N}_{\infty}$.
+	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The output of \eqref{M_PD} is denoted by $y_{\gamma}(t)=[y(t) \hspace{2pt} u(t)]^T$. The constraints \eqref{constraints} on $y(t)$ and $u(t)$  are rewritten as: 
 	\begin{equation*}
 	\begin{matrix}
-	\begin{matrix}
-	y_{min} \leq y(t) \leq y_{max} \\
-	u_{min} \leq u(t) \leq u_{max}
-	\end{matrix} & \bigg{\}} & Hy_{\gamma}(t) \leq h
+	Hy_{\gamma}(t) \leq h
 	\end{matrix}
 	\end{equation*}
-	At each time instant $t$, the reference governer solves the quadratic program:
+	At each time instant $t$, for a horizon of $N_P$ time-steps, the RMPC controller solves the optimization problem:
 	\begin{equation}
 	\begin{aligned}
-	& \underset{v}{\text{min}}
-	& & \cfrac{1}{2}\norm{v-g(t)}_2^2 \\
-	& \text{subject to}
-	& & 
-	(x,v) \in \mathbb{O}_{\infty}
+	 \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
+	&  \hspace{20pt} \mathlarger{\sum\limits_{k=1}^{N_P}}(y(t+k|t)-r(t+k))^2 \\
+	\text{subject to}
+	%\begin{matrix}
+	& \hspace{20pt} \gamma(t+k+1) = A_\gamma\gamma(t+k) + B_\gamma^g g(t+k)\\
+	& \hspace{20pt} y_{\gamma}(t+k) = C_\gamma\gamma(t+k) + D_\gamma^g g(t+k)\\
+	& \hspace{20pt} Hy_{\gamma}(t) \leq h \\
+	& \hspace{20pt}  g(t+k) \in \mathbb{O}_{\infty}(\gamma(t)) \\
+	& \hspace{20pt} \gamma(t|t) = \gamma(t)
+	%\end{matrix}
 	\end{aligned}
-	\label{RGprob}
+	\label{RMPC}
 	\end{equation}
-	where the set $\mathbb{O}_{\infty}$ is defined as:
-	\begin{equation*}
-	\mathbb{O}_{\infty} = \{(x,v): x = \gamma(t), \hspace{2pt} Hy_{\gamma}(\tau) \leq h \hspace{5pt} \forall \tau \geq t \} \\ 
-	\end{equation*}
-	This is called a maximal output admissible set.
-	It is set of feasible values for $v$ for the current observed state $x=\gamma(t)$ such that if a constant input signal $v(\tau \geq t)=v$ is applied, the system output constraints $Hy_{\gamma}(\tau \geq t) \leq h$ remain satisfied for all $\tau$.
-	At a time instant $\tau \geq t$, the system output $y_{\gamma}(\tau)$ for input signal $v(\tau \geq t)=v$ can be written as:
+	where the set $\mathbb{O}_{\infty}(\gamma(t))$ is defined as:
+	\begin{equation}
+	\mathbb{O}_{\infty}(\gamma(t)) = \{g: \hspace{2pt} Hy_{\gamma}(\tau) \leq h ,\hspace{2pt} \forall n(\tau) \in \mathcal{N}_{\infty} ,\hspace{2pt} \forall \tau \geq t \} 
+	\label{O_infty}
+	\end{equation}
+	This is called maximal output admissible set.
+	It is the set of feasible values for $g$ for the current observed state $\gamma(t)$ such that if a constant input signal $g(\tau \geq t)=g$ is applied, the system output constraints $Hy_{\gamma}(\tau \geq t) \leq h$ remain satisfied for all $\tau$, for all possible disturbance realizations $n(\tau) \in \mathcal{N}_{\infty}$, $\forall \tau \geq t$ .
+	At a time instant $\tau \geq t$, the system output $y_{\gamma}(\tau)$ for input signal $g(\tau \geq t)=g$ can be written as:
 	\begin{equation*}
 	\hspace{-30pt}
 	\begin{aligned}
 	\begin{matrix}
-	y_{\gamma}(\tau) = C_{\gamma}A_{\gamma}^{\tau - t}\gamma(t) + \bigg( C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^v_{\gamma} + D_{\gamma}^v \bigg)v + \vspace{5pt}\\  \hspace{110pt} C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^n_{\gamma}n(\tau-k) + D_{\gamma}^n n(\tau)
+	y_{\gamma}(\tau) = C_{\gamma}A_{\gamma}^{\tau - t}\gamma(t) + \bigg( C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^g_{\gamma} + D_{\gamma}^g \bigg)g + \vspace{5pt}\\  \hspace{110pt} C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^n_{\gamma}n(\tau-k) + D_{\gamma}^n n(\tau)
 	\end{matrix}
 	\end{aligned}
 	\end{equation*} \\
-	For a particular future time instant $\tau$, the set $\mathbb{O}_{\tau}$ is given by:
+	For a particular future time instant $\tau$, the set $\mathbb{O}_{\tau}(\gamma(t))$ is given by:
 	\begin{equation*}
 	\begin{matrix}
 	\mathbb{O}_{\tau} = \{(x,v): x = \gamma(t), \hspace{5pt} \tilde{H}(\tau)v \leq \tilde{h}(\tau)\} \vspace{5pt}\\
