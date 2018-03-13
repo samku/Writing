@@ -296,7 +296,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\vspace{-5pt} \\
 	Since this model represents the closed-loop behavior of the system, new closed-loop measurements are required to estimate the parameters of the disturbance model $\mathbb{D}$. These are obtained by performing experiments with excitation signals $\hat{g}(t)$ on the reference closed-loop model $\mathbb{M}_P$ and the actual closed-loop plant under the control law $\mathbb{K}_P$, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The signals are captured in the data set $\hat{D}_{N}=\{\hat{g}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
 	The disturbance model $\mathbb{D}$ is parameterized as the ARX model $A_D(q^{-1})y_D(t) = B_D(q^{-1})v(t)+w(t)$, where 
-	\begin{equation*}RMPC
+	\begin{equation*}
 	\begin{matrix}
 	y_D(t) = y(t) - y_M(t) = d_D(t)+d_S(t) \\ 
 	A_D(q^{-1}) = 1+\mathlarger{\sum\limits_{i=1}^{n_{a_D}}}a_i^Dq^{-i}\\
@@ -419,22 +419,25 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{equation*}
 	 From these bounds, we want to calculate the set $\mathcal{W}_{\infty}$ defined as
 	\begin{equation*}
-	\mathcal{W}_{\infty} = \begin{Bmatrix} w(t): \forall t \in (-\infty,\infty), \begin{matrix}
+	\hspace{0pt}
+	\mathcal{W}_{\infty} = \begin{Bmatrix} \{w(t)\}: 
+	\begin{matrix}
 	w_{min}\leq w(t)\leq w_{max} \\ 
-	\mathbb{D}_S w(t) \in \mathcal{D}_{\infty} \\
-	\end{matrix} 
+	\mathbb{D}_S w(t) \in \mathcal{D}_{\infty}
+	\end{matrix} \hspace{5pt}
+	\forall t \in (-\infty,\infty) 
 	\end{Bmatrix}
 	\end{equation*}  
-	This is the set of all $w(t)$ sequences such that the steady-state output signal of $\mathbb{D}_S$ corresponding to any $w(t)\in \mathcal{W}_{\infty}$  lies within $\mathcal{D}_{\infty}$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $\mathcal{W}_{\infty}$ but producing a corresponding output sequence belonging to $\mathcal{D}_{\infty}$.
-	\begin{equation*}
-	\begin{matrix}
-	\hspace{-40pt}\forall w(t) \in \mathcal{W}_{\infty}  : \mathbb{D}_S w(t) \in \mathcal{D}_{\infty} \\
-	\hspace{40pt}\notimplies \nexists  w(t) \notin \mathcal{W}_{\infty} : \mathbb{D}_S w(t) \in \mathcal{D}_{\infty}
-	\end{matrix}
-	\end{equation*}
+	The set $\mathcal{W}_{\infty}$ contains all $\{w(t)\}$ sequences such that the corresponding steady-state output signal of $\mathbb{D}_S$ lies within $\mathcal{D}_{\infty}$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $\mathcal{W}_{\infty}$ but producing a corresponding output sequence belonging to $\mathcal{D}_{\infty}$.
+	%\begin{equation*}
+	%\begin{matrix}
+	%\hspace{-40pt}\forall w(t) \in %\mathcal{W}_{\infty}  : %\mathbb{D}_S w(t) \in \mathcal{D}_{\infty} \\
+	%\hspace{40pt}\notimplies \nexists  w(t) \notin \mathcal{W}_{\infty} : \mathbb{D}_S w(t) \in \mathcal{D}_{\infty}
+	%\end{matrix}
+	%\end{equation*}
 	This means that the bounds on residuals of the ARX identification \eqref{DSensor}, that can be obtained by inverting the (invertible) model $\mathbb{D}_S$, are not necessarily $w_{min}$ and $w_{max}$. 
 		
-	To calculate the bounds $w_{min}$ and $w_{max}$, first, the optimization problems shown in \eqref{bound_problem} are solved for increasing lengths of time horizon $N$.
+	To calculate the bounds $w_{min}$ and $w_{max}$, first the optimization problems shown in \eqref{bound_problem} are solved for increasing lengths of time horizon $N$.
 	\begin{equation}
 	\begin{matrix}
 	\begin{matrix}
