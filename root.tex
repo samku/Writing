@@ -237,8 +237,8 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	For a particular future time instant $\tau$, the set $\mathbb{O}_{\tau}(\gamma(t))$ is given by:
 	\begin{equation*}
 	\begin{matrix}
-	\mathbb{O}_{\tau} = \{(x,v): x = \gamma(t), \hspace{5pt} \tilde{H}(\tau)v \leq \tilde{h}(\tau)\} \vspace{5pt}\\
-	\text{where } \hspace{5pt} \tilde{H}(\tau) = H\bigg( C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^v_{\gamma} + D_{\gamma}^v \bigg) \vspace{5pt} \\ \hspace{10pt}
+	\mathbb{O}_{\tau}(\gamma(t)) = \{g: \hspace{2pt} \tilde{H}(\tau)v \leq \tilde{h}(\tau)\} \vspace{5pt}\\
+	\text{where } \hspace{5pt} \tilde{H}(\tau) = H\bigg( C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^g_{\gamma} + D_{\gamma}^g \bigg) \vspace{5pt} \\ \hspace{10pt}
 	\tilde{h}(\tau) = h - HC_{\gamma}A_{\gamma}^{\tau - t}\gamma(t) - f^n(\tau) \vspace{5pt}
 	\end{matrix} 
 	\end{equation*}
@@ -247,33 +247,56 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	f_i^n(\tau) = \underset{\{n(k)\}_{t}^{\tau}\in \mathcal{N}_{\infty}}{\text{max}} H\bigg(C_{\gamma}\sum\limits_{k=1}^{\tau - t}A_{\gamma}^{k-1}B^n_{\gamma}n(\tau-k) + D_{\gamma}^n n(\tau)\bigg)_i
 	\label{RG_offline}
 	\end{equation}
-	Subscript $i$ in the above problem indicates that row $i$ of the matrix is used in the linear program to calculate the corresponding $n(k)$ sequence. According to the theory of maximal output admissible sets for linear systems as discussed in \cite{83532}, the set $\mathbb{O}_{\infty} = \mathbb{O}_{\tau \to \infty}$ is reached at a finite value $\tau_c$. In the current setting, this happens when elements of $f^n(\tau)$ converge to a constant value. Since the linear problem to be solved for $f_i^n(\tau)$ does not depend on the state at current time instant $t$, it can be solved offline for increasing values of $\tau$ after setting $t=1$. When convergence is observed at time $\tau_c$, the value $f^n(\tau_c)$ is stored. This results in  problem \eqref{RGprob} being reformulated as:
+	The subscript $i$ in \eqref{RG_offline} indicates that row $i$ of the matrix is used in the linear program to calculate the corresponding $n(k)$ sequence. The maximal output admissible set is then given by:
 	\begin{equation}
-	\begin{aligned}
-	& \underset{v}{\text{min}}
-	& & \cfrac{1}{2}\norm{v-g(t)}_2^2 \\
-	& \text{subject to}
-	& & 
-	\tilde{H}(\tau_c)v \leq \tilde{h}(\tau_c)
-	\end{aligned}
-	\label{RGprob_simple}
+	\mathbb{O}_{\infty}(\gamma(t)) = \bigcup\limits_{\tau=t}^{\infty}\mathbb{O}_{\tau}(\gamma(t))
 	\end{equation}
-	It must be noted that the value $\tilde{h}(\tau_c)$ depends on the current observed state $\gamma(t)$. Thus, at each time instant, the reference governer reads the current state $\gamma(t)$, reference input $g(t)$, and calculates a new reference $v$ which robustly satisfies output constraints on the system.
-	\section{Disturbance sensor}
+	 According to the theory of maximal output admissible sets for linear systems as discussed in \cite{83532}, the sets $\mathbb{O}_{\tau}(\gamma(t))$ become redundant after a finite time $\tau_c$. In the current setting, this happens when the elements of $f^n(\tau)$ converge to constant values.
+	 Since the linear program \eqref{RG_offline} does not depend on $\gamma(t)$, it can be solved offline for increasing values of $\tau$ after setting $t=1$. The values of $f^n(\tau)$ are stored till convergence is observed at $\tau = \tau_c$. The corresponding parts $\tilde{H}(\tau)$ are also calculated and stored offline till $\tau = \tau_c$, after setting $t=1$. The resulting set $\mathbb{O}_{\infty}(\gamma(t))$ is a set of linear inequality constraints on $g$, given by:
+	 \begin{equation}
+	 \begin{bmatrix}
+	 \tilde{H}(1) \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 \tilde{H}(\tau_c)
+	 \end{bmatrix} g \leq
+	 \begin{bmatrix}
+	 h \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 h
+	 \end{bmatrix} - 
+	 \begin{bmatrix}
+	 HC_{\gamma} \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 HC_{\gamma}A_{\gamma}^{\tau_c - t}
+	 \end{bmatrix}\gamma(t) - 
+	 \begin{bmatrix}
+	 f^n(1) \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 . \vspace{0.001cm} \\
+	 f^n(\tau_c)
+	 \end{bmatrix}
+	 \label{MOAS}
+	 \end{equation}
+	 Thus, at each time instant $t$, the RMPC controller reads the state $\gamma(t)$, builds the constraint set \eqref{MOAS}, and solves the optimization problem \eqref{RMPC} to generate a reference trajectory $g(t)$ for the next $N_P$ time-steps which robustly satisfies the constraints \eqref{constraints}. Note that our framework can easily be extended to a multivariable system.
+	 
+	\section{Uncertain model estimation}
 	\label{Contribution}
-	This section discusses the development of the model $\mathbb{M}'_{PD}$, which is used by the robust reference governor to generate the signal $v(t)$. First, the overall model is presented. Then, a novel technique is introduced to quantify uncertainty bounds on the model obtained from ARX estimation.
+	This section discusses the development of the model $\mathbb{M}'_{PD}$, which is used by the RMPC controller to generate the signal $g(t)$. First, the overall model is presented. Then, a novel technique is introduced to quantify uncertainty bounds on the model obtained from ARX estimation.
 	\subsection{Appended closed-loop model}
-	In order to improve prediction of closed loop performance, a disturbance sensor $\mathbb{D}$ is designed. The disturbance sensor is a dynamical system whose output is the discrepancy between output of the actual closed loop system  $\mathbb{K}_P$-$\mathbb{G}_P$ and reference closed loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in Fig. \ref{Appended}.
+	In order to improve prediction of closed-loop performance, an output disturbance model $\mathbb{D}$ is designed. The disturbance model is a dynamical system whose output is the discrepancy between the actual output of the system in closed-loop with  $\mathbb{K}_P$ and the output of the reference closed-loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in Fig. \ref{Appended}.
 	\begin{figure}[h!]
-		\hspace{35pt}
+		\hspace{20pt}
 		\includegraphics[scale = 0.7]{Mp-D-E.pdf}
-		\caption{Reference model appended with disturbance sensor.}
+		\caption{Overall uncertain closed-loop model $M_{PD}'$.}
 		\label{Appended}
 	\end{figure}
 	\vspace{-5pt} \\
-	Since this model represents closed loop behavior of the system, new closed loop measurements are required to estimate the parameters of the disturbance sensor. These are obtained by performing experiments with excitation signals $\hat{v}(t)$ on the reference closed loop model $\mathbb{M}_P$ and the closed loop plant $\mathbb{K}_P-\mathbb{G}_{P}$, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The signals are captured in the data set $\hat{D}_{N}=\{\hat{v}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
-	The disturbance sensor $\mathbb{D}$ is parameterized as $A_D(q^{-1})y_D(t) = B_D(q^{-1})v(t)+w(t)$, where 
-	\begin{equation*}
+	Since this model represents the closed-loop behavior of the system, new closed-loop measurements are required to estimate the parameters of the disturbance model $\mathbb{D}$. These are obtained by performing experiments with excitation signals $\hat{g}(t)$ on the reference closed-loop model $\mathbb{M}_P$ and the actual closed-loop plant under the control law $\mathbb{K}_P$, and measuring the outputs $\hat{y}_M(t)$ and $\hat{y}(t)$ respectively. The signals are captured in the data set $\hat{D}_{N}=\{\hat{g}(t),\hat{y}_M(t),\hat{y}(t);t\in{1,...,N}\}$.
+	The disturbance model $\mathbb{D}$ is parameterized as the ARX model $A_D(q^{-1})y_D(t) = B_D(q^{-1})v(t)+w(t)$, where 
+	\begin{equation*}RMPC
 	\begin{matrix}
 	y_D(t) = y(t) - y_M(t) = d_D(t)+d_S(t) \\ 
 	A_D(q^{-1}) = 1+\mathlarger{\sum\limits_{i=1}^{n_{a_D}}}a_i^Dq^{-i}\\
@@ -338,22 +361,22 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{table*}
 	\fi
 	
-	Using standard ARX identification, the coefficients $a_i^D$ and $b_i^D$ are estimated by solving the optimization problem
+	Using standard ARX identification, the coefficients $a_i^D$ and $b_i^D$ are estimated by solving the standard linear regression problem
 	\begin{equation}
 	\begin{aligned}
 	& \underset{a_i^D,b_i^D}{\text{min}}
-	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{|}}A_D(q^{-1})(\hat{y}(t)-\hat{y}_M(t))-B_K(q^{-1})(\hat{v}(t))\mathlarger{\mathlarger{|}}^2 \\
+	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{(}}A_D(q^{-1})(\hat{y}(t)-\hat{y}_M(t))-B_K(q^{-1})(\hat{v}(t))\mathlarger{\mathlarger{)}}^2 \\
 	\end{aligned}
 	\label{DSensor}
 	\end{equation}
-	The disturbance sensor is then split into two parts, deterministic and stochastic. The deterministic part $\mathbb{D}_D$ takes in the reference signal $v(t)$ as an input, and the stochastic part $\mathbb{D}_S$ takes in the exogenous disturbance $w(t)$. The I/O behavior of these parts are separately written as 
+	The disturbance model is then split into two parts, deterministic and stochastic. The deterministic part $\mathbb{D}_D$ takes in the reference signal $g(t)$ as an input, and the stochastic part $\mathbb{D}_S$ is excited by the exogenous disturbance $w(t)$:
 	\begin{equation*}
 	\begin{matrix}
-	d_D(t) = \cfrac{B_D(q^{-1})}{A_D(q^{-1})}v(t) = \mathbb{D}_D v(t) \vspace{4pt} \\  
+	d_D(t) = \cfrac{B_D(q^{-1})}{A_D(q^{-1})}v(t) = \mathbb{D}_D g(t) \vspace{4pt} \\  
 	d_S(t) = \cfrac{1}{A_D(q^{-1})}w(t) = \mathbb{D}_S w(t)
 	\end{matrix}
 	\end{equation*}
-	The overall appended model shown is Fig.\ref{Appended} can be seen as a 2-input 2-output system $\mathbb{M}'_{PD}$, described as
+	The appended model shown is Fig.\ref{Appended} can be seen as the 2-input 2-output system $\mathbb{M}'_{PD}$.
 	\begin{equation}
 	\begin{bmatrix}
 	y(t) \\ u(t)
@@ -363,7 +386,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\mathbb{K}_P(I-(\mathbb{M}_P+\mathbb{D}_D)) &  -\mathbb{K}_P\mathbb{D}_S
 	\end{bmatrix}
 	\begin{bmatrix}
-	v(t) \\ w(t)
+	g(t) \\ w(t)
 	\end{bmatrix}
 	\label{TF_w}
 	\end{equation}
@@ -377,25 +400,24 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\mathbb{K}_P(I-(\mathbb{M}_P+\mathbb{D}_D)) &  -\mathbb{K}_P
 	\end{bmatrix}
 	\begin{bmatrix}
-	v(t) \\ d_S(t)
+	g(t) \\ d_S(t)
 	\end{bmatrix}
 	\label{TF_d}
 	\end{equation} 
-	Note that the dependence of the model on time shift operator $q^{-1}$ is not shown for ease of notation. Both $w(t)$ and $d_S(t)$ can be seen as exogenous disturbance signals, which cause model uncertainty. Hence, the state space equivalents of either of these models can be used in a robust reference governor, by replacing $n(t)$ in \eqref{M_PD} with $w(t)$ if model \eqref{TF_w} is used, and with $d_S(t)$ if \eqref{TF_d} is used. \\
-	If the model described in \eqref{TF_d} is considered for robust reference governor design, the bounds on $d_S(t)$ can be estimated directly from the prediction errors obtained during ARX identification performed in \eqref{DSensor}. These bounds are used to build the set $\mathcal{D}_{\infty}$, the definition of which is formalized in the next subsection. Within the reference governor, the disturbance set $\mathcal{N}_{\infty}$ is set equal to $\mathcal{D}_{\infty}$.
-.	In case of the model described in \eqref{TF_w}, the calculation of bounds on $w(t)$ is not as straightforward. 
-	The following subsection discusses a technique to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the disturbance signal $w(t)$, which build the set $\mathcal{W}_{\infty}$. In the reference governor, $\mathcal{N}_{\infty}$ is then set equal to $\mathcal{W}_{\infty}$
+	Note that the dependence of the model on time shift operator $q^{-1}$ is not shown for ease of notation. Both $w(t)$ and $d_S(t)$ can be seen as exogenous disturbance signals, which cause model uncertainty. Hence, the state space equivalents of either of these models can be used in the RMPC controller, by replacing $n(t)$ in \eqref{M_PD} with $w(t)$ if model \eqref{TF_w} is used, and with $d_S(t)$ if \eqref{TF_d} is used instead. \\
+	If the model described in \eqref{TF_d} is considered for RMPC controller design, the bounds on $d_S(t)$ can be estimated directly from the prediction errors obtained during ARX identification performed in \eqref{DSensor}. These bounds are used to build the uncertainty set $\mathcal{D}_{\infty}$, the definition of which is formalized in the next subsection. Hence, the set $\mathcal{D}_{\infty}$ replaces $\mathcal{N}_{\infty}$ while solving the linear programs \eqref{RG_offline}.	In case of the model described in \eqref{TF_w}, the calculation of bounds on $w(t)$ is not as straightforward. 
+	The following subsection discusses a technique to calculate upper and lower bounds $w_{min}$ and $w_{max}$ on the disturbance signal $w(t)$, which build the set $\mathcal{W}_{\infty}$. Within the RMPC controller, $\mathcal{N}_{\infty}$ is then set equal to $\mathcal{W}_{\infty}$
 	\subsection{Calculation of exogenous disturbance set}
 	\label{Noise}
-	A realization of the discrepancy $d_S(t)$ between desired output $y(t)$ and deterministic output $y_M(t)+d_D(t)$ can be calculated from the data set $\hat{D}_{N}$ as 
+	Samples $\hat{d}_S(t)$ between $\hat{y}(t)$ and the deterministic output $\hat{y}_M(t)+\hat{d}_D(t)$ can be simply calculated from the data set $\hat{D}_{N}$ as 
 	\begin{equation*}
 	\hat{d}_S(t) = \hat{y}(t)-\hat{y}_M(t)-\cfrac{B_D(q^{-1})}{A_D(q^{-1})} \hat{v}(t) 
 	\end{equation*}
-	The maximum and minimum values of this discrepancy are labeled $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ respectively. If the ARX identification results in a stable deterministic disturbance sensor $\mathbb{D}_D$, the values $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ are finite. Further, if infinite closed loop data $\hat{D}_{\infty}$ is collected for ARX identification, the bounds on discrepancy are equal to the actual bounds $d_{S,max}$ and $d_{S,min}$. The set of sequences $d_S(t)$ satisfying these bounds are indicated as lying in a set $\mathcal{D}_{\infty}$, defined as 
+	The maximum and minimum values of $\hat{d}_S(t)$ are labeled $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ respectively. If the ARX identification results in a stable deterministic disturbance model $\mathbb{D}_D$, the values $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ are finite. Further, if infinite closed-loop data $\hat{D}_{\infty}$ were collected for ARX identification, the bounds on discrepancy would be equal to the actual bounds $d_{S,max}$ and $d_{S,min}$ on $d_S(t)$. The set of sequences $\{d_S(t)\}$ satisfying these bounds are indicated as lying in a set $\mathcal{D}_{\infty}$, defined as 
 	\begin{equation*}
-	\mathcal{D}_{\infty} = \{d_S(t): d_{S,min} \leq d_S(t) \leq d_{S,max} \hspace{5pt} \forall t \in (-\infty,\infty) \}
+	\mathcal{D}_{\infty} = \{\{d_S(t)\}: d_{S,min} \leq d_S(t) \leq d_{S,max} \hspace{5pt} \forall t \in (-\infty,\infty) \}
 	\end{equation*}
-	 From these bounds, we attempt to calculate the set $\mathcal{W}_{\infty}$ defined as
+	 From these bounds, we want to calculate the set $\mathcal{W}_{\infty}$ defined as
 	\begin{equation*}
 	\mathcal{W}_{\infty} = \begin{Bmatrix} w(t): \forall t \in (-\infty,\infty), \begin{matrix}
 	w_{min}\leq w(t)\leq w_{max} \\ 
