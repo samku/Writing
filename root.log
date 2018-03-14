@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  14 MAR 2018 13:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  14 MAR 2018 18:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -889,42 +889,42 @@ A
  []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 104.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Calculating math sizes for size <14> on input line 142.
+LaTeX Font Info:    Calculating math sizes for size <14> on input line 141.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.36008> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.40009> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 141.
 
-Overfull \hbox (5.0774pt too wide) detected at line 145
+Overfull \hbox (8.18533pt too wide) detected at line 144
 [] []
  []
 
-<./Drawings/KpGp.pdf, id=18, 244.69116pt x 66.00359pt>
+<./Drawings/KpGp.pdf, id=17, 244.69116pt x 66.00359pt>
 File: ./Drawings/KpGp.pdf Graphic file (type pdf)
 
 <use ./Drawings/KpGp.pdf>
-Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 151.
+Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 150.
 (pdftex.def)             Requested size: 195.75317pt x 52.80293pt.
 
-<./Drawings/final_robust.pdf, id=19, 230.0043pt x 78.40392pt>
+<./Drawings/final_robust.pdf, id=18, 230.0043pt x 78.40392pt>
 File: ./Drawings/final_robust.pdf Graphic file (type pdf)
 
 <use ./Drawings/final_robust.pdf>
-Package pdftex.def Info: ./Drawings/final_robust.pdf used on input line 185.
+Package pdftex.def Info: ./Drawings/final_robust.pdf used on input line 184.
 (pdftex.def)             Requested size: 207.00194pt x 70.56287pt.
  [2 <./Drawings/KpGp.pdf> <./Drawings/final_robust.pdf>] <./Drawings/Mp-D-E.pdf
-, id=66, 250.00502pt x 154.80435pt>
+, id=65, 250.00502pt x 154.80435pt>
 File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
 
 <use ./Drawings/Mp-D-E.pdf>
-Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 292.
+Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 291.
 (pdftex.def)             Requested size: 175.0023pt x 108.36229pt.
  [3 <./Drawings/Mp-D-E.pdf>] [4]
 Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
@@ -936,7 +936,7 @@ Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
 (epstopdf)                    size: 14712 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/bounds_RG-eps-c
 onverted-to.pdf ./Drawings/bounds_RG.eps>
-(epstopdf)             \includegraphics on input line 595.
+(epstopdf)             \includegraphics on input line 594.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/bounds_RG-eps-converted-to.pdf, id=86, 309.155pt x 146.5475pt>
@@ -944,7 +944,7 @@ File: ./Drawings/bounds_RG-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/bounds_RG-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/bounds_RG-eps-converted-to.pdf used on inpu
-t line 595.
+t line 594.
 (pdftex.def)             Requested size: 231.86568pt x 109.91034pt.
 Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC.eps>
 (epstopdf)                    date: 2018-03-14 01:55:56
@@ -955,7 +955,7 @@ f>
 (epstopdf)                    size: 69368 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC-eps
 -converted-to.pdf ./Drawings/VRFT_vs_MPC.eps>
-(epstopdf)             \includegraphics on input line 607.
+(epstopdf)             \includegraphics on input line 606.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC-eps-converted-to.pdf, id=87, 399.4925pt x 225.84375pt>
@@ -963,10 +963,10 @@ File: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf used on in
-put line 607.
+put line 606.
 (pdftex.def)             Requested size: 239.69734pt x 135.50728pt.
 
-Underfull \hbox (badness 1430) in paragraph at lines 587--611
+Underfull \hbox (badness 1430) in paragraph at lines 586--610
 \OT1/ptm/m/n/10 The cor-re-spond-ing out-put ad-mis-si-ble sets $\U/msb/m/n/10 
 O[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^M\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/
 10 t\OT1/ztmcm/m/n/10 ))$ \OT1/ptm/m/n/10 till
@@ -982,7 +982,7 @@ pdf>
 (epstopdf)                    size: 58286 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC_u-e
 ps-converted-to.pdf ./Drawings/VRFT_vs_MPC_u.eps>
-(epstopdf)             \includegraphics on input line 614.
+(epstopdf)             \includegraphics on input line 613.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf, id=96, 399.4925pt x 225.84375pt
@@ -990,7 +990,7 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf used on 
-input line 614.
+input line 613.
 (pdftex.def)             Requested size: 239.69734pt x 135.50728pt.
  (./root.bbl)
 
@@ -1007,11 +1007,11 @@ Before submitting the final camera ready copy, remember to:
 [6 <./Drawings/VRFT_vs_MPC-eps-converted-to.pdf> <./Drawings/VRFT_vs_MPC_u-eps-
 converted-to.pdf>] (./root.aux) ) 
 Here is how much of TeX's memory you used:
- 24778 strings out of 493029
- 610824 string characters out of 6136234
- 794872 words of memory out of 5000000
+ 24776 strings out of 493029
+ 610812 string characters out of 6136234
+ 795872 words of memory out of 5000000
  27810 multiletter control sequences out of 15000+600000
- 93753 words of font info for 213 fonts, out of 8000000 for 9000
+ 93331 words of font info for 211 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,19n,84p,888b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips
@@ -1027,7 +1027,7 @@ syr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on root.pdf (6 pages, 290032 bytes).
+Output written on root.pdf (6 pages, 290161 bytes).
 PDF statistics:
  148 PDF objects out of 1000 (max. 8388607)
  116 compressed objects within 2 object streams

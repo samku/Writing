@@ -78,30 +78,29 @@ Robust data-driven model predictive control
 \begin{abstract}
 
 This paper presents a robust data-driven control approach for SISO systems subject to bound constraints on input and output.
- The approach builds on a previously presented hierarchical data-driven control architecture for constrained systems. Robustness is achieved by using a robust model predictive controller (RMPC) instead of a deterministic model predictive controller (MPC) within the architecture. The RMPC controller calculates a reference signal that robustly satisfies the plant constraints. To this end, it utilizes a model of the inner loop, the uncertainty of which is assumed to lie within a bounded disturbance set. A major contribution of this work is the development of a method to calculate this set from an identified ARX model. Numerical validations of the robust control architecture are performed, and the results are presented.
+ The approach builds on a previously presented hierarchical data-driven control architecture for constrained systems. Robustness is achieved by using a robust model predictive controller (RMPC) instead of a deterministic model predictive controller (MPC) in the outer loop of the architecture. The RMPC controller calculates a reference signal for the inner loop that robustly satisfies the plant constraints. To this end, it utilizes a model of the inner loop with uncertainty within an unknown bounded disturbance set. A major contribution of this work is the development of a method to calculate this set from an identified AutoRegressive model with eXogenous inputs (ARX). Numerical validations of the robust control architecture are performed, and the results are presented.
 
 \end{abstract}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-Design of control systems can broadly be classified into two categories: model-based and data-driven. Model-based control design techniques utilize an explicit model of the plant being controlled. This involves selecting a model that trades-off between complexity and accuracy. Model selection is followed by experiments to identify the parameters. These steps introduce several challenges. To avoid this, one can resort to a data-driven controller design methodology. \\
+Design of control systems can be broadly classified into two categories: model-based and data-driven. Model-based control design techniques use explicit model of the plant being controlled. This involves selecting a model that trades-off between complexity and accuracy. Model selection is followed by experiments to identify the parameters. These steps introduce several challenges. To avoid this, one can resort to a direct data-driven controller design methodology. \\
 \indent
 Data-driven controller design methods avoid explicitly identifying the plant model. They synthesize a controller directly from I/O data obtained from the plant. A review of several such methods can be found in \cite{HOU20133}. One such method, virtual reference feedback tuning (VRFT) introduced in \cite{CAMPI20021337}, has been used to design a stabilizing feedback controller within a hierarchical control architecture in \cite{7932940} for LTI/LPV systems. The architecture employs an outer MPC controller, which utilizes the reference model selected for VRFT to generate a tracking signal. Performance bounds on the plant are translated into constraints on the optimization problem solved by the MPC controller. Since the reference model might not reasonably reflect the performance of the closed-loop plant, there is a possibility of constraint violation.
-To avoid this, one can use a robust MPC controller in the outer loop. A review of the concepts related to robust MPC controllers can be found in \cite{10.1007/BFb0109870}. An alternative is to use a robust reference governor, which modifies the reference signal supplied to the plant in a way that constraints are satisfied. These are reviewed in \cite{GARONE2017306}. Both the techniques need a model of the plant being controlled, with the model explicitly incorporating uncertainties.
+To avoid this, one can use a robust MPC controller in the outer loop, which generates a tracking signal that robustly satisfies the plant constraints. A review of the concepts related to robust MPC controllers can be found in \cite{10.1007/BFb0109870}. An alternative is to use a robust reference governor, which modifies the reference signal supplied to the plant in a way that constraints are satisfied. These are reviewed in \cite{GARONE2017306}. Both the techniques need a model of the plant being controlled, with the model explicitly incorporating uncertainties.
 \\ \indent
-In this work, we propose a robust data-driven control approach, building on the hierarchical control architecture presented in \cite{7932940}. The robust controller uses a model of the inner closed loop, which consists of the plant and the VRFT-based feedback controller. This model is not the same as the reference model used for VRFT, but is separately identified using an ARX parameterization from closed loop experiments. 
- The model incorporates uncertainties as exogenous disturbance signals, assumed to lie within a bounded polyhedral set. Since robust control methods explicitly incorporate uncertainty information in their formulation, identification of the polyhedral sets is necessary. In this work, a novel method to do so is presented. Such a method falls under the umbrella of identification for robust control.
-This field includes a large volume of literature on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of authors' knowledge, no similar work has been done to calculate polyhedral sets of exogenous disturbance signals.
+In this work, we propose a robust data-driven control approach, building on the hierarchical control architecture presented in \cite{7932940}. The robust controller uses a model of the inner closed-loop, which consists of the plant and the VRFT-based feedback controller. This model is not the same as the reference model used for VRFT, but is separately identified using an ARX parameterization from closed-loop experiments. 
+ The model incorporates uncertainties as exogenous disturbance signals, assumed to lie within an unknown bounded polyhedral set. Since robust control methods explicitly incorporate uncertainty information in their formulation, identification of the polyhedral sets is necessary.  In this work, a novel method to do so is presented. Such a method falls under the umbrella of identification for robust control.
+This field includes a large volume of literature on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of the authors' knowledge, no similar work has been done to calculate polyhedral sets of input exogenous disturbance signals from output data.
  \\ \indent
-  Following the identification of a model and corresponding disturbance sets, a robust reference governor is designed and appended to the control architecture presented in \cite{7932940}.
- The option of robust reference governor is chosen for illustration, but the techniques presented can easily be extended to a robust MPC.
+  Following the identification of a model and corresponding disturbance sets, an RMPC controller is designed to replace the deterministic MPC controller in the outer loop of the hierarchical architecture presented in \cite{7932940}.
  \\ \indent
- The paper is organized as follows. In Sec.\ref{Problem statement}, the problem statement is formally presented. Background regarding the hierarchical data-driven control architecture and robust reference governor is presented in Sec.\ref{Background}. Sec.\ref{Contribution} presents the techniques used to identify the closed-loop system model with disturbance bounds, which is the main contribution of this paper. The final Sec.\ref{Case studies} presents a numerical example implementing the robust hierarchical control design approach. 
+ The paper is organized as follows. In Sec \ref{Problem statement}, the problem statement is formally presented. Background regarding the hierarchical data-driven control architecture and robust reference governor is presented in Sec \ref{Background}. Sec \ref{Contribution} presents the techniques used to identify the model of the closed-loop system with disturbance bounds, which is the main contribution of this paper. Finally, Sec \ref{Case studies} presents a numerical example implementing the robust hierarchical control design approach. 
 
 \section{Problem statement}
 \label{Problem statement}
-Consider a \textit{single-input single-output} system $\mathbb{G}_P$ generating an output signal $y(t) \in \mathbb{R}$ corresponding to the input signal $u(t) \in \mathbb{R}$ for the time $t \in \mathbb{Z}^+$. We aim to synthesize a controller that can make $y(t)$ accurately track any user defined reference signal, while robustly respecting the constraints:
+We consider, for simplicity, a \textit{single-input single-output} (SISO) system $\mathbb{G}_P$ generating an output signal $y(t) \in \mathbb{R}$ corresponding to the input signal $u(t) \in \mathbb{R}$, $t \in \mathbb{Z}^+$. We aim at synthesizing a controller that can make $y(t)$ accurately track any user-defined reference signal, while robustly satisfying the constraints:
 \begin{equation} 
 \begin{matrix}
 y_{min}\leq y(t) \leq y_{max}\\
@@ -110,7 +109,7 @@ u_{min}\leq u(t) \leq u_{max} \\
 \end{matrix}
 \label{constraints}
 \end{equation} 
-Following the data-driven controller synthesis methodology, we use the data $D_{N}=\{u(t),y(t);t\in{1,...,N}\}$ obtained by exciting the system to design the controller.
+Following the direct data-driven controller synthesis methodology, we use the dataset $D_{N}=\{u(t),y(t);t\in{1,...,N}\}$ obtained by exciting the system to design the controller.
 \section{Background}
 \label{Background}
 \subsection{Hierarchical approach}
@@ -121,10 +120,10 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	y_M(t) = C_Mx_M(t)
 	\end{matrix}
 	\end{equation*}\\  
- The VRFT methodology designs a feedback controller  $\mathbb{K}_P$, with the goal of making the closed-loop system $\mathbb{K}_P$-$\mathbb{G}_P$ behave similar to the reference model $\mathbb{M}_P$. It utilizes the dataset $\mathbb{D}_N$ for controller synthesis. The steps followed are summarized:
+ The VRFT methodology designs a feedback controller  $\mathbb{K}_P$, with the goal of making the closed-loop system $\mathbb{K}_P$-$\mathbb{G}_P$ behave similar to the reference model $\mathbb{M}_P$. Note that the model $\mathbb{G}_P$ is unknown and not needed by the procedure, which is therefore a model-free one. It utilizes the dataset $\mathbb{D}_N$ for controller synthesis. The steps of the approach are summarized as follows:
 \begin{enumerate}
 	\item
-	A virtual reference input $g(t)$ is calculated by setting $y_M(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by inverting the model $\mathbb{M}_P$. Let this mapping be defined by $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
+	A virtual reference input $g(t)$ is calculated by setting $y_M(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by inverting the model $\mathbb{M}_P$, i.e, $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
 	\item
 	A feedback controller $\mathbb{K}_P$ described by $A_K(q^{-1})u(t) = B_K(q^{-1})(g(t)-y(t))$ is chosen, where 
 	\begin{equation*}
@@ -134,12 +133,12 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{matrix}  
 	\end{equation*}
 	\item
-		The parameters $a_i^K$ and $b_i^K$  of the controller are calculated such that the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$ matches open loop performance of  the reference model $\mathbb{M}_P$.
+		The parameters $a_i^K$ and $b_i^K$  of the controller are calculated such that the closed-loop dynamics of $\mathbb{K}_P$-$\mathbb{G}_P$ matches that of  the reference model $\mathbb{M}_P$.
 	This is done by solving the convex optimization problem
 	\begin{equation}
 	\begin{aligned}
 	& \underset{a_i^K,b_i^K}{\text{min}}
-	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{|}}A_K(q^{-1})u(t)-B_K(q^{-1})(\mathbb{M}_P^{\dagger}y(t)-y(t))\mathlarger{\mathlarger{|}}^2 \\
+	& & \frac{1}{N}\mathlarger{\sum\limits_{t=1}^N}\mathlarger{\mathlarger{(}}A_K(q^{-1})u(t)-B_K(q^{-1})(\mathbb{M}_P^{\dagger}y(t)-y(t))\mathlarger{\mathlarger{)}}^2 \\
 	\end{aligned}
 	\label{VRFT_problem}
 	\end{equation}
@@ -152,7 +151,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\caption{Feedback controller designed using VRFT}
 	\end{figure}
 \end{enumerate}
-	To satisfy plant constraints, the reference signal $g(t)$ is generated using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. This augmented state-space model is called $\mathbb{M}'_P$.
+	To satisfy plant constraints, the reference signal $g(t)$ is generated using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. We denote by $\mathbb{M}'_P$ the resulting augmented state-space model.
 	\begin{equation*}
 	\begin{matrix}
 	\zeta(t+1) = A_\zeta\zeta(t) + B_\zeta g(t)\\
@@ -160,7 +159,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{matrix}
 	\end{equation*}
 	\\
-	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ timesteps is shown in \eqref{MPC}.
+	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ time-steps is:
 	\begin{equation}
 	\begin{aligned}
 	 \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
@@ -195,7 +194,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{matrix}
 	\label{M_PD}
 	\end{equation}
-	The model has a deterministic input $g(t)$ and a disturbance input $n(t)$, which captures the effect of model uncertainties on system output. It is assumed that the disturbance input lies in a bounded set $\mathcal{N}_{\infty}$.
+	The model has a deterministic input $g(t)$ and a disturbance input $n(t)$, which captures the effect of model uncertainties on system output. It is assumed that the disturbance input lies in an unknown bounded set $\mathcal{N}_{\infty}$.
 	The columns of matrices $B_\gamma$ and $D_\gamma$ are separated for ease of notation. The output of \eqref{M_PD} is denoted by $y_{\gamma}(t)=[y(t) \hspace{2pt} u(t)]^T$. The constraints \eqref{constraints} on $y(t)$ and $u(t)$  are rewritten as: 
 	\begin{equation*}
 	\begin{matrix}
