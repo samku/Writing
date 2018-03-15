@@ -1,0 +1,51 @@
+ \newcommand{\noop}[1]{}
+\begin{thebibliography}{1}
+
+\bibitem{HOU20133}
+Z.-S. Hou and Z.~Wang, ``From model-based control to data-driven control:
+  Survey, classification and perspective,'' {\em Information Sciences},
+  vol.~235, pp.~3 -- 35, 2013.
+\newblock Data-based Control, Decision, Scheduling and Fault Diagnostics.
+
+\bibitem{CAMPI20021337}
+M.~Campi, A.~Lecchini, and S.~Savaresi, ``Virtual reference feedback tuning: a
+  direct method for the design of feedback controllers,'' {\em Automatica},
+  vol.~38, no.~8, pp.~1337 -- 1346, 2002.
+
+\bibitem{7932940}
+D.~Piga, S.~Formentin, and A.~Bemporad, ``Direct data-driven control of
+  constrained systems,'' {\em IEEE Transactions on Control Systems Technology},
+  vol.~PP, no.~99, pp.~1--8, 2017.
+
+\bibitem{10.1007/BFb0109870}
+A.~Bemporad and M.~Morari, ``Robust model predictive control: A survey,'' in
+  {\em Robustness in identification and control} (A.~Garulli and A.~Tesi,
+  eds.), (London), pp.~207--226, Springer London, 1999.
+
+\bibitem{GARONE2017306}
+E.~Garone, S.~D. Cairano, and I.~Kolmanovsky, ``Reference and command governors
+  for systems with constraints: A survey on theory and applications,'' {\em
+  Automatica}, vol.~75, pp.~306 -- 328, 2017.
+
+\bibitem{WALTER1990449}
+E.~Walter and H.~Piet-Lahanier, ``Estimation of parameter bounds from
+  bounded-error data: a survey,'' {\em Mathematics and Computers in
+  Simulation}, vol.~32, no.~5, pp.~449 -- 468, 1990.
+
+\bibitem{7330793}
+A.~Mohammadi, M.~Diehl, and M.~Zanon, ``Estimation of uncertain arx models with
+  ellipsoidal parameter variability,'' in {\em 2015 European Control Conference
+  (ECC)}, pp.~1766--1771, July 2015.
+
+\bibitem{83532}
+E.~G. Gilbert and K.~T. Tan, ``Linear systems with state and control
+  constraints: the theory and application of maximal output admissible sets,''
+  {\em IEEE Transactions on Automatic Control}, vol.~36, pp.~1008--1020, Sep
+  1991.
+
+\bibitem{Lofberg2004}
+J.~L{\"{o}}fberg, ``Yalmip : A toolbox for modeling and optimization in
+  matlab,'' in {\em In Proceedings of the CACSD Conference}, (Taipei, Taiwan),
+  2004.
+
+\end{thebibliography}
