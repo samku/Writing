@@ -91,12 +91,12 @@ Data-driven controller design methods avoid explicitly identifying the plant mod
 To avoid this, one can use a robust MPC controller in the outer loop, which generates a tracking signal that robustly satisfies the system constraints. A review of the concepts related to robust MPC controllers can be found in \cite{10.1007/BFb0109870}. An alternative is to use a robust reference governor, which modifies the reference signal supplied to the plant in a way that constraints are satisfied. These are reviewed in \cite{GARONE2017306}. Both the techniques need a model of the plant being controlled, with the model explicitly incorporating uncertainties.
 \\ \indent
 In this work, we propose a robust data-driven control approach, building on the hierarchical control architecture presented in \cite{7932940}. The robust controller uses a model of the inner closed-loop, which consists of the plant and the VRFT-based feedback controller. This model is not the same as the reference model used for VRFT, but is separately identified using an ARX parameterization from closed-loop experiments. 
- The model incorporates uncertainties as exogenous disturbance signals, assumed to lie within an unknown bounded polyhedral set. Since robust control methods explicitly incorporate uncertainty information in their formulation, identification of the polyhedral sets is necessary.  In this work, a novel method to do so is presented. Such a method falls under the umbrella of identification for robust control.
+ The model incorporates uncertainties as exogenous disturbance signals, assumed to lie within an unknown bounded polyhedral set. Since robust control methods explicitly incorporate uncertainty information in their formulation, identification of the polyhedral sets is necessary. \\
+ \indent In this work, a novel method to do so is presented. Such a method falls under the umbrella of identification for robust control.
 This field includes a large volume of literature on set-membership techniques for parameter estimation. A review of these can be found in \cite{WALTER1990449}. A method to obtain ellipsoidal parameterizations of these sets during ARX estimation is discussed in \cite{7330793}. To the best of the authors' knowledge, no similar work has been done to calculate polyhedral sets of input exogenous disturbance signals from output data.
+  Following the identification of a model and corresponding disturbance sets, an RMPC controller is designed, which replaces the deterministic MPC controller in the outer loop of the hierarchical architecture presented in \cite{7932940}.
  \\ \indent
-  Following the identification of a model and corresponding disturbance sets, an RMPC controller is designed to replace the deterministic MPC controller in the outer loop of the hierarchical architecture presented in \cite{7932940}.
- \\ \indent
- The paper is organized as follows. In Sec \ref{Problem statement}, the problem statement is formally presented. Background regarding the hierarchical data-driven control architecture and robust model predictive controller is presented in Sec \ref{Background}. Sec \ref{Contribution} presents the techniques used to identify the model of the closed-loop system with disturbance bounds, which is the main contribution of this paper. Finally, Sec \ref{Case studies} presents a numerical example implementing the robust hierarchical control design approach. 
+ The paper is organized as follows. In Sect. \ref{Problem statement}, the problem statement is formally presented. Background regarding the hierarchical data-driven control architecture and robust model predictive controller is presented in Sect. \ref{Background}. Sect. \ref{Contribution} presents the techniques used to identify the model of the closed-loop system with disturbance bounds, which is the main contribution of this paper. Finally, Sect. \ref{Case studies} presents a numerical example implementing the robust hierarchical control design approach. 
 
 \section{Problem statement}
 \label{Problem statement}
@@ -123,7 +123,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
  The VRFT methodology designs a feedback controller  $\mathbb{K}_P$, with the goal of making the closed-loop system $\mathbb{K}_P$-$\mathbb{G}_P$ behave similar to the reference model $\mathbb{M}_P$. Note that the model $\mathbb{G}_P$ is unknown and not needed by the procedure, which is therefore a model-free one. It utilizes the dataset $D_N$ for controller synthesis. The steps of the approach are summarized as follows:
 \begin{enumerate}
 	\item
-	A virtual reference input $g(t)$ is calculated by setting $y_M(t)=y(t)$ obtained from the dataset $\mathbb{D}_N$, by inverting the model $\mathbb{M}_P$, i.e, $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
+	A virtual reference input $g(t)$ is calculated by setting $y_M(t)=y(t)$ obtained from the dataset $D_N$, by inverting the model $\mathbb{M}_P$, i.e, $g(t) = \mathbb{M}_P^{\dagger}y(t) $.
 	\item
 	A feedback controller $\mathbb{K}_P$ described by $A_K(q^{-1})u(t) = B_K(q^{-1})(g(t)-y(t))$ is chosen, where 
 	\begin{equation*}
@@ -151,7 +151,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\caption{Feedback controller designed using VRFT}
 	\end{figure}
 \end{enumerate}
-	To satisfy plant constraints, the reference signal $g(t)$ is generated using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. We denote by $\mathbb{M}'_P$ the resulting augmented state-space model.
+	To satisfy plant constraints, the reference signal $g(t)$ is generated using an MPC controller in an outer loop. The objective of the MPC controller is to make the output signal $y(t)$ track the reference $r(t)$, while satisfying constraints on the plant output $y(t)$ and input $u(t)$. This is achieved by considering the closed-loop plant model $\mathbb{M}_P$ for the state propagation equation, and an augmented model with $[y(t),u(t)]$ as the output equation. We denote by $\mathbb{M}'_P$ the resulting augmented state-space model:
 	\begin{equation*}
 	\begin{matrix}
 	\zeta(t+1) = A_\zeta\zeta(t) + B_\zeta g(t)\\
@@ -161,6 +161,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\\
 	The optimization problem solved by the MPC at each time step $t$ for a horizon of $N_P$ time-steps is:
 	\begin{equation}
+	\small
 	\begin{aligned}
 	 \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
 	& \hspace{20pt} Q_y\mathlarger{\sum\limits_{k=1}^{N_P}}(y(t+k|t)-r(t+k))^2 + Q_{\epsilon}\epsilon^2 \\
@@ -174,10 +175,11 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{aligned}
 	\label{MPC}
 	\end{equation}
+	\normalsize
 	The quantities $V_y$ and $V_u$ in the MPC formulation are used as soft constraints to avoid infeasibility of the optimization problem over successive iterations, since the reference model $\mathbb{M}'_P$ might not accurately capture the dynamics of the closed loop $\mathbb{K}_P-\mathbb{G}_P$. This implies that constraint satisfaction is not guaranteed by the proposed formulation. 
 	
 	\subsection{Robust model predictive controller}
-	The deterministic MPC controller in the outer loop of the hierarchical control architecture is replaced by a robust MPC controller. A schematic of the control loop is shown in Fig.\ref{fullloop}. 
+	The deterministic MPC controller in the outer loop of the hierarchical control architecture is replaced by a robust MPC controller. A schematic of the control loop is shown in Figure \ref{fullloop}. 
 	\begin{figure}[h]
 		\vspace{-3pt}
 		\hspace{20pt}
@@ -186,7 +188,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\label{fullloop}
 	\end{figure} 
 	
-	In order to achieve robustness, the RMPC controller uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$, which is obtained by appending disturbance information over the model $\mathbb{M}'_{P}$. Identification of this model and corresponding bounds is discussed in Sec \ref{Contribution}. The state-space form of $\mathbb{M}'_{PD}$ is:
+	In order to achieve robustness, the RMPC controller uses the model $\mathbb{M}'_{PD}$. $\mathbb{M}'_{PD}$ is a model of the closed loop performance of $\mathbb{K}_P$-$\mathbb{G}_P$, which is obtained by appending disturbance information over the model $\mathbb{M}'_{P}$. Identification of this model and corresponding bounds is discussed in Sect. \ref{Contribution}. The state-space form of $\mathbb{M}'_{PD}$ is:
 	\begin{equation}
 	\begin{matrix}
 	\gamma(t+1) = A_\gamma\gamma(t) + B^g_\gamma g(t) + B^n_\gamma n(t) \vspace{2pt}\\
@@ -203,6 +205,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{equation*}
 	At each time instant $t$, for a horizon of $N_P$ time-steps, the RMPC controller solves the optimization problem:
 	\begin{equation}
+	\small
 	\begin{aligned}
 	 \underset{\{g(t+k)\}_{k=1}^{N_P}}{\text{min}}
 	&  \hspace{20pt} \mathlarger{\sum\limits_{k=1}^{N_P}}(y(t+k|t)-r(t+k))^2 \\
@@ -217,12 +220,13 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\end{aligned}
 	\label{RMPC}
 	\end{equation}
+	\normalsize
 	where the set $\mathbb{O}_{\infty}(\gamma(t))$ is defined as:
 	\begin{equation}
 	\mathbb{O}_{\infty}(\gamma(t)) = \{g: \hspace{2pt} Hy_{\gamma}(\tau) \leq h ,\hspace{2pt} \forall n(\tau) \in \mathcal{N}_{\infty} ,\hspace{2pt} \forall \tau \geq t \} 
 	\label{O_infty}
 	\end{equation}
-	This is called maximal output admissible set.
+	The set $\mathbb{O}_{\infty}(\gamma(t))$ in \eqref{O_infty} is called the robust maximal output admissible set \cite{GARONE2017306}.
 	It is the set of feasible values for $g$ for the current observed state $\gamma(t)$ such that if a constant input signal $g(\tau \geq t)=g$ is applied, the system output constraints $Hy_{\gamma}(\tau \geq t) \leq h$ remain satisfied for all $\tau$, for all possible disturbance realizations $n(\tau) \in \mathcal{N}_{\infty}$, $\forall \tau \geq t$ .
 	At a time instant $\tau \geq t$, the system output $y_{\gamma}(\tau)$ for input signal $g(\tau \geq t)=g$ can be written as:
 	\begin{equation*}
@@ -279,13 +283,14 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	 \end{bmatrix}
 	 \label{MOAS}
 	 \end{equation}
+	 \normalsize
 	 Thus, at each time instant $t$, the RMPC controller reads the state $\gamma(t)$, builds the constraint set \eqref{MOAS}, and solves the optimization problem \eqref{RMPC} to generate a reference trajectory $g(t)$ for the next $N_P$ time-steps which robustly satisfies the constraints \eqref{constraints}. Note that our framework can easily be extended to a multivariable system.
 	 
 	\section{Uncertain model estimation}
 	\label{Contribution}
 	This section discusses the development of the model $\mathbb{M}'_{PD}$, which is used by the RMPC controller to generate the signal $g(t)$. First, the overall model is presented. Then, a novel technique is introduced to quantify uncertainty bounds on the model obtained from ARX estimation.
 	\subsection{Appended closed-loop model}
-	In order to improve prediction of closed-loop performance, an output disturbance model $\mathbb{D}$ is designed. The disturbance model is a dynamical system whose output is the discrepancy between the actual output of the system in closed-loop with  $\mathbb{K}_P$ and the output of the reference closed-loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in Fig. \ref{Appended}.
+	In order to improve prediction of closed-loop performance, an output disturbance model $\mathbb{D}$ is designed. The disturbance model is a dynamical system whose output is the discrepancy between the actual output of the system in closed-loop with  $\mathbb{K}_P$ and the output of the reference closed-loop system $\mathbb{M}_P$. The system consists of a deterministic part and a stochastic part, as seen in Figure \ref{Appended}.
 	\begin{figure}[h!]
 		\hspace{20pt}
 		\includegraphics[scale = 0.7]{Mp-D-E.pdf}
@@ -375,7 +380,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	d_S(t) = \cfrac{1}{A_D(q^{-1})}w(t) = \mathbb{D}_S w(t)
 	\end{matrix}
 	\end{equation*}
-	The appended model shown is Fig.\ref{Appended} can be seen as the 2-input 2-output system $\mathbb{M}'_{PD}$.
+	The overall model shown is Figure \ref{Appended} can be seen as the 2-input 2-output system $\mathbb{M}'_{PD}$.
 	\begin{equation}
 	\begin{bmatrix}
 	y(t) \\ u(t)
@@ -410,39 +415,50 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\label{Noise}
 	Samples $\hat{d}_S(t)$ of the discrepancy $d_S(t)$ between $\hat{y}(t)$ and the deterministic output $\hat{y}_M(t)+\hat{d}_D(t)$ can be simply calculated from the data set $\hat{D}_{N}$ as 
 	\begin{equation*}
-	\hat{d}_S(t) = \hat{y}(t)-\hat{y}_M(t)-\cfrac{B_D(q^{-1})}{A_D(q^{-1})} \hat{v}(t) 
+	\hat{d}_S(t) = \hat{y}(t)-\hat{y}_M(t)-\cfrac{B_D(q^{-1})}{A_D(q^{-1})} \hat{g}(t) 
 	\end{equation*}
-	The maximum and minimum values of $\hat{d}_S(t)$ are labeled $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ respectively. If the ARX identification results in a stable deterministic disturbance model $\mathbb{D}_D$, the values $\hat{d}_{S,max}$ and $\hat{d}_{S,min}$ are finite. Further, if infinite closed-loop data $\hat{D}_{\infty}$ were collected for ARX identification, the bounds on discrepancy would be equal to the actual bounds $d_{S,max}$ and $d_{S,min}$ on $d_S(t)$. The set of sequences $\{d_S(t)\}$ satisfying these bounds are indicated as lying in a set $\mathcal{D}_{\infty}$, defined as 
+	The minimum and maximum values of $\hat{d}_S(t)$ are labeled $\hat{d}_{S,min}$ and $\hat{d}_{S,max}$ respectively. If the ARX identification results in a stable deterministic disturbance model $\mathbb{D}_D$, the values $\hat{d}_{S,min}$ and $\hat{d}_{S,max}$ are finite. Further, if infinite closed-loop data $\hat{D}_{\infty}$ were collected for ARX identification, the bounds on discrepancy would be equal to the actual bounds $d_{S,max}$ and $d_{S,min}$ on $d_S(t)$. The set of sequences $\{d_S(t)\}$ satisfying these bounds are indicated as lying in a set $\mathcal{D}_{\infty}$, defined as 
 	\begin{equation*}
 	\mathcal{D}_{\infty} = \{\{d_S(t)\}: d_{S,min} \leq d_S(t) \leq d_{S,max} \hspace{5pt} \forall t \in (-\infty,\infty) \}
 	\end{equation*}
-	 From these bounds, we want to calculate the set $\mathcal{W}_{\infty}$ defined as
+	 Let a set $\mathcal{W}^{*}_{\infty}$ be defined as
 	\begin{equation*}
 	\hspace{0pt}
-	\mathcal{W}_{\infty} = \begin{Bmatrix} \{w(t)\}: 
+	\mathcal{W}^*_{\infty} = \begin{Bmatrix} \{w(t)\}: 
 	\begin{matrix}
-	w_{min}\leq w(t)\leq w_{max} \\ 
+	w^*_{min}\leq w(t)\leq w^*_{max} \\ 
 	\mathbb{D}_S w(t) \in \mathcal{D}_{\infty}
 	\end{matrix} \hspace{5pt}
 	\forall t \in (-\infty,\infty) 
 	\end{Bmatrix}
 	\end{equation*}  
-	The set $\mathcal{W}_{\infty}$ contains all $\{w(t)\}$ sequences such that the corresponding steady-state output signal of $\mathbb{D}_S$ lies within $\mathcal{D}_{\infty}$. It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $\mathcal{W}_{\infty}$ but producing a corresponding output sequence belonging to $\mathcal{D}_{\infty}$.
+	The set $\mathcal{W}^*_{\infty}$ contains sequences $\{w(t)\}$  bounded by $w^*_{min}$ and $w^*_{max}$ such that the corresponding steady-state output signal of $\mathbb{D}_S$ lies within $\mathcal{D}_{\infty}$.  Let the largest of these sets be called $\mathcal{W}_{\infty}$, with the corresponding bounds on $\{w(t)\}$ being $w_{min}$ and $w_{max}$.
+	The set $\mathcal{W}_{\infty}$ is the complete exogenous disturbance set of $w(t)$, which we want to find.
+	%It must be noted that the converse is not implied. That is, it does not mean that there cannot exist a noise sequence $w(t)$ not belonging to $\mathcal{W}_{\infty}$ but producing a corresponding output sequence belonging to $\mathcal{D}_{\infty}$.
 	%\begin{equation*}
 	%\begin{matrix}
 	%\hspace{-40pt}\forall w(t) \in %\mathcal{W}_{\infty}  : %\mathbb{D}_S w(t) \in \mathcal{D}_{\infty} \\
 	%\hspace{40pt}\notimplies \nexists  w(t) \notin \mathcal{W}_{\infty} : \mathbb{D}_S w(t) \in \mathcal{D}_{\infty}
 	%\end{matrix}
 	%\end{equation*}
-	This means that the bounds on residuals of the ARX identification \eqref{DSensor}, that can be obtained by inverting the (invertible) model $\mathbb{D}_S$, are not necessarily $w_{min}$ and $w_{max}$. 
-		
-	To calculate the bounds $w_{min}$ and $w_{max}$, the optimization problems shown in \eqref{bound_problem} are solved for increasing lengths of time horizon $N$.
+	%This means that the bounds on residuals of the ARX identification \eqref{DSensor}, that can be obtained by inverting the (invertible) model $\mathbb{D}_S$, are not necessarily $w_{min}$ and $w_{max}$. 	
+	\\
+	Let another set $\mathcal{W}^{**}_{\infty}$ be defined as:
+		\begin{equation*}
+		\hspace{0pt}
+		\mathcal{W}^{**}_{\infty} = \begin{Bmatrix} \{w(t)\}: 
+		w^{**}_{min}\leq w(t)\leq w^{**}_{max} \hspace{5pt}
+		\forall t \in (-\infty,\infty) 
+		\end{Bmatrix}
+		\end{equation*}  
+	 The bounds $w^{**}_{min}$ and $w^{**}_{max}$ on $\{w(t)\}$ are calculated by solving the optimization problems shown in \eqref{bound_problem} for increasing lengths of time horizon $N$.
 	\begin{equation}
+	\small
 	\label{bound_problem}
 	\begin{matrix}
 	\begin{aligned}
 	\underset{X_{j}}{\text{min}}
-	 & \hspace{20pt} \bar{w}_j(N) \\
+	 & \hspace{20pt} \bar{w}_j(N)  \\
 	\text{subject to} 
 	 & \hspace{20pt}
 	d_S(k) = -\mathlarger{\sum\limits_{i=1}^{n_{a_D}}}a_i^Dd_S(k-i) + w(k), k={1:N}\\
@@ -453,25 +469,30 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\vspace{10pt} 
 	\end{matrix}
 	\end{equation}
-	\vspace{-10pt}
+	\normalsize
+	\vspace{-5pt}
 	\begin{equation*}
+	\hspace{-30pt}
 	\begin{matrix}
-	\text{where } X_j = 
+	\text{where } \small
+	X_j = 
 	\begin{Bmatrix}
 	\{d_S(-n_{a_D}+1),...,d_S(N)\},\\
 	\{w(1),...,w(N)\},\vspace{0.001cm}\\
 	\bar{w}_j(N)
 	\end{Bmatrix}, j=\{1,2\}
 	\vspace{5pt}\\
-	\begin{matrix}
+	\begin{matrix} 
+	\hspace{30pt}
 	D_1 = \{d:d \leq d_{S,min}\}, \hspace{5pt}
 	D_2 = \{d:d \geq d_{S,max}\}
 	\end{matrix}
 	\end{matrix}
 	\end{equation*}
+	\normalsize
 	
 	Problem \eqref{bound_problem} looks for a sequence of inputs $\{w(k), k={1:N}\}$ such that the sequence of corresponding outputs at all instances except at time $N$ lie within $\mathcal{D}_{\infty}$. This means that the chosen input sequence $w(k)$ should drive $d_S(N)$ out of $\mathcal{D}_{\infty}$ into $D_j$. The initial conditions on $d_S(k)$ are left free to be chosen by the solver, but are constrained to lie within $\mathcal{D}_{\infty}$.
-	The solutions $\bar{w}_j(N)$ are collected, and the set $\mathcal{W}_{\infty}$ is constructed with converged values of $\bar{w}_1(N)$ and $\bar{w}_2(N)$ corresponding to $w_{min}$ and $w_{max}$ respectively.
+	The solutions $\bar{w}_j(N)$ are collected, and the set $\mathcal{W}^{**}_{\infty}$ is constructed with converged values of $\bar{w}_1(N)$ and $\bar{w}_2(N)$ corresponding to $w^{**}_{min}$ and $w^{**}_{max}$ respectively.
 	%\begin{equation}
 	%\begin{matrix}
 	%w_{max} = {\text{max %}}\{\underset{N}{\text{max }} \bar{w}_1(N),\underset{N}{\text{max }}\bar{w}_2(N)\} \\
@@ -480,7 +501,15 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	%\label{maxmin}
 	%\end{equation}
 	%. It is noted that the noise is assumed to be zero-mean. This can be rectified easily by letting the lower and upper bounds on $w(k)$ in \eqref{bound_problem} be composed of different optimization variables.
-	At lower values of $N$, there can exist an initial sequence $\{d_S(-n_{a_D}+1),..,d_S(1)\}$ that drives $d_S(N)$ into $D_j$ with very low input effort $w(k)$. At higher values of $N$, the effect of initial condition wears off, and a higher value of control effort is required to violate $\mathcal{D}_{\infty}$. Hence, solving \eqref{bound_problem} gives the values of $w_{min}$ and $w_{max}$, that are the minimum and maximum values of the disturbance signal $w(t)$ such that the steady state values of $d_S(t)$ lie within $\mathcal{D}_{\infty}$.  
+	At lower values of $N$, there can exist an initial sequence $\{d_S(-n_{a_D}+1),..,d_S(1)\}$ that drives $d_S(N)$ into $D_j$ with very low input effort $w(k)$. At higher values of $N$, the effect of initial condition wears off, and a higher value of control effort is required to violate $\mathcal{D}_{\infty}$. 
+	\\
+	Following the construction of $\mathcal{W}^{**}_{\infty}$, the desired exogenous disturbance set $\mathcal{W}_{\infty}$ is set equal to $\mathcal{W}^{**}_{\infty}$ by using Theorem 1. \vspace{0.001cm}\\
+	\indent
+	\textit{Theorem 1:} Let $\mathcal{W}^{**}_{\infty}$ be the result of solving \eqref{bound_problem}, the convergence of which is obtained at a horizon length $N$. Then, the complete exogenous disturbance set $\mathcal{W}_{\infty} = \mathcal{W}^{**}_{\infty}$. \\
+	\indent
+	\textit{Proof:} Let $\mathcal{W}^{*}_{\infty} \subset \mathcal{W}^{**}_{\infty}$. This implies that for any sequence $\{d_S(t)\}_{-\infty}^{N-1} \in \mathcal{D}_{\infty}$ and $\{w(t)\}_{-\infty}^N \in \mathcal{W}^*_{\infty}$, we will have $d_S(N) \in \mathcal{D}_{\infty}$. Hence, the set $\mathcal{W}^{**}_{\infty}$ is the upper bound on the sets $\mathcal{W}^{*}_{\infty}$, which is equal to complete exogenous disturbance set $\mathcal{W}_{\infty}$. 
+	\vspace{0.001cm}\\
+	%Hence, solving \eqref{bound_problem} gives the values of $w_{min}$ and $w_{max}$, that are the minimum and maximum values of the disturbance signal $w(t)$ such that the steady state values of $d_S(t)$ lie within $\mathcal{D}_{\infty}$.  
 	%\begin{figure}[h!]
 		%\begin{center}
 			%\hspace{20pt}
@@ -496,7 +525,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	  Note that in practical implementations, the set $\mathcal{D}_{\infty}$ is constructed from a finite dataset $\hat{D}_{N}$ of $N$ samples. Hence, the set $\mathcal{W}_{\infty}$ constructed using $\mathcal{D}_{\infty}$ is still limited to the finite data set $\hat{D}_{N}$. Since $\mathcal{D}_{\infty}$ and $\mathcal{W}_{\infty}$ are used by the robust controller under the assumption that they capture all possible disturbances, robustness can only be achieved asymptotically as dataset $\hat{D}_{N}$ goes to $\hat{D}_{\infty}$. \\
 	We now have a closed-loop model with disturbance bound information, and hence are ready to use it in an RMPC controller.
 	\section{Case study}
-	Numerical simulations are performed on a servo motor control problem, implementing the complete control scheme presented in Fig \ref{fullloop}. The sampling time is $T_s = 1 ms$. RMPC controllers are implemented for closed-loop models corresponding to both \eqref{TF_w} and \eqref{TF_d}. It is shown that using model \eqref{TF_w} results is superior performance, and hence performing an additional step to calculate $w_{min}$ and $w_{max}$ is justified.
+	Numerical simulations are performed on a servo motor control problem, implementing the complete control scheme presented in Figure \ref{fullloop}. The sampling time is $T_s = 1 ms$. RMPC controllers are implemented for closed-loop models corresponding to both \eqref{TF_w} and \eqref{TF_d}. It is shown that using model \eqref{TF_w} results is superior performance, and hence performing an additional step to calculate $w_{min}$ and $w_{max}$ is justified.
 	Both the case studies are implemented using MATLAB R2017b, with optimization problems occasionally implemented using YALMIP \cite{Lofberg2004}.
 	\label{Case studies}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -510,9 +539,9 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	u(1) = 0, \hspace{5pt} x(1) = 0
 	\end{matrix}
 	\end{equation*}
-	The input $u(t)$ is deterministic and $w(t)$ is the disturbance. An approximate ARX model of the system is calculated as $A(q^{-1})\tilde{x}(t) = B(q^{-1})u(t)+w(t)$ after performing experiments on the system and collecting data. It is identified with $A(q^{-1})$ and $B(q^{-1})$ having two and one free parameter each. Following this, the methodology discussed in Sec.\ref{Noise} is used to calculate bounds on $w(t)$.
+	The input $u(t)$ is deterministic and $w(t)$ is the disturbance. An approximate ARX model of the system is calculated as $A(q^{-1})\tilde{x}(t) = B(q^{-1})u(t)+w(t)$ after performing experiments on the system and collecting data. It is identified with $A(q^{-1})$ and $B(q^{-1})$ having two and one free parameter each. Following this, the methodology discussed in Sect.\ref{Noise} is used to calculate bounds on $w(t)$.
 	\\
-	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $\mathcal{D}_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \eqref{bound_problem}. The bounds $-\bar{w}_j(N)$ and $\bar{w}_j(N)$ on the input sequences are shown in Fig.\ref{bounds}.
+	First, the signal $d_S(t)=x(t) - (B(q^{-1})/A(q^{-1}))u(t)$ is extracted from the experimental data, and $\mathcal{D}_{\infty}$ is constructed. For increasing values of $N$, sequences $\{w(k),k=1:N\}$ and corresponding $\{d_S(k),k=1:N\}$ are calculated by solving the optimization problems in \eqref{bound_problem}. The bounds $-\bar{w}_j(N)$ and $\bar{w}_j(N)$ on the input sequences are shown in Figure \ref{bounds}.
 	The largest region where $-\bar{w}_j(N) \leq w(k) \leq -\bar{w}_j(N)$ is satisfied, is $\mathcal{W}_{\infty}$. 
 		\begin{figure}[h!]
 			\hspace{30pt}
@@ -520,7 +549,7 @@ A feedback controller is designed to control the system, using the VRFT methodol
 			\caption{Convergence of bounds to $w_{min}$ and $w_{max}$, with zero mean noise assumption.}
 			\label{bounds}
 		\end{figure} \vspace{-5pt}\\
-	To verify the obtained bounds, the system identified through ARX identification is simulated with deterministic inputs $u(t)$, and a range of disturbance inputs $w(t)$ sampled from $\mathcal{W}_{\infty}$. The simulation results are seen in Fig.\ref{simulation}. It can be seen that output of the ARX model simulated with noise inputs $w(t)$ covers the measurement range, and avoids conservatism. This is an indicator that the set $\mathcal{W}_{\infty}$ is valid.
+	To verify the obtained bounds, the system identified through ARX identification is simulated with deterministic inputs $u(t)$, and a range of disturbance inputs $w(t)$ sampled from $\mathcal{W}_{\infty}$. The simulation results are seen in Figure \ref{simulation}. It can be seen that output of the ARX model simulated with noise inputs $w(t)$ covers the measurement range, and avoids conservatism. This is an indicator that the set $\mathcal{W}_{\infty}$ is valid.
 	\begin{figure}[h]
 		\hspace{22pt}
 		\includegraphics[scale = 0.70]{simulation.eps}
@@ -531,8 +560,9 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\fi
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Robust data-driven MPC }
-	The plant consisting of a servo positioning system is controlled using the scheme shown in Fig \ref{fullloop}. The plant dynamics are modeled by the following nonlinear state space equations:
+	The plant consisting of a servo positioning system is controlled using the scheme shown in Figure \ref{fullloop}. The plant dynamics are modeled by the following nonlinear state space equations:
 	\begin{equation*}
+	\small
 	\begin{matrix}
 	\begin{bmatrix}
 	\dot{\theta}(t) \vspace{12pt} \\
@@ -548,7 +578,6 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	\begin{bmatrix} \theta(t) \\ \omega(t) \\ i(t) \end{bmatrix} 
 	\end{matrix}
 	\end{equation*}
-	
 	\begin{table}[h!]
 		\hspace{30pt}
 		\begin{tabular}{||c|c|c||} 
@@ -572,7 +601,9 @@ A feedback controller is designed to control the system, using the VRFT methodol
 		\end{tabular}
 		\caption{Physical parameters of servo motor system}
 		\label{Simparam}
+		\vspace{-10pt}  
 	\end{table}
+	\normalsize
 	The states of the system $\theta(t)$, $\omega(t)$, and $i(t)$ are angle $[rad]$ and rotational velocity $[rad/s]$ of the servo motor, and armature current $[A]$ respectively. The input $u(t)$ is the voltage $[V]$ applied across the motor, and the output $y(t)$ is the rotational angle. 
 	A VRFT methodology is used to design a stabilizing PD controller, which provides a voltage input $u(t)$ to make the rotational angle $y(t)$ track a reference signal $g(t)$. To this end, experiments are conducted with a low-pass filtered white noise signal $u(t)$ with a standard deviation of $10$V. The output angle $y(t)$ is recorded and the dataset $\mathbb{D}_N$ is obtained. A slow reference closed loop model $\mathbb{M}_P$ is chosen, given by:
 	\begin{equation*}
@@ -588,33 +619,33 @@ A feedback controller is designed to control the system, using the VRFT methodol
 	Solving the optimization problem \eqref{VRFT_problem}, the parameters 
 	$K_p$ and $K_d$ are calculated using the dataset $D_N$. The controller is placed in the inner loop within the hierarchical control architecture.
 	After VRFT synthesis, an outer MPC is designed using the formulation in \eqref{MPC}, to provide a reference signal $g(t)$. The output $y(t)$ is constrained to lie between $-1$ rad and $1$ rad, and the voltage input $u(t)$ between $-3.5$ V and $3.5$ V. An MPC horizon of $N_P=10$ timesteps is chosen, and weights are $Q_y=1$ and $Q_{\epsilon}=1$. \\
-	Towards formulating the RMPC controller instead of the deterministic MPC controller, the disturbance model discussed in Sec \ref{Contribution} is developed. First, the dataset $\hat{D}_N$ is built by performing closed loop experiments with input signal $\hat{g}(t)$ of standard deviation $10$ rad. Then, a linear model for $\mathbb{D}$ parameterized by $n_{a_D} = 4$ and $n_{b_D} = 3$ is identified by solving \eqref{DSensor}. Two equivalent models of the appended system, corresponding to \eqref{TF_w} and \eqref{TF_d}, are developed.  \\ 
-	\indent For the model corresponding to \eqref{TF_w}, the disturbance model is split into two parts, $\mathbb{D}_D$ and $\mathbb{D}_S$, with inputs $g(t)$ and $w(t)$ respectively. Bounds on the exogenous disturbance $w(t)$ for a horizon $N$ are calculated by solving the linear problems \eqref{bound_problem}. The evolution of these bounds with increasing values of horizon $N$ is plotted in Fig \ref{bounds_RG}.  The values $w_{min}$ and $w_{max}$ are obtained at convergence of  $\bar{w}_1(N)$ and $\bar{w}_2(N)$ respectively.
+	Towards formulating the RMPC controller instead of the deterministic MPC controller, the disturbance model discussed in Sect. \ref{Contribution} is developed. First, the dataset $\hat{D}_N$ is built by performing closed loop experiments with input signal $\hat{g}(t)$ of standard deviation $10$ rad. Then, a linear model for $\mathbb{D}$ parameterized by $n_{a_D} = 4$ and $n_{b_D} = 3$ is identified by solving \eqref{DSensor}. Two equivalent models of the appended system, corresponding to \eqref{TF_w} and \eqref{TF_d}, are developed.  \\ 
+	\indent For the model corresponding to \eqref{TF_w}, the disturbance model is split into two parts, $\mathbb{D}_D$ and $\mathbb{D}_S$, with inputs $g(t)$ and $w(t)$ respectively. Bounds on the exogenous disturbance $w(t)$ for a horizon $N$ are calculated by solving the linear problems \eqref{bound_problem}. The evolution of these bounds with increasing values of horizon $N$ is plotted in Figure \ref{bounds_RG}.  The values $w_{min}$ and $w_{max}$ are obtained at convergence of  $\bar{w}_1(N)$ and $\bar{w}_2(N)$ respectively.
 	\begin{figure}[h]
-		\hspace{0pt}
-		\includegraphics[scale = 0.75]{bounds_RG.eps}
+		\hspace{40pt}
+		\includegraphics[scale = 0.50]{bounds_RG.eps}
 		\caption{Convergence of bounds on $w(t)$ acting as input to the disturbance model $D_S$.}
 		\label{bounds_RG}
-	\end{figure} \\
+	\end{figure} 
 	For the model corresponding to \eqref{TF_d}, the disturbance model consists of $\mathbb{D}_D$ and a direct exogenous disturbance signal $d_S(t)$. The bounds $d_{S,min}$ and $d_{S,max}$ on $d_S(t)$ are set equal to the minimum and maximum values of prediction error obtained during identification of the ARX model for $\mathbb{D}$ respectively. \vspace{5pt} \\
-	These models and related disturbance bounds are used in the formulation of corresponding RMPC controllers. To this end, constraints on the reference signal $g(t)$ are constructed, as shown in \eqref{MOAS}. Solving the linear programs \eqref{RG_offline} till convergence to calculate maximal output admissible set $\mathbb{O}_{\infty}(\gamma(t))$ can result in very conservative constraints on $g(t)$. This is avoided by solving them only for the duration of RMPC horizon by setting $\tau_c = N_P$.  \\
+	These models and related disturbance bounds are used in the formulation of corresponding RMPC controllers. To this end, constraints on the reference signal $g(t)$ are constructed, as shown in \eqref{MOAS}. Solving the linear programs \eqref{RG_offline} till convergence to calculate maximal output admissible set $\mathbb{O}_{\infty}(\gamma(t))$ can result in very conservative constraints on $g(t)$. This is avoided by solving them only for the duration of RMPC horizon by setting $\tau_c = N_P$. Note that the bounds used for the calculation of constraint sets \eqref{MOAS} are calculated with the assumption of infinite data $\hat{D}_{\infty}$, and hence actual robustness is achieved only asymptotically at $\underset{N \rightarrow \infty}{lim} \hat{D}_N$.\\
 	The corresponding output admissible sets $\mathbb{O}_{1}(\gamma(t))$ till $\mathbb{O}_{N_P}(\gamma(t))$ are calculated at each time-instant $t$ by reading the state $\gamma(t)$, which is built with the assumption of no additional measurement noise.
 	Following this,
 	the optimization problem \eqref{RMPC} is constructed and solved by the RMPC controller, generating a constraint satisfying reference signal $g(t)$.
-	Performance of the control system for all these cases is plotted in Fig \ref{VRFT_y} and Fig \ref{VRFT_u}.
+	Performance of the control system for all these cases is plotted in Figure \ref{VRFT_y} and Figure \ref{VRFT_u}.
 	\begin{figure}[t]
-		\hspace{-5pt}
-		\includegraphics[scale = 0.60]{VRFT_vs_MPC.eps}
-		\caption{The performance inner closed loop does not exactly match the reference model $M_P$. MPC improves the performance but results in small constraint violation. Constraint violation is robustly avoided by using a reference governor. Using \eqref{TF_d} results in a conservative performance compared to \eqref{TF_w}.  }
+		\hspace{20pt}
+		\includegraphics[scale = 0.50]{VRFT_vs_MPC.eps}
+		\caption{The performance inner closed loop does not exactly match the reference model $M_P$. MPC improves the performance but results in small constraint violation. Constraint violation is robustly avoided by using an RMPC controller instead of deterministic MPC. Using \eqref{TF_d} results in a conservative performance compared to \eqref{TF_w}.  }
 		\label{VRFT_y}
 	\end{figure} 
-	
 	\begin{figure}[t]
-		\hspace{-5pt}
-		\includegraphics[scale = 0.60]{VRFT_vs_MPC_u.eps}
+		\hspace{20pt}
+		\includegraphics[scale = 0.50]{VRFT_vs_MPC_u.eps}
 		\caption{Comparison of voltage input $u(t)$.}
 		\label{VRFT_u}
 	\end{figure} 
+	\\ \indent
 	It can clearly be seen that utilizing an RMPC controller instead of a deterministic MPC controller in the outer loop results in robust constraint satisfaction. Also, using the closed-loop model corresponding to \eqref{TF_d} as the plant model for RMPC controller design results in conservative performance when compared to using \eqref{TF_w}, for the same admissible set horizon $\tau_c = N_P$. Since the calculation of bounds $w_{min}$ and $w_{max}$ (which are required to use \eqref{TF_w} for RMPC synthesis) is performed offline, conservativeness of the control scheme can be reduced without any additional online operation. Note that increasing admissible set horizon to convergence results in conservative performance from either of the models, with \eqref{TF_w} still outperforming \eqref{TF_d}. 
 	
 	\section{Conclusion}
