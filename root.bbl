@@ -1,5 +1,5 @@
  \newcommand{\noop}[1]{}
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{HOU20133}
 Z.-S. Hou and Z.~Wang, ``From model-based control to data-driven control:
@@ -36,6 +36,11 @@ E.~Walter and H.~Piet-Lahanier, ``Estimation of parameter bounds from
 A.~Mohammadi, M.~Diehl, and M.~Zanon, ``Estimation of uncertain arx models with
   ellipsoidal parameter variability,'' in {\em 2015 European Control Conference
   (ECC)}, pp.~1766--1771, July 2015.
+
+\bibitem{SPB18}
+L.~Selvi, D.~Piga, and A.~Bemporad, ``Towards direct data-driven control design
+  of optimal controllers,'' in {\em European Control Conference}, (Limassol,
+  Cyprus), 2018.
 
 \bibitem{83532}
 E.~G. Gilbert and K.~T. Tan, ``Linear systems with state and control

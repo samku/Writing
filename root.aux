@@ -11,43 +11,50 @@
 \citation{7932940}
 \providecommand \oddpage@label [2]{}
 \@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Problem statement}{1}}
-\newlabel{Problem statement}{{II}{1}}
-\newlabel{constraints}{{1}{1}}
+\citation{SPB18}
+\citation{7932940}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Problem statement}{2}}
+\newlabel{Problem statement}{{II}{2}}
+\newlabel{constraints}{{1}{2}}
 \@writefile{toc}{\contentsline {section}{\numberline {III}Background}{2}}
 \newlabel{Background}{{III}{2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {III-A}Hierarchical approach}{2}}
 \newlabel{VRFT_problem}{{2}{2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Feedback controller designed using VRFT\relax }}{2}}
-\newlabel{MPC}{{3}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Robust model predictive controller}{2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Schematic of the robust control system\relax }}{2}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fullloop}{{2}{2}}
+\newlabel{eq:cl-model}{{III-A}{2}}
+\newlabel{MPC}{{3}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {III-B}Robustified model predictive controller}{2}}
 \newlabel{M_PD}{{4}{2}}
-\citation{GARONE2017306}
 \citation{83532}
 \newlabel{RMPC}{{5}{3}}
 \newlabel{O_infty}{{6}{3}}
-\newlabel{RG_offline}{{7}{3}}
+\newlabel{eq:constraint@t+k}{{7}{3}}
+\newlabel{RG_offline}{{8}{3}}
 \newlabel{MOAS}{{9}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Uncertain model estimation}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Estimation of uncertainty model}{3}}
 \newlabel{Contribution}{{IV}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Appended closed-loop model}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {IV-A}Structure of uncertainty model}{3}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Overall uncertain closed-loop model $M_{PD}'$.\relax }}{3}}
 \newlabel{Appended}{{3}{3}}
-\newlabel{DSensor}{{10}{4}}
+\newlabel{DSensor}{{10}{3}}
 \newlabel{TF_w}{{11}{4}}
 \newlabel{TF_d}{{12}{4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {IV-B}Calculation of exogenous disturbance set}{4}}
 \newlabel{Noise}{{IV-B}{4}}
-\newlabel{bound_problem}{{13}{4}}
+\newlabel{eq:Winfty}{{13}{4}}
+\newlabel{eq:W**N}{{14}{4}}
+\newlabel{bound_problem}{{15}{4}}
 \citation{Lofberg2004}
 \@writefile{toc}{\contentsline {section}{\numberline {V}Case study}{5}}
 \newlabel{Case studies}{{V}{5}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {V-A}Robust data-driven MPC }{5}}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Physical parameters of servo motor system\relax }}{5}}
 \newlabel{Simparam}{{I}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Convergence of bounds on $w(t)$ acting as input to the disturbance model $D_S$.\relax }}{5}}
+\newlabel{bounds_RG}{{4}{5}}
 \bibdata{references}
 \bibcite{HOU20133}{1}
 \bibcite{CAMPI20021337}{2}
@@ -56,10 +63,9 @@
 \bibcite{GARONE2017306}{5}
 \bibcite{WALTER1990449}{6}
 \bibcite{7330793}{7}
-\bibcite{83532}{8}
-\bibcite{Lofberg2004}{9}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Convergence of bounds on $w(t)$ acting as input to the disturbance model $D_S$.\relax }}{6}}
-\newlabel{bounds_RG}{{4}{6}}
+\bibcite{SPB18}{8}
+\bibcite{83532}{9}
+\bibcite{Lofberg2004}{10}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The performance inner closed-loop does not exactly match the reference model $M_P$. MPC improves the performance but results in small constraint violation. Constraint violation is robustly avoided by using an RMPC controller instead of deterministic MPC. Using \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 12\hbox {}\unskip \@@italiccorr )}} results in a conservative performance compared to \textup  {\hbox {\mathsurround \z@ \normalfont  (\ignorespaces 11\hbox {}\unskip \@@italiccorr )}}. \relax }}{6}}
 \newlabel{VRFT_y}{{5}{6}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of voltage input $u(t)$.\relax }}{6}}
