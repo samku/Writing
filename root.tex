@@ -51,6 +51,7 @@
 
 \setlength{\parindent}{15pt} % Default is 15pt.
 \newcommand{\AB}[1]{\textbf{\color{magenta}{[AB: #1]}}}
+\newcommand{\SK}[1]{\textbf{\color{blue}{[SK: #1]}}}
 \newcommand{\smallmat}[1]{\left[ \begin{smallmatrix}#1 \end{smallmatrix} \right]}
 
 \title{\LARGE \bf
@@ -227,6 +228,7 @@ we consider a control horizon of one step, so that the RMPC controller
 becomes a simpler robust reference governor (RRG).
 	At each time instant $t$, given the current state $\hat \gamma(t)=\gamma(t)$, 
 the RMPC controller/RRG solves the optimization problem
+\SK{I prevously implemented with initial conditions on $\hat{\gamma}(t)$. Shouldn't those be there?}
 	\begin{equation}
 	\small
 	\begin{aligned}
@@ -235,7 +237,7 @@ the RMPC controller/RRG solves the optimization problem
 	\text{subject to}
 	%\begin{matrix}
 	& \hspace{20pt} \hat \gamma(t+k+1) = A_\gamma\hat \gamma(t+k) + B_\gamma^g g(t)\\
-	& \hspace{20pt} \hat y_{\gamma}(t+k) = C_\gamma\hat \gamma(t+k) + D_\gamma^g g(t)
+	& \hspace{20pt} \hat y_{\gamma}(t+k) = C_\gamma\hat \gamma(t+k) + D_\gamma^g g(t) \\
 %	& \hspace{20pt} Hy_{\gamma}(t) \leq h \mbox{\AB{I think $Hy_{\gamma}(t)\leq h$ is redundant}}\\
 %	& \hspace{20pt}  g(t+k) \in \mathbb{G}_{\infty}(\gamma(t)) \\
 	%& \hspace{20pt} \gamma(t|t) = \gamma(t)
@@ -475,7 +477,7 @@ Let another set $\mathcal{W}^{**}_{N}$ be defined as
 		\end{Bmatrix}
     \label{eq:W**N}
 \end{equation}  
-where the bounds $w^{N}_{\rm min}=\bar w_1^*(N)$ and $w^{N}_{\rm max}=\bar w_2^*(N)$ on $\{w(t)\}$ are obtained by solving the optimization problems
+where the bounds $w^{N}_{\rm min}=\bar w_1^*(N)$ and $w^{N}_{\rm max}=\bar w_2^*(N)$ on $\{w(t)\}$ are obtained by solving the optimization problems \SK{I feel that the problems should be such that for j=1 (for $d_S,min$), we maximize $\bar{w}_j$ with constraint $\bar{w}_j \leq w(k)$, and for j=2, (for $d_S,max$), we minimize $\bar{w}_j$ with constraint $w(k) \leq \bar{w}_j$. If this is the case, then according to lemma 1, the monotonically increasing and decreasing natures are shown.}
 	\begin{equation}
 	\small
 	\label{bound_problem}
@@ -519,7 +521,8 @@ exist and are finite.
 \end{lemma}
 \emph{Proof}.
 \AB{TBC}
-\hfill\QED
+\hfill\QED \\
+\SK{Should there be a proof for Lemma 1? I am not sure if I can come up with one before the deadline}
 
 	%\begin{equation}
 	%\begin{matrix}
@@ -543,7 +546,7 @@ Let $\mathcal{W}^{**}(N)$ be defined as in~\eqref{eq:W**N}. Then
 {\color{gray}
 Let $\mathcal{W}^{*}_{\infty} \subset \mathcal{W}^{**}_{\infty}$. This implies that for any sequence $\{d_S(t)\}_{-\infty}^{N-1} \in \mathcal{D}_{\infty}$ and $\{w(t)\}_{-\infty}^N \in \mathcal{W}^*_{\infty}$, we will have $d_S(N) \in \mathcal{D}_{\infty}$. Hence, the set $\mathcal{W}^{**}_{\infty}$ is the upper bound on the sets $\mathcal{W}^{*}_{\infty}$, which is equal to complete exogenous disturbance set $\mathcal{W}_{\infty}$. 
 }\\
-	\textit{Proof: Since there exists a sequence $\{w(t)\} \in \mathcal{W}^{**}_{N}$ that drives $d_S(N)$ out of $\mathcal{D}_{\infty}$ for some past sequences $\{d_S(t)\}$ and $\{w(t)\}$, we will always have $\mathcal{W}_{\infty}(w^*_{\rm min},w^*_{\rm max}) \subset \mathcal{W}^{**}_{N}$. Since the set $\lim_{N\rightarrow+\infty}\mathcal{W}^{**}(N)$ is finite according to Lemma 1, it is the upper bound on the sets $\mathcal{W}_{\infty}(w^*_{\rm min},w^*_{\rm max})$ so that $d_S(N)$ remains within $\mathcal{D}_{\infty}$ for all $N$. Hence, this upper bound is the complete exogenous disturbance set $\mathcal{W}_{\infty}$. } \hfill\QED
+	\textit{Proof: Since there exists a sequence $\{w(t)\} \in \mathcal{W}^{**}_{N}$ that drives $d_S(N)$ out of $\mathcal{D}_{\infty}$ for some past sequences $\{d_S(t)\}$ and $\{w(t)\}$, we will always have $\mathcal{W}_{\infty}(w^*_{\rm min},w^*_{\rm max}) \subset \mathcal{W}^{**}_{N}$. Since the set $\lim_{N\rightarrow+\infty}\mathcal{W}^{**}(N)$ is finite according to Lemma 1, it is the upper bound on the sets $\mathcal{W}_{\infty}(w^*_{\rm min},w^*_{\rm max})$ so that $d_S(N)$ remains within $\mathcal{D}_{\infty}$ for all $N$. Hence, this upper bound is the complete exogenous disturbance set $\mathcal{W}_{\infty}$. } \hfill\QED \vspace{-8pt} \\
 	%Hence, solving \eqref{bound_problem} gives the values of $w_{\rm min}$ and $w_{\rm max}$, that are the minimum and maximum values of the disturbance signal $w(t)$ such that the steady state values of $d_S(t)$ lie within $\mathcal{D}_{\infty}$.  
 	%\begin{figure}[h!]
 		%\begin{center}
@@ -563,8 +566,8 @@ is only achieved asymptotically for $N=\infty$ samples
 that capture all the possible values $d_S(t)$ can take.
 
 \section{Case study}
-	Numerical simulations are performed on a servo motor control problem, implementing the complete control scheme presented in Figure \ref{fullloop}. The sampling time is $T_s = 1 ms$. RMPC controllers are implemented for closed-loop models corresponding to both \eqref{TF_w} and \eqref{TF_d}. It is shown that using model \eqref{TF_w} results is superior performance, and hence performing an additional step to calculate $w_{\rm min}$ and $w_{\rm max}$ is justified.
-	Both the case studies are implemented using MATLAB R2017b, with optimization problems occasionally implemented using YALMIP \cite{Lofberg2004}.
+	Numerical simulations are performed on a servo motor control problem, implementing the control scheme presented in Figure \ref{fullloop}. The sampling time is $T_s = 1 ms$. RMPC controllers are implemented for closed-loop models corresponding to both \eqref{TF_w} and \eqref{TF_d}. It is shown that using model \eqref{TF_w} results is superior performance, and hence performing an additional step to calculate $w_{\rm min}$ and $w_{\rm max}$ is justified.
+	The simulations are implemented using MATLAB R2017b, with optimization problems occasionally implemented using YALMIP \cite{Lofberg2004}.
 	\label{Case studies}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\iffalse
@@ -598,7 +601,7 @@ that capture all the possible values $d_S(t)$ can take.
 	\fi
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Robust data-driven MPC }
-	The plant consisting of a servo positioning system is controlled using the scheme shown in Figure \ref{fullloop}. The plant dynamics are modeled by the following nonlinear state space equations:
+	The plant consisting of a servo positioning system is controlled using the scheme shown in Figure \ref{fullloop}. Plant dynamics are modeled by the following nonlinear state space equations:
 	\begin{equation*}
 	\small
 	\begin{array}{rcl}
@@ -617,7 +620,7 @@ that capture all the possible values $d_S(t)$ can take.
 	\end{array}
 	\end{equation*}
 	\begin{table}[h!]
-		\hspace{30pt}
+		\hspace{20pt}
 		\begin{tabular}{||c|c|c||} 
 			\hline
 			Symbol & Parameter & Value\\ [0.5ex] 
@@ -641,7 +644,7 @@ that capture all the possible values $d_S(t)$ can take.
 		\label{Simparam}
 		\vspace{-10pt}  
 	\end{table}
-	\normalsize
+	\normalsize\\
 	The states of the system $\theta(t)$, $\omega(t)$, and $i(t)$ are angle $[rad]$ and rotational velocity $[rad/s]$ of the servo motor, and armature current $[A]$ respectively. The input $u(t)$ is the voltage $[V]$ applied across the motor, and the output $y(t)$ is the rotational angle. 
 	A VRFT methodology is used to design a stabilizing PD controller, which provides a voltage input $u(t)$ to make the rotational angle $y(t)$ track a reference signal $g(t)$. To this end, experiments are conducted with a low-pass filtered white noise signal $u(t)$ with a standard deviation of $10$V. The output angle $y(t)$ is recorded and the dataset $\mathbb{D}_N$ is obtained. A slow reference closed loop model $\mathbb{M}_P$ is chosen, given by:
 	\begin{equation*}
@@ -658,16 +661,15 @@ that capture all the possible values $d_S(t)$ can take.
 	$K_p$ and $K_d$ are calculated using the dataset $D_N$. The controller is placed in the inner loop within the hierarchical control architecture.
 	After VRFT synthesis, an outer MPC is designed using the formulation in \eqref{MPC}, to provide a reference signal $g(t)$. The output $y(t)$ is constrained to lie between $-1$ rad and $1$ rad, and the voltage input $u(t)$ between $-3.5$ V and $3.5$ V. An MPC horizon of $N_P=10$ timesteps is chosen, and weights are $Q_y=1$ and $Q_{\epsilon}=1$. \\
 	Towards formulating the RMPC controller instead of the deterministic MPC controller, the disturbance model discussed in Sect. \ref{Contribution} is developed. First, the dataset $\hat{D}_N$ is built by performing closed loop experiments with input signal $\hat{g}(t)$ of standard deviation $10$ rad. Then, a linear model for $\mathbb{D}$ parameterized by $n_{a_D} = 4$ and $n_{b_D} = 3$ is identified by solving \eqref{DSensor}. Two equivalent models of the appended system, corresponding to \eqref{TF_w} and \eqref{TF_d}, are developed.  \\ 
-	\indent For the model corresponding to \eqref{TF_w}, the disturbance model is split into two parts, $\mathbb{D}_D$ and $\mathbb{D}_S$, with inputs $g(t)$ and $w(t)$ respectively. Bounds on the exogenous disturbance $w(t)$ for a horizon $N$ are calculated by solving the linear problems \eqref{bound_problem}. The evolution of these bounds with increasing values of horizon $N$ is plotted in Figure \ref{bounds_RG}.  The values $w_{\rm min}$ and $w_{\rm max}$ are obtained at convergence of  $\bar{w}_1(N)$ and $\bar{w}_2(N)$ respectively.
+	\indent For the model corresponding to \eqref{TF_w}, the disturbance model is split into two parts, $\mathbb{D}_D$ and $\mathbb{D}_S$, with inputs $g(t)$ and $w(t)$ respectively. Bounds on the exogenous disturbance $w(t)$ for a horizon $N$ are calculated by solving the linear problems \eqref{bound_problem}. The evolution of these bounds with increasing values of horizon $N$ is plotted in Figure \ref{bounds_RG}.  According to Theorem 1, the values $w_{\rm min}$ and $w_{\rm max}$ are obtained at convergence of  $\bar{w}_1(N)$ and $\bar{w}_2(N)$ respectively.
 	\begin{figure}[h]
 		\hspace{40pt}
 		\includegraphics[scale = 0.50]{bounds_RG.eps}
 		\caption{Convergence of bounds on $w(t)$ acting as input to the disturbance model $D_S$.}
 		\label{bounds_RG}
-	\end{figure} 
+	\end{figure} \\
 	For the model corresponding to \eqref{TF_d}, the disturbance model consists of $\mathbb{D}_D$ and a direct exogenous disturbance signal $d_S(t)$. The bounds $d_{S,{\rm min}}$ and $d_{S,{\rm max}}$ on $d_S(t)$ are set equal to the minimum and maximum values of prediction error obtained during identification of the ARX model for $\mathbb{D}$ respectively. \\
-	These models and related disturbance bounds are used in the formulation of corresponding RMPC controllers. To this end, constraints on the reference signal $g(t)$ are constructed, as shown in \eqref{MOAS}. Solving the linear programs \eqref{RG_offline} till convergence to calculate maximal output admissible set $\mathbb{G}_{\infty}(\gamma(t))$ can result in very conservative constraints on $g(t)$. This is avoided by solving them only for the duration of RMPC horizon by setting $\tau_c = N_P$. Note that the bounds used for the calculation of constraint sets \eqref{MOAS} are calculated with the assumption of infinite data $\hat{D}_{\infty}$, and hence actual robustness is achieved only asymptotically as $\underset{N \rightarrow \infty}{\text{lim}} \hat{D}_N$.\\
-	The corresponding output admissible sets $\mathbb{O}_{1}(\gamma(t))$ till $\mathbb{O}_{N_P}(\gamma(t))$ are calculated at each time-instant $t$ by reading the state $\gamma(t)$, which is built with the assumption of no additional measurement noise.
+	These models and related disturbance bounds are used in the formulation of corresponding RMPC controllers. To this end, constraints on the reference signal $g(t)$ are constructed, as shown in \eqref{MOAS}. At each time step $t$, the state vector $\gamma(t)$ is built with the assumption of no additional measurement noise. Solving the linear programs \eqref{RG_offline} till convergence to calculate the complete constraint set $\mathbb{G}_{\infty}(\gamma(t))$ can result in very conservative constraints on $g(t)$. This is avoided by solving them only for the duration of RMPC horizon by setting $k_c = N_P$. Since the bounds used for the calculation of constraint sets \eqref{MOAS} are calculated only based on a finite dataset $\hat{D}_{N}$ of size $N$, actual robustness is achieved only asymptotically for $N=\infty$ samples.\\
 	Following this,
 	the optimization problem \eqref{RMPC} is constructed and solved by the RMPC controller, generating a constraint satisfying reference signal $g(t)$.
 	Performance of the control system for all these cases is plotted in Figure \ref{VRFT_y} and Figure \ref{VRFT_u}.
@@ -683,7 +685,7 @@ that capture all the possible values $d_S(t)$ can take.
 		\caption{Comparison of voltage input $u(t)$.}
 		\label{VRFT_u}
 	\end{figure} 
-	It can clearly be seen that utilizing an RMPC controller instead of a deterministic MPC controller in the outer loop results in robust constraint satisfaction. Also, using the closed-loop model corresponding to \eqref{TF_d} as the plant model for RMPC controller design results in conservative performance when compared to using \eqref{TF_w}, for the same admissible set horizon $\tau_c = N_P$. Since the calculation of bounds $w_{\rm min}$ and $w_{\rm max}$ (which are required to use \eqref{TF_w} for RMPC synthesis) is performed offline, conservativeness of the control scheme can be reduced without any additional online operation. Note that increasing admissible set horizon to convergence results in conservative performance from either of the models, with \eqref{TF_w} still outperforming \eqref{TF_d}. 
+	It can clearly be seen that utilizing an RMPC controller instead of a deterministic MPC controller in the outer loop results in robust constraint satisfaction. Also, using the closed-loop model corresponding to \eqref{TF_d} as the plant model for RMPC controller design results in conservative performance when compared to using \eqref{TF_w}, for the same constraint set horizon $k_c = N_P$. Since the calculation of bounds $w_{\rm min}$ and $w_{\rm max}$ (which are required to use \eqref{TF_w} for RMPC synthesis) is performed offline, conservativeness of the control scheme can be reduced without any additional online operation. Note that increasing the constraint set horizon by solving \eqref{RG_offline} to convergence results in conservative performance from both the models, with \eqref{TF_w} still outperforming \eqref{TF_d}. 
 	
 	\section{Conclusion}
 	This paper builds on the hierarchical data-driven control of constrained systems, by introducing robustness with respect to constraint satisfaction. This is done by using a robust model predictive controller.  Uncertainty on the model utilized by the RMPC controller is modeled as a disturbance input lying within an unknown bounded polyhedral set. 

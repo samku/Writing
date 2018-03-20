@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  20 MAR 2018 13:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  20 MAR 2018 17:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -764,18 +764,18 @@ Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
  (./root.aux)
 \openout1 = `root.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
+LaTeX Font Info:    ... okay on input line 73.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -845,54 +845,54 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.13}).
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 76.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 76
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 77.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 77
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 76
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 77
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 76
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 77
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 76
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 77
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 76.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 76.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 77.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 77.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 76--76
+Underfull \hbox (badness 10000) in paragraph at lines 77--77
 [][][]$[]$\OT1/ptm/m/n/8 Bernard D. Re-searcheris with the De-part-ment of Elec
 -tri-cal
  []
 
 
-Underfull \hbox (badness 8075) in paragraph at lines 76--76
+Underfull \hbox (badness 8075) in paragraph at lines 77--77
 \OT1/ptm/m/n/8 En-gi-neer-ing, Wright State Uni-ver-sity, Day-ton, OH 45435, US
 A
  []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 113.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 114.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -900,59 +900,59 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 141--142
+Underfull \hbox (badness 10000) in paragraph at lines 142--143
 []\OT1/ptm/m/n/10 Parameterize the feed-back con-troller $\U/msb/m/n/10 K[]$ \O
 T1/ptm/m/n/10 as
  []
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 150.
+LaTeX Font Warning: Command \small invalid in math mode on input line 151.
 
 LaTeX Font Info:    Calculating math sizes for size <10.79997> on input line 15
-3.
+4.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.79997> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 153.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.99203> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 153.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.48004> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 153.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 154.
 LaTeX Font Info:    Calculating math sizes for size <12.95992> on input line 15
-3.
+4.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12.95992> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 153.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9.59041> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 153.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 154.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.77602> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 153.
-LaTeX Font Info:    Calculating math sizes for size <> on input line 156.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 154.
+LaTeX Font Info:    Calculating math sizes for size <> on input line 157.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 156.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <0.74> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 156.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <0.6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 156.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 157.
 <./Drawings/KpGp.pdf, id=14, 244.69116pt x 66.00359pt>
 File: ./Drawings/KpGp.pdf Graphic file (type pdf)
 
 <use ./Drawings/KpGp.pdf>
-Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 162.
+Package pdftex.def Info: ./Drawings/KpGp.pdf used on input line 163.
 (pdftex.def)             Requested size: 195.75317pt x 52.80293pt.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 176.
+LaTeX Font Warning: Command \small invalid in math mode on input line 177.
 
 <./Drawings/final_robust.pdf, id=15, 230.0043pt x 78.40392pt>
 File: ./Drawings/final_robust.pdf Graphic file (type pdf)
 
 <use ./Drawings/final_robust.pdf>
-Package pdftex.def Info: ./Drawings/final_robust.pdf used on input line 200.
+Package pdftex.def Info: ./Drawings/final_robust.pdf used on input line 201.
 (pdftex.def)             Requested size: 207.00194pt x 70.56287pt.
  [2 <./Drawings/KpGp.pdf> <./Drawings/final_robust.pdf>]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 231.
+LaTeX Font Warning: Command \small invalid in math mode on input line 233.
 
 
-Overfull \hbox (0.60716pt too wide) detected at line 297
+Overfull \hbox (0.60716pt too wide) detected at line 299
 \U/msb/m/n/10 G[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^M\OT1/ztmcm/m/n/10 (\O
 ML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 )) = []
  []
@@ -961,27 +961,39 @@ ML/ztmcm/m/it/10 t\OT1/ztmcm/m/n/10 )) = []
 File: ./Drawings/Mp-D-E.pdf Graphic file (type pdf)
 
 <use ./Drawings/Mp-D-E.pdf>
-Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 311.
+Package pdftex.def Info: ./Drawings/Mp-D-E.pdf used on input line 313.
 (pdftex.def)             Requested size: 175.0023pt x 108.36229pt.
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 386.
+LaTeX Font Warning: Command \small invalid in math mode on input line 388.
 
 [3 <./Drawings/Mp-D-E.pdf>]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 480.
+LaTeX Font Warning: Command \small invalid in math mode on input line 482.
 
 
-Overfull \hbox (13.55751pt too wide) detected at line 489
+Overfull \hbox (13.55751pt too wide) detected at line 491
 []
  []
 
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 494.
+LaTeX Font Warning: Command \small invalid in math mode on input line 496.
 
 [4]
+Underfull \hbox (badness 2134) in paragraph at lines 547--562
+\OMS/ztmcm/m/n/10 f\OML/ztmcm/m/it/10 d[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 
+t\OT1/ztmcm/m/n/10 )\OMS/ztmcm/m/n/10 g[] 2 D[]$ \OT1/ptm/m/n/10 and $\OMS/ztmc
+m/m/n/10 f\OML/ztmcm/m/it/10 w\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 t\OT1/ztmcm
+/m/n/10 )\OMS/ztmcm/m/n/10 g[] 2 W[]$\OT1/ptm/m/n/10 , we will have
+ []
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 603.
+
+Underfull \hbox (badness 10000) in paragraph at lines 547--562
+
+ []
+
+
+LaTeX Font Warning: Command \small invalid in math mode on input line 606.
 
 Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
 (epstopdf)                    date: 2018-03-14 08:14:36
@@ -992,14 +1004,14 @@ Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
 (epstopdf)                    size: 14712 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/bounds_RG-eps-c
 onverted-to.pdf ./Drawings/bounds_RG.eps>
-(epstopdf)             \includegraphics on input line 664.
+(epstopdf)             \includegraphics on input line 667.
 Package epstopdf Info: Output file is already uptodate.
 <./Drawings/bounds_RG-eps-converted-to.pdf, id=86, 309.155pt x 146.5475pt>
 File: ./Drawings/bounds_RG-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/bounds_RG-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/bounds_RG-eps-converted-to.pdf used on inpu
-t line 664.
+t line 667.
 (pdftex.def)             Requested size: 154.57712pt x 73.27356pt.
 Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC.eps>
 (epstopdf)                    date: 2018-03-13 21:25:56
@@ -1010,7 +1022,7 @@ f>
 (epstopdf)                    size: 69368 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC-eps
 -converted-to.pdf ./Drawings/VRFT_vs_MPC.eps>
-(epstopdf)             \includegraphics on input line 676.
+(epstopdf)             \includegraphics on input line 678.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC-eps-converted-to.pdf, id=87, 399.4925pt x 225.84375pt>
@@ -1018,7 +1030,7 @@ File: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf used on in
-put line 676.
+put line 678.
 (pdftex.def)             Requested size: 199.74576pt x 112.92159pt.
 Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC_u.eps>
 (epstopdf)                    date: 2018-03-13 21:26:12
@@ -1029,7 +1041,7 @@ pdf>
 (epstopdf)                    size: 58286 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC_u-e
 ps-converted-to.pdf ./Drawings/VRFT_vs_MPC_u.eps>
-(epstopdf)             \includegraphics on input line 682.
+(epstopdf)             \includegraphics on input line 684.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf, id=88, 399.4925pt x 225.84375pt
@@ -1037,16 +1049,9 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf used on 
-input line 682.
+input line 684.
 (pdftex.def)             Requested size: 199.74576pt x 112.92159pt.
-
-Underfull \hbox (badness 1430) in paragraph at lines 656--687
-\OT1/ptm/m/n/10 The cor-re-spond-ing out-put ad-mis-si-ble sets $\U/msb/m/n/10 
-O[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^M\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/
-10 t\OT1/ztmcm/m/n/10 ))$ \OT1/ptm/m/n/10 till
- []
-
-[5 <./Drawings/bounds_RG-eps-converted-to.pdf>] (./root.bbl)
+ [5 <./Drawings/bounds_RG-eps-converted-to.pdf>] (./root.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1061,10 +1066,10 @@ Before submitting the final camera ready copy, remember to:
 [6 <./Drawings/VRFT_vs_MPC-eps-converted-to.pdf> <./Drawings/VRFT_vs_MPC_u-eps-
 converted-to.pdf>] (./root.aux) ) 
 Here is how much of TeX's memory you used:
- 24880 strings out of 493029
- 612176 string characters out of 6136234
+ 24881 strings out of 493029
+ 612178 string characters out of 6136234
  797872 words of memory out of 5000000
- 27886 multiletter control sequences out of 15000+600000
+ 27887 multiletter control sequences out of 15000+600000
  126413 words of font info for 288 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,19n,84p,981b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1081,7 +1086,7 @@ syr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on root.pdf (6 pages, 293723 bytes).
+Output written on root.pdf (6 pages, 294691 bytes).
 PDF statistics:
  148 PDF objects out of 1000 (max. 8388607)
  116 compressed objects within 2 object streams
