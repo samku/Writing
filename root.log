@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  20 MAR 2018 11:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.1.25)  20 MAR 2018 13:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -981,7 +981,7 @@ LaTeX Font Warning: Command \small invalid in math mode on input line 494.
 
 [4]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 602.
+LaTeX Font Warning: Command \small invalid in math mode on input line 603.
 
 Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
 (epstopdf)                    date: 2018-03-14 08:14:36
@@ -992,14 +992,14 @@ Package epstopdf Info: Source file: <./Drawings/bounds_RG.eps>
 (epstopdf)                    size: 14712 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/bounds_RG-eps-c
 onverted-to.pdf ./Drawings/bounds_RG.eps>
-(epstopdf)             \includegraphics on input line 663.
+(epstopdf)             \includegraphics on input line 664.
 Package epstopdf Info: Output file is already uptodate.
 <./Drawings/bounds_RG-eps-converted-to.pdf, id=86, 309.155pt x 146.5475pt>
 File: ./Drawings/bounds_RG-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/bounds_RG-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/bounds_RG-eps-converted-to.pdf used on inpu
-t line 663.
+t line 664.
 (pdftex.def)             Requested size: 154.57712pt x 73.27356pt.
 Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC.eps>
 (epstopdf)                    date: 2018-03-13 21:25:56
@@ -1010,7 +1010,7 @@ f>
 (epstopdf)                    size: 69368 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC-eps
 -converted-to.pdf ./Drawings/VRFT_vs_MPC.eps>
-(epstopdf)             \includegraphics on input line 675.
+(epstopdf)             \includegraphics on input line 676.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC-eps-converted-to.pdf, id=87, 399.4925pt x 225.84375pt>
@@ -1018,7 +1018,7 @@ File: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC-eps-converted-to.pdf used on in
-put line 675.
+put line 676.
 (pdftex.def)             Requested size: 199.74576pt x 112.92159pt.
 Package epstopdf Info: Source file: <./Drawings/VRFT_vs_MPC_u.eps>
 (epstopdf)                    date: 2018-03-13 21:26:12
@@ -1029,7 +1029,7 @@ pdf>
 (epstopdf)                    size: 58286 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Drawings/VRFT_vs_MPC_u-e
 ps-converted-to.pdf ./Drawings/VRFT_vs_MPC_u.eps>
-(epstopdf)             \includegraphics on input line 681.
+(epstopdf)             \includegraphics on input line 682.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf, id=88, 399.4925pt x 225.84375pt
@@ -1037,20 +1037,16 @@ Package epstopdf Info: Output file is already uptodate.
 File: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf>
 Package pdftex.def Info: ./Drawings/VRFT_vs_MPC_u-eps-converted-to.pdf used on 
-input line 681.
+input line 682.
 (pdftex.def)             Requested size: 199.74576pt x 112.92159pt.
 
-Underfull \hbox (badness 1430) in paragraph at lines 655--686
+Underfull \hbox (badness 1430) in paragraph at lines 656--687
 \OT1/ptm/m/n/10 The cor-re-spond-ing out-put ad-mis-si-ble sets $\U/msb/m/n/10 
 O[]\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/10 ^^M\OT1/ztmcm/m/n/10 (\OML/ztmcm/m/it/
 10 t\OT1/ztmcm/m/n/10 ))$ \OT1/ptm/m/n/10 till
  []
 
-[5 <./Drawings/bounds_RG-eps-converted-to.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-(./root.bbl)
+[5 <./Drawings/bounds_RG-eps-converted-to.pdf>] (./root.bbl)
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -1067,7 +1063,7 @@ converted-to.pdf>] (./root.aux) )
 Here is how much of TeX's memory you used:
  24880 strings out of 493029
  612176 string characters out of 6136234
- 796872 words of memory out of 5000000
+ 797872 words of memory out of 5000000
  27886 multiletter control sequences out of 15000+600000
  126413 words of font info for 288 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1085,7 +1081,7 @@ syr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on root.pdf (6 pages, 293015 bytes).
+Output written on root.pdf (6 pages, 293723 bytes).
 PDF statistics:
  148 PDF objects out of 1000 (max. 8388607)
  116 compressed objects within 2 object streams
